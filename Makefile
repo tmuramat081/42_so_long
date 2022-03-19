@@ -1,13 +1,14 @@
 NAME = so_long
-SRCS = ./src/test.c
+SRCS = ./src/main.c
 OBJS = ${SRCS:.c=.o}
 MLXDIR = mlx
-MLX = ${MLXDIR}/libmlx.dylib
+MLX = ${MLXDIR}/libmlx.a
 LIBFTDIR = libft
 LIBFT = ${LIBFTDIR}/libft.a
-INCS = -I./includes -I${LIBFTDIR} -I${MLXDIR}
+INCS = -I./include -I${LIBFTDIR} -I${MLXDIR}
 CC = gcc
-CFLAGS = #-Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
+MFLAGS = -Lmlx -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 
 all: ${NAME}
 
@@ -20,10 +21,10 @@ ${MLX}:
 ${NAME}: ${OBJS}
 	${MAKE} ${LIBFT}
 	${MAKE} ${MLX}
-	${CC} ${CFLAGS} ${OBJS} ${LIBFT} ${MLX} ${INCS} -o $@
+	${CC} ${CFLAGS} ${OBJS} ${MFLAGS} ${LIBFT} ${MLX} ${INCS} -o $@
 
 .c.o:
-	${CC} ${CFLAGS} -I ${INCS} -c $< -o $@
+	${CC} ${CFLAGS} ${INCS} -Imlx_linux -O3 -c $< -o $@
 
 clean:
 	rm -f ${OBJS}
@@ -33,7 +34,6 @@ clean:
 fclean: clean
 	rm -f ${NAME} 
 	${MAKE} fclean -C ${LIBFTDIR}
-	${MAKE} fclean -C ${MLXDIR}
 
 re: fclean all
 
