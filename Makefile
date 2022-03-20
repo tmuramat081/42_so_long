@@ -7,7 +7,7 @@ LIBFTDIR = libft
 LIBFT = ${LIBFTDIR}/libft.a
 INCS = -I./include -I${LIBFTDIR} -I${MLXDIR}
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = #-Wall -Wextra -Werror
 MFLAGS = -Lmlx -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 
 all: ${NAME}
