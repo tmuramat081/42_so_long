@@ -1,55 +1,101 @@
 #include "so_long.h"
 #include "get_next_line.h"
 
-int hook_player_move(int key, t_game *game)
+int hook_player_move(int keycode, t_game *game)
 {
-	mlx_destroy_window(game->mlx, game->win);
-	printf("KEY_HOOK");
+	if (keycode == KEY_A)
+	{
+		game->player_pos->x -= 1;
+		printf("left\n");
+	}
+	else if (keycode == KEY_D)
+		game->player_pos->x += 1; 
+	else if (keycode == KEY_W)
+		game->player_pos->y += 1;
+	else if (keycode == KEY_S)
+		game->player_pos->y -= 1;
+	else if (keycode == KEY_ESC)
+		mlx_destroy_window(game->mlx, game->win);
 }
 
-void set_game_event(t_game *game, char **map)
-{
-	mlx_hook(game->win, 3, 1L<<0, hook_player_move, game);
-
-}
-
-void project_map(t_game *game, char **map, t_img *img)
+int	refresh_game(t_game *game)
 {
 	int i;
 	int j;
 
 	i = 0;
-	while (map[i])
+	while (game->map[i])
 	{
 		j = 0;
-		while (map[i][j])
+		while (game->map[i][j])
 		{
-			if (map[i][j] == '0')
-				mlx_put_image_to_window(game->mlx, game->win, img->floor, j * 32, i * 32);
-			else if (map[i][j] == '1')
-				mlx_put_image_to_window(game->mlx, game->win, img->wall, j * 32, i * 32);
-			else if (map[i][j] == 'C')
-				mlx_put_image_to_window(game->mlx, game->win, img->dot, j * 32, i * 32);
-			else if (map[i][j] == 'E')
-				mlx_put_image_to_window(game->mlx, game->win, img->player, j * 32, i * 32);
+			if (game->map[i][j] == '0')
+				mlx_put_image_to_window(game->mlx, game->win, game->img->floor, j * TIP_SIZE, i * TIP_SIZE);
+			else if (game->map[i][j] == '1')
+				mlx_put_image_to_window(game->mlx, game->win, game->img->wall, j * TIP_SIZE, i * TIP_SIZE);
+			else if (game->map[i][j] == 'C')
+				mlx_put_image_to_window(game->mlx, game->win, game->img->dot, j * TIP_SIZE, i * TIP_SIZE);
+			else if (game->map[i][j] == 'E')
+			{
+				game->player_pos->y = i;
+				game->player_pos->x = j;
+				mlx_put_image_to_window(game->mlx, game->win, game->img->player, j * TIP_SIZE, i * TIP_SIZE);
+			}
+			j++;
+		}
+		i++;
+	}	
+}
+
+void set_game_event(t_game *game)
+{
+	mlx_key_hook(game->win, hook_player_move, game);
+	mlx_loop_hook(game->mlx, refresh_game, game);
+}
+
+void project_map(t_game *game)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (game->map[i])
+	{
+		j = 0;
+		while (game->map[i][j])
+		{
+			if (game->map[i][j] == '0')
+				mlx_put_image_to_window(game->mlx, game->win, game->img->floor, j * TIP_SIZE, i * TIP_SIZE);
+			else if (game->map[i][j] == '1')
+				mlx_put_image_to_window(game->mlx, game->win, game->img->wall, j * TIP_SIZE, i * TIP_SIZE);
+			else if (game->map[i][j] == 'C')
+				mlx_put_image_to_window(game->mlx, game->win, game->img->dot, j * TIP_SIZE, i * TIP_SIZE);
+			else if (game->map[i][j] == 'E')
+			{
+				game->player_pos->y = i;
+				game->player_pos->x = j; 
+				mlx_put_image_to_window(game->mlx, game->win, game->img->player, j * TIP_SIZE, i * TIP_SIZE);
+			}
 			j++;
 		}
 		i++;
 	}
 }
 
-void	init_game(t_game *game, char **map, t_img *img)
+void	init_game(t_game *game)
 {
 	int width;
 	int height;
+	void *mlx = game->mlx;
+	t_img *img = game->img;
 
-	game->mlx = mlx_init();
-	game->win = mlx_new_window(game->mlx, 600, 600, WINDOW_TITLE);
-	img->floor = mlx_xpm_file_to_image(game->mlx, "./img/floor.xpm", &width, &height);
-	img->wall = mlx_xpm_file_to_image(game->mlx, "./img/wall.xpm", &width, &height);
-	img->dot = mlx_xpm_file_to_image(game->mlx, "./img/dot.xpm", &width, &height);
-	img->player = mlx_xpm_file_to_image(game->mlx, "./img/player.xpm", &width, &height);
-	project_map(game, map, img);
+	mlx = mlx_init();
+	game->win = mlx_new_window(mlx, 600, 600, WINDOW_TITLE);
+	img->floor = mlx_xpm_file_to_image(mlx, "./img/floor.xpm", &width, &height);
+	img->wall = mlx_xpm_file_to_image(mlx, "./img/wall.xpm", &width, &height);
+	img->dot = mlx_xpm_file_to_image(mlx, "./img/dot.xpm", &width, &height);
+	img->player = mlx_xpm_file_to_image(mlx, "./img/player.xpm", &width, &height);
+	project_map(game);
 }
 
 char **input_file(t_game *game, char *file)
@@ -76,16 +122,14 @@ char **input_file(t_game *game, char *file)
 
 int	main (int argc, char **argv)
 {
-	t_game game;
-	t_img img;
-	char **map;
+	t_game *game;
 
 	if (argc != 2)
 		exit(1);
-	ft_bzero(&game, sizeof(t_game));
-	map = input_file(&game, argv[1]);
-	init_game(&game, map, &img);
-	set_game_event(&game, map);
-	mlx_loop(game.mlx);
+	game = calloc(1, sizeof(t_game));
+	game->map = input_file(game, argv[1]);
+	init_game(game);
+	set_game_event(game);
+	mlx_loop(game->mlx);
 	return (0);
 }
