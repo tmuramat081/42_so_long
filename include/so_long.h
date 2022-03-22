@@ -10,7 +10,7 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 
-typedef struct s_img{
+typedef struct s_img {
 	void *floor;
 	void *wall;
 	void *dot;
@@ -18,12 +18,12 @@ typedef struct s_img{
 	void *player;
 }	t_img;
 
-typedef struct s_pos{
+typedef struct s_pos {
 	int	x;
 	int	y;
 }	t_pos;
 
-typedef struct s_game{
+typedef struct s_game {
 	void	*mlx;
 	void	*win;
 	int		win_width;
@@ -32,5 +32,11 @@ typedef struct s_game{
 	t_img	*img;
 	char	**map;
 }	t_game;
+
+void	init_game(t_game *game);
+void	load_image_file(t_game *game);
+char	**load_map_file(char *file);
+void	draw_map(t_game *game);
+void	set_hook(t_game *game);
 
 #endif

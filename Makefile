@@ -1,5 +1,6 @@
 NAME = so_long
-SRCS = ./src/main.c
+SRCS = ./src/main.c ./src/init_game.c ./src/load_map.c \
+	./src/load_image.c ./src/set_hook.c ./src/render.c
 OBJS = ${SRCS:.c=.o}
 MLXDIR = mlx
 MLX = ${MLXDIR}/libmlx.a
