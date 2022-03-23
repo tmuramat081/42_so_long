@@ -1,18 +1,17 @@
 #include "so_long.h"
 
-void	*get_tip_image(char pos, t_game *game)
+void	*get_tip_image(int pos_y, int pos_x, t_game *game)
 {
-	t_img *img;
+	t_img img;
 
 	img = game->img;	
-	if (pos == '0')
-		return(img->floor);
-	else if (pos == '1')
-		return(img->wall);
-	else if (pos == 'C')
-		return(img->dot);
-	else if (pos == 'E')
-		return (img->player);
+	if (game->map[pos_y][pos_x] == '1')
+		return(img.wall);
+	else if (game->map[pos_y][pos_x] == 'C')
+		return(img.dot);
+	else if (game->map[pos_y][pos_x] == 'E')
+		return(img.exit);
+	return (NULL);
 }
 
 void	draw_map(t_game *game)
@@ -27,9 +26,10 @@ void	draw_map(t_game *game)
 		j = 0;
 		while (j < 31)
 		{
-			img = get_tip_image(game->map[i][j], game);
-			mlx_put_image_to_window(game->mlx, game->win, img, 
-				j * TIP_SIZE, i * TIP_SIZE);
+			img = get_tip_image(i, j, game);
+			if (img)
+				mlx_put_image_to_window(game->mlx, game->win, img, 
+					j * TIP_SIZE, i * TIP_SIZE);
 			j++;
 		}
 		i++;

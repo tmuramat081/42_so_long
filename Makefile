@@ -1,6 +1,11 @@
 NAME = so_long
-SRCS = ./src/main.c ./src/init_game.c ./src/load_map.c \
-	./src/load_image.c ./src/set_hook.c ./src/render.c
+SRCS = ./src/main.c \
+	./src/init_game.c \
+	./src/load_map.c \
+	./src/load_image.c \
+	./src/set_hook.c \
+	./src/render.c \
+	./src/utils.c
 OBJS = ${SRCS:.c=.o}
 MLXDIR = mlx
 MLX = ${MLXDIR}/libmlx.a
@@ -8,7 +13,7 @@ LIBFTDIR = libft
 LIBFT = ${LIBFTDIR}/libft.a
 INCS = -I./include -I${LIBFTDIR} -I${MLXDIR}
 CC = gcc
-CFLAGS = #-Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 MFLAGS = -Lmlx -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 
 all: ${NAME}
@@ -39,4 +44,3 @@ fclean: clean
 re: fclean all
 
 .PHONY: all bonus clean fclean re kill
-
