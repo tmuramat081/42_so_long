@@ -3,7 +3,7 @@ SRCS = ./src/main.c \
 	./src/init_game.c \
 	./src/input_map.c \
 	./src/input_image.c \
-	./src/set_hook.c \
+	./src/set_event.c \
 	./src/render.c \
 	./src/utils.c
 OBJS = ${SRCS:.c=.o}
