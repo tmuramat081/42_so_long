@@ -31,15 +31,18 @@ void full_search_map(char **map, int x, int y, t_mchk *map_checker)
 void load_map_file(t_game *game, char *file)
 {
 	int		fd;
-	char	*map[MAP_SIZE_MAX];
+	char	**map;
+	size_t	i;
 
 	fd = open(file, O_RDONLY);
+	map = malloc(sizeof(char *) * MAP_SIZE_MAX);
+	i = 0;
 	while (true)
 	{
-		*map = get_next_line(fd);
-		if (*map == NULL)
+		map[i] = get_next_line(fd);
+		if (map[i] == NULL)
 			break ;
-		(*map)++;
+		i++;
 	}
 	game->map = map;
 }

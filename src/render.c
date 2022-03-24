@@ -1,20 +1,21 @@
 #include "so_long.h"
 
-void	*get_tip_image(int pos_y, int pos_x, t_game *game)
+void	*get_grid_image(int y, int x, t_game *game)
 {
-	t_img img;
+	void *img;
 
-	img = game->img;	
-	if (game->map[pos_y][pos_x] == '1')
-		return(img.wall);
-	else if (game->map[pos_y][pos_x] == 'C')
-		return(img.dot);
-	else if (game->map[pos_y][pos_x] == 'E')
-		return(img.exit);
-	return (NULL);
+	if (game->map[y][x] == '1')
+		img = game->img.wall;
+	else if (game->map[y][x] == 'C')
+		img = game->img.dot;
+	else if (game->map[y][x] == 'E')
+		img = game->img.exit;
+	else
+		img = game->img.floor;
+	return (img);
 }
 
-void	draw_map(t_game *game)
+void	render_map(t_game *game)
 {
 	int		i;
 	int 	j;
@@ -24,12 +25,10 @@ void	draw_map(t_game *game)
 	while (i < 6)
 	{
 		j = 0;
-		while (j < 31)
+		while (j < 30)
 		{
-			img = get_tip_image(i, j, game);
-			if (img)
-				mlx_put_image_to_window(game->mlx, game->win, img, 
-					j * GRID_SIZE, i * GRID_SIZE);
+			img = get_grid_image(i, j, game);
+			mlx_put_image_to_window(game->mlx, game->win, img, j * GRID_SIZE, i *GRID_SIZE);
 			j++;
 		}
 		i++;

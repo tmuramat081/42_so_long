@@ -46,7 +46,7 @@ typedef struct s_game {
 void	input_map(t_game *game, char *map_file);
 void	input_image(t_game *game);
 void	init_game(t_game *game);
-void	draw_map(t_game *game);
+void	render_map(t_game *game);
 void	set_hook(t_game *game);
 void	put_error_and_exit(char *err_msg);
 
