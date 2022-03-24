@@ -24,11 +24,12 @@ typedef struct s_pos {
 }	t_pos;
 
 typedef struct s_mchk{
-	int cnt_dot; 
-	bool is_no_exit;
-	bool is_invalid_c;
-	bool is_map_opened;
-	bool is_more_player;
+	int		cnt_dot; 
+	int		cnt_exit;
+	bool	is_invalid_c;
+	bool 	is_map_opened;
+	int		cnt_player;
+	int		cnt_enemy;
 }	t_mchk;
 
 typedef struct s_game {
@@ -42,9 +43,9 @@ typedef struct s_game {
 	size_t	step;
 }	t_game;
 
+void	input_map(t_game *game, char *map_file);
+void	input_image(t_game *game);
 void	init_game(t_game *game);
-void	load_image_file(t_game *game);
-char	**load_map_file(char *file);
 void	draw_map(t_game *game);
 void	set_hook(t_game *game);
 void	put_error_and_exit(char *err_msg);

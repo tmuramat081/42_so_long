@@ -20,7 +20,7 @@
 # define IMG_FILE_PLAYER "./img/player.xpm"
 
 # define WINDOW_TITLE "So long"
-# define MAP_SIZE_MAX 100
-# define TIP_SIZE 32
+# define MAP_SIZE_MAX 128
+# define GRID_SIZE 32
 
 #endif

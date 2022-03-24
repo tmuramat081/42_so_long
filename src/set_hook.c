@@ -3,14 +3,14 @@
 int render_next_frame(t_game *game)
 {
 	mlx_put_image_to_window(game->mlx, game->win,
-		game->img.player, game->player_pos.x * TIP_SIZE, game->player_pos.y * TIP_SIZE);	
+		game->img.player, game->player_pos.x * GRID_SIZE, game->player_pos.y * GRID_SIZE);	
 	return(0);
 }
 
 int hook_player_move(int keycode, t_game *game)
 {
 	mlx_put_image_to_window(game->mlx, game->win,
-		game->img.floor, game->player_pos.x * TIP_SIZE, game->player_pos.y * TIP_SIZE);	
+		game->img.floor, game->player_pos.x * GRID_SIZE, game->player_pos.y * GRID_SIZE);	
 	if (keycode == KEY_A || keycode == KEY_LEFT)
 		game->player_pos.x -= 1;
 	else if (keycode == KEY_D || keycode == KEY_RIGHT)

@@ -1,8 +1,8 @@
 NAME = so_long
 SRCS = ./src/main.c \
 	./src/init_game.c \
-	./src/load_map.c \
-	./src/load_image.c \
+	./src/input_map.c \
+	./src/input_image.c \
 	./src/set_hook.c \
 	./src/render.c \
 	./src/utils.c

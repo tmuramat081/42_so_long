@@ -29,7 +29,7 @@ void	draw_map(t_game *game)
 			img = get_tip_image(i, j, game);
 			if (img)
 				mlx_put_image_to_window(game->mlx, game->win, img, 
-					j * TIP_SIZE, i * TIP_SIZE);
+					j * GRID_SIZE, i * GRID_SIZE);
 			j++;
 		}
 		i++;
