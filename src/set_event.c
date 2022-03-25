@@ -20,6 +20,20 @@ bool wall_exists(char **map, int next_x, int next_y)
 	return (false);
 }
 
+bool exit_exists(char **map, int next_x, int next_y)
+{	
+	if (map[next_y][next_x] == 'E')
+		return (true);
+	return (false);
+}
+
+bool dot_exists(char **map, int next_x, int next_y)
+{
+	if (map[next_y][next_x] == 'C')
+		return (true);
+	return (false);
+}
+
 void move_player(t_game *game, int next_x, int next_y)
 {
 	void *img;
@@ -31,9 +45,14 @@ void move_player(t_game *game, int next_x, int next_y)
 	prev_y = game->player_coord.y;
 	if (wall_exists(game->map, next_x, next_y) == true)
 		return ;
+	else if (dot_exists(game->map, next_x, next_y) == true)
+		game->rem_dot -= 1;
+	else if (exit_exists(game->map, next_x, next_y) == true)
+		exit (1);
 	mlx_put_image_to_window(game->mlx, game->win, img, prev_x * GRID_SIZE, prev_y * GRID_SIZE);
 	game->player_coord.x = next_x;
 	game->player_coord.y = next_y;
+	put_steps();
 }
 
 int check_key_entry(int keycode, t_game *game)
@@ -51,14 +70,15 @@ int check_key_entry(int keycode, t_game *game)
 		move_player(game, x, y-1);
 	else if (keycode == KEY_S || keycode == KEY_DOWN)
 		move_player(game, x, y+1);
-	else if (keycode == KEY_ESC)
+	else if (keycode == KEY_Q || keycode == KEY_ESC)
 		mlx_destroy_window(game->mlx, game->win);
-	printf("KEYCODE:%d\n", keycode);
+//	printf("KEYCODE:%d\n", keycode);
 	return (0);
 }
 
-void set_hook(t_game *game)
+void set_events(t_game *game)
 {
 	mlx_key_hook(game->win, check_key_entry, game);
 	mlx_loop_hook(game->mlx, render_next_frame, game);
+	mlx_do_key_autorepeaton(game->mlx);
 }

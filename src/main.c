@@ -9,8 +9,6 @@ int	main (int argc, char **argv)
 	game.mlx = mlx_init();
 	input_map(&game, argv[1]);
 	input_image(&game);
-	game.player_coord.x = 3;
-	game.player_coord.y = 3;
 	init_game(&game);
 	mlx_loop(game.mlx);
 	return (0);

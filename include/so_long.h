@@ -2,6 +2,7 @@
 # define SO_LONG_H
 
 # include "game_config.h"
+# include "system_message.h"
 # include "mlx.h"
 # include "libft.h"
 # include <stdio.h>
@@ -23,8 +24,8 @@ typedef struct s_coord {
 	int	y;
 }	t_coord;
 
-typedef struct s_mchk{
-	int		cnt_dot; 
+typedef struct s_mchk {
+	int		cnt_dot;
 	int		cnt_exit;
 	bool	is_invalid_c;
 	bool 	is_map_opened;
@@ -35,11 +36,12 @@ typedef struct s_mchk{
 typedef struct s_game {
 	void	*mlx;
 	void	*win;
-	int		win_width;
-	int		win_height;
+	size_t	map_width;
+	size_t	map_height;
 	t_coord	player_coord;
 	t_img	img;
 	char	**map;
+	int		rem_dot;
 	size_t	step;
 }	t_game;
 
@@ -48,7 +50,12 @@ void	input_image(t_game *game);
 void	init_game(t_game *game);
 void	render_map(t_game *game);
 void	render_character(t_game *game);
-void	set_hook(t_game *game);
+void	set_events(t_game *game);
 void	put_error_and_exit(char *err_msg);
+void	put_steps(void);
+bool	is_valid_map(char **map);
+bool	is_valid_file_name(char *file_name);
 
+/*** utils.c ***/
+void	put_steps(void);
 #endif

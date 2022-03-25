@@ -5,6 +5,7 @@ SRCS = ./src/main.c \
 	./src/input_image.c \
 	./src/set_event.c \
 	./src/render.c \
+	./src/validate_map.c \
 	./src/utils.c
 OBJS = ${SRCS:.c=.o}
 MLXDIR = mlx
@@ -13,7 +14,7 @@ LIBFTDIR = libft
 LIBFT = ${LIBFTDIR}/libft.a
 INCS = -I./include -I${LIBFTDIR} -I${MLXDIR}
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 MFLAGS = -Lmlx -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 
 all: ${NAME}

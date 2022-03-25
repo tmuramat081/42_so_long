@@ -29,15 +29,15 @@ void	render_character(t_game *game)
 
 void	render_map(t_game *game)
 {
-	int		i;
-	int 	j;
+	size_t	i;
+	size_t 	j;
 	void	*img;
 
 	i = 0;
-	while (i < 6)
+	while (i < game->map_height)
 	{
 		j = 0;
-		while (j < 30)
+		while (j < game->map_width)
 		{
 			img = get_grid_image(i, j, game);
 			mlx_put_image_to_window(game->mlx, game->win, img, j * GRID_SIZE, i *GRID_SIZE);
