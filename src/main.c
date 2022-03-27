@@ -9,7 +9,6 @@ int	main (int argc, char **argv)
 	game = (t_game){};
 	game.mlx = mlx_init();
 	input_map(&game, argv[1]);
-	load_images(&game);
 	init_game(&game);
 	mlx_loop(game.mlx);
 	return (0);

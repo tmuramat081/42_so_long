@@ -13,6 +13,7 @@
 # define ERR_NO_WALL "Error\nMap has no wall."
 # define ERR_PLAYERS "Error\nPlayer is not single."
 # define ERR_NO_READ "Error\nCan't read the map."
+# define ERR_MAP_FMT "Error\nMap is not rectangle/square."
 
 /***** End message. *****/
 # define WIN_GAME "Congratulations! you are win."

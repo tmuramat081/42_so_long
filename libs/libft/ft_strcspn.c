@@ -12,5 +12,5 @@ size_t ft_strcspn(const char *s1, const char *s2)
 		s1++;
 		len++;
 	}
-	return (len - 1);
+	return (len);
 }
