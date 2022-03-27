@@ -1,20 +1,26 @@
 #include "so_long.h"
 
-void	put_steps(void)
+bool exist_wall(char grid)
 {
-	static int cnt_step;
-
-	cnt_step += 1;
-	ft_putstr_fd("\033[32m\033[1K\033[1G", 1);
-	ft_putstr_fd("STEP:", 1);
-	ft_putnbr_fd(cnt_step , 1);
-	ft_putstr_fd("\033[49m", 1);
+	if (grid == '1')
+		return (true);
+	return (false);
 }
 
-void	put_error_and_exit(char *err_msg)
+bool exist_exit(char grid, t_game *game)
 {
-	ft_putstr_fd("\033[31m", 1);
-	ft_putendl_fd(err_msg, 1);
-	ft_putstr_fd("\033[49m", 1);
-	exit(EXIT_FAILURE);
+	if (grid == 'E')
+	{
+		if (game->rem_dot == 0)
+			close_window(game);
+		return (true);
+	}
+	return (false);
+}
+
+bool exist_dot(char grid)
+{
+	if (grid == 'C')
+		return (true);
+	return (false);
 }

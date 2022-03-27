@@ -1,43 +1,19 @@
 #include "so_long.h"
 
-int render_next_frame(t_game *game)
-{
-	void *img;
-	int x;
-	int y;
 
-	img = game->img.player;
-	x = game->player_coord.x;
-	y = game->player_coord.y;
-	mlx_put_image_to_window(game->mlx, game->win, img, x * GRID_SIZE, y * GRID_SIZE);
-	return(0);
+int 	close_window(t_game *game)
+{
+	put_steps();
+	put_end_message(game);
+	ft_free_matrix(&game->map);
+	mlx_clear_window(game->mlx, game->win);
+	mlx_destroy_window(game->mlx, game->win);
+	mlx_destroy_display(game->mlx);
+	free(game->mlx);
+	exit(0);
 }
 
-bool exist_wall(char grid)
-{
-	if (grid == '1')
-		return (true);
-	return (false);
-}
-
-bool exist_exit(char grid, t_game *game)
-{
-	if (grid == 'E')
-	{
-		if (game->rem_dot == 0)
-			close_window(game);
-		return (true);
-	}
-	return (false);
-}
-
-bool exist_dot(char grid)
-{
-	if (grid == 'C')
-		return (true);
-	return (false);
-}
-
+/* Check what's ahead of player, then rewrite own coordinates. */
 void move_player(t_game *game, int next_x, int next_y)
 {
 	void *img;
@@ -53,13 +29,17 @@ void move_player(t_game *game, int next_x, int next_y)
 	else if (exist_exit(game->map[next_y][next_x], game) == true)
 		return ;
 	else if (exist_dot(game->map[next_y][next_x]) == true)
+	{
+		game->map[next_y][next_x] = '0';
 		game->rem_dot -= 1;
+	}
 	mlx_put_image_to_window(game->mlx, game->win, img, prev_x * GRID_SIZE, prev_y * GRID_SIZE);
 	game->player_coord.x = next_x;
 	game->player_coord.y = next_y;
 	put_steps();
 }
 
+/* Call functions when keyboard is pressed. */
 int check_key_entry(int keycode, t_game *game)
 {
 	int x;
@@ -81,10 +61,11 @@ int check_key_entry(int keycode, t_game *game)
 	return (0);
 }
 
+/* Hook functions in mlx loop. */
 void set_events(t_game *game)
 {
-	mlx_key_hook(game->win, check_key_entry, game);
-	mlx_loop_hook(game->mlx, render_next_frame, game);
+	mlx_hook(game->win, 02, 1L<<0, check_key_entry, game);
+	mlx_loop_hook(game->mlx, render_player, game);
 	mlx_hook(game->win, 17, 0, close_window, game);
-	mlx_do_key_autorepeaton(game->mlx);
+	mlx_do_key_autorepeatoff(game->mlx);
 }

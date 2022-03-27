@@ -3,7 +3,7 @@
 /* "./ber" is invalid file name. */
 bool is_valid_file_name(char *file_name)
 {
-	if (ft_strlen(file_name) == 5 && ft_strncmp(file_name, ".ber", 5) == 0)	
+	if (ft_strncmp(file_name, ".ber", 5) == 0)	
 		return (false);
 	return (true);
 }

@@ -1,7 +1,7 @@
 #include "so_long.h"
 #include "get_next_line.h"
 
-
+/* Count the number of dot, and locate player spawn point. */
 void	check_grid_info(char **map, size_t y, size_t x,  t_game *game)
 {
 
@@ -17,13 +17,13 @@ void	check_grid_info(char **map, size_t y, size_t x,  t_game *game)
 	
 }
 
+/* Check if the map is rectangular or square. */ 
 void	parse_map(char **map, t_game *game)
 {
 	size_t i;
 	size_t j;
 	
-	game->map_width = ft_strcspn(map[2], "\n\r");
-	printf("%ld\n", game->map_width);
+	game->map_width = ft_strcspn(map[0], "\n\r");
 	i = 0;
 	while (map[i])
 	{
@@ -40,6 +40,7 @@ void	parse_map(char **map, t_game *game)
 	game->map_height = i;
 }
 
+/* Read a map file line by line, using get_next_line(subject of school 42). */
 char **load_map_file(char *file)
 {
 	int		fd;
@@ -59,16 +60,4 @@ char **load_map_file(char *file)
 		i++;
 	}
 	return (map);
-}
-
-void input_map(t_game *game, char *map_file)
-{
-	char **map;
-
-	if (is_valid_file_name(map_file) == false)
-		put_error_and_exit(ERR_FILE_NAME);
-	map = load_map_file(map_file);
-	parse_map(map, game);
-	check_playable_map(game, (const char **)map);
-	game->map = map;
 }

@@ -15,7 +15,7 @@ void	*get_grid_image(int y, int x, t_game *game)
 	return (img);
 }
 
-void	render_character(t_game *game)
+int	render_player(t_game *game)
 {
 	void *img;
 	int x;
@@ -25,6 +25,7 @@ void	render_character(t_game *game)
 	x = game->player_coord.x;
 	y = game->player_coord.y;
 	mlx_put_image_to_window(game->mlx, game->win, img, x * GRID_SIZE, y * GRID_SIZE);
+	return (0);
 }
 
 void	render_map(t_game *game)

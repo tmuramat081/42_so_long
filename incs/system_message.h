@@ -16,8 +16,8 @@
 # define ERR_MAP_FMT "Error\nMap is not rectangle/square."
 
 /***** End message. *****/
-# define WIN_GAME "Congratulations! you are win."
-# define LOSE_GAME "Oops, you are lost."
-# define EXIT_GAME "See you, please play again."
+# define WIN_GAME "---Congratulations! you are win.---\n"
+# define LOSE_GAME "---Oops, you are lost.---\n"
+# define EXIT_GAME "---See you, please play again.---\n"
 
 #endif

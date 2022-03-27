@@ -1,13 +1,12 @@
 NAME = so_long
 SRCS = ./src/main.c \
-	./src/init_game.c \
-	./src/input_map.c \
-	./src/input_image.c \
-	./src/set_event.c \
+	./src/map.c \
+	./src/image.c \
+	./src/event.c \
 	./src/render.c \
-	./src/validate_map.c \
-	./src/utils.c \
-	./src/end_game.c
+	./src/validation.c \
+	./src/print.c \
+	./src/utils.c
 OBJS = ${SRCS:.c=.o}
 MLXDIR = ./libs/mlx_linux
 MLX = ${MLXDIR}/libmlx.a
@@ -17,6 +16,9 @@ INCS = -I./incs -I${LIBFTDIR} -I${MLXDIR} -I./libs/libft/printf
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 MFLAGS = -L/usr/lib -lmlx -lXext -lX11 -lm -lz
+PLAY_MAPS = M00_sample.ber M02_basic.ber
+
+
 
 all: ${NAME}
 
@@ -44,5 +46,14 @@ fclean: clean
 	${MAKE} fclean -C ${LIBFTDIR}
 
 re: fclean all
+
+play:
+
+test:
+
+git:
+	git add .
+	git commit 
+	git push
 
 .PHONY: all bonus clean fclean re kill

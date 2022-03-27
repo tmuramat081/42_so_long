@@ -5,10 +5,8 @@
 # include "system_message.h"
 # include "mlx.h"
 # include "libft.h"
-# include <stdio.h>
 # include <unistd.h>
 # include <sys/types.h>
-# include <sys/stat.h>
 # include <fcntl.h>
 
 typedef struct s_img {
@@ -42,19 +40,43 @@ typedef struct s_game {
 	size_t	step;
 }	t_game;
 
+/*** main.c ***/
 void	input_map(t_game *game, char *map_file);
-void	load_images(t_game *game);
 void	init_game(t_game *game);
+
+/*** input_map.c ***/
+char **load_map_file(char *file);
+void	parse_map(char **map, t_game *game);
+void	check_grid_info(char **map, size_t y, size_t x,  t_game *game);
+
+/*** input_image.c ***/ 
+void	load_images(t_game *game);
+void *convert_file_into_image(void *mlx, char *img_file);
+
+/*** render.c ***/
 void	render_map(t_game *game);
-void	render_character(t_game *game);
-void	set_events(t_game *game);
-void	put_error_and_exit(char *err_msg);
-void	put_steps(void);
+int		render_player(t_game *game);
+void	*get_grid_image(int y, int x, t_game *game);
+
+/*** set_event.c ***/
+void set_events(t_game *game);
+int check_key_entry(int keycode, t_game *game);
+void move_player(t_game *game, int next_x, int next_y);
+bool exist_dot(char grid);
+bool exist_exit(char grid, t_game *game);
+bool exist_wall(char grid);
+
+/*** validate_map.c ***/
+void	check_playable_map(t_game *game, const char **src_map);
+void 	full_search_map(char **map, int x, int y, t_chk *map_checker);
+void	get_grid_info(char grid, t_chk *map_checker);
 bool	is_valid_map(char **map);
 bool	is_valid_file_name(char *file_name);
-void	check_playable_map(t_game *game, const char **map);
+
+/*** end_game.c ***/
 int		close_window(t_game *game);
-void	end_game(t_game *game);
 /*** utils.c ***/
 void	put_steps(void);
+void	put_error_and_exit(char *err_msg);
+void	put_end_message(t_game *game);
 #endif
