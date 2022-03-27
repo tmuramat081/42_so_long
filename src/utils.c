@@ -14,7 +14,6 @@ void	put_steps(void)
 void	put_error_and_exit(char *err_msg)
 {
 	ft_putstr_fd("\033[31m", 1);
-	ft_putendl_fd("ERROR", 1);
 	ft_putendl_fd(err_msg, 1);
 	ft_putstr_fd("\033[49m", 1);
 	exit(EXIT_FAILURE);

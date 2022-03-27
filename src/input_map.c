@@ -1,4 +1,5 @@
 #include "so_long.h"
+#include "get_next_line.h"
 
 void	parse_map(t_game *game, char **map)
 {
@@ -7,10 +8,10 @@ void	parse_map(t_game *game, char **map)
 
 	i = 0;
 	game->map_width = ft_strcspn(map[0], "\n");
-	while (map[i] != NULL)
+	while (map[i])
 	{
 		j = 0;
-		while (map[i][j] != '\0')
+		while (map[i][j])
 		{
 			if (map[i][j] == 'P')
 			{
@@ -51,7 +52,6 @@ void input_map(t_game *game, char *map_file)
 		put_error_and_exit(ERR_FILE_NAME);
 	map = load_map_file(map_file);
 	parse_map(game, map);
-	if (is_valid_map(map) == false)
-		put_error_and_exit("Error");
+	check_playable_map(game, (const char **)map);
 	game->map = map;
 }

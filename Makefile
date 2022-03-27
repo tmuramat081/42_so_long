@@ -6,16 +6,17 @@ SRCS = ./src/main.c \
 	./src/set_event.c \
 	./src/render.c \
 	./src/validate_map.c \
-	./src/utils.c
+	./src/utils.c \
+	./src/end_game.c
 OBJS = ${SRCS:.c=.o}
-MLXDIR = mlx
+MLXDIR = ./libs/mlx_linux
 MLX = ${MLXDIR}/libmlx.a
-LIBFTDIR = libft
+LIBFTDIR = ./libs/libft
 LIBFT = ${LIBFTDIR}/libft.a
-INCS = -I./include -I${LIBFTDIR} -I${MLXDIR}
+INCS = -I./incs -I${LIBFTDIR} -I${MLXDIR} -I./libs/libft/printf
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g
-MFLAGS = -Lmlx -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+CFLAGS = -Wall -Wextra -Werror
+MFLAGS = -L/usr/lib -lmlx -lXext -lX11 -lm -lz
 
 all: ${NAME}
 
@@ -31,10 +32,10 @@ ${NAME}: ${OBJS}
 	${CC} ${CFLAGS} ${OBJS} ${MFLAGS} ${LIBFT} ${MLX} ${INCS} -o $@
 
 .c.o:
-	${CC} ${CFLAGS} ${INCS} -Imlx_linux -O3 -c $< -o $@
+	${CC} ${CFLAGS} -I/usr/include -I./libs/mlx_linux ${INCS} -O3 -c $< -o $@
 
 clean:
-	rm -f ${OBJS}
+	rm -f ${OBJS} ${GNL_OBJS}
 	${MAKE} clean -C ${LIBFTDIR}
 	${MAKE} clean -C ${MLXDIR}
 

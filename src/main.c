@@ -5,10 +5,11 @@ int	main (int argc, char **argv)
 	t_game game;
 
 	if (argc != 2)
-		put_error_and_exit("ERROR");
+		put_error_and_exit(ERR_ARGS);
+	game = (t_game){};
 	game.mlx = mlx_init();
 	input_map(&game, argv[1]);
-	input_image(&game);
+	load_images(&game);
 	init_game(&game);
 	mlx_loop(game.mlx);
 	return (0);
