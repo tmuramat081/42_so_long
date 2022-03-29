@@ -20,6 +20,6 @@ void	put_steps(void)
 
 void	put_error_and_exit(char *err_msg)
 {
-	ft_printf("Error\n%s", err_msg);
+	ft_printf("Error\n%s\n", err_msg);
 	exit(EXIT_FAILURE);
 }

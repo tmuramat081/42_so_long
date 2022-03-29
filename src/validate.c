@@ -27,7 +27,10 @@ void get_grid_info(char grid, t_chk *map_checker)
 
 void explore_map(char **map, int x, int y, t_chk *map_checker)
 {
-	if (map[y][x] != '@' && map[y][x] != '1')
+	if (x == -1 || x == map_checker->width_lim
+		|| y == -1 || y == map_checker->height_lim)
+		put_error_and_exit(ERR_NO_WALL);
+	else if (map[y][x] != '@' && map[y][x] != '1')
 	{
 		get_grid_info(map[y][x], map_checker);
 		map[y][x] = '@';
@@ -51,16 +54,14 @@ bool match_explored_info(t_game *game, t_chk map_checker)
 
 void	check_is_playable_map(t_game *game, const char **src_map)
 {
-	size_t	init_x;
-	size_t	init_y;
 	t_chk	map_checker;
 	char **cpy_map;
 
 	cpy_map = ft_matrixdup(src_map);
 	map_checker = (t_chk){};
-	init_x = game->player_coord.x;
-	init_y = game->player_coord.y;
-	explore_map(cpy_map, init_x, init_y, &map_checker);
+	map_checker.width_lim = game->map_width;
+	map_checker.height_lim = game->map_height;
+	explore_map(cpy_map, game->player_coord.x, game->player_coord.y, &map_checker);
 	if (match_explored_info(game, map_checker) == false)
 		put_error_and_exit(ERR_NOT_PLAYABLE);
 	ft_free_matrix(&cpy_map);

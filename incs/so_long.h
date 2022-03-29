@@ -26,18 +26,19 @@ typedef struct s_chk {
 	size_t	cnt_dot;
 	size_t	cnt_exit;
 	size_t	cnt_player;
+	int		width_lim;
+	int		height_lim;
 }	t_chk;
 
 typedef struct s_game {
 	void	*mlx;
 	void	*win;
+	char	**map;
 	size_t	map_width;
 	size_t	map_height;
 	t_coord	player_coord;
 	t_img	img;
-	char	**map;
 	size_t	rem_dot;
-	size_t	step;
 }	t_game;
 
 /*** main.c ***/

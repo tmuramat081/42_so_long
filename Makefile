@@ -16,8 +16,10 @@ INCS = -I./incs -I${LIBFTDIR} -I${MLXDIR} -I./libs/libft/printf -I./libs/libft/g
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 MFLAGS = -L/usr/lib -lmlx -lXext -lX11 -lm -lz
-PLAY_MAPS = M00_basic.ber M01_basic2.ber M02_smallest.ber M03_largest.ber
-
+MAPS = ./map/M00_basic1.ber ./map/M01_basic2.ber ./map/M02_smallest.ber ./map/M03_largest.ber
+ERROR_MAPS = ./map/E00_empty.ber ./map/E01_not_closed.ber ./map/E02_not_closed2.ber ./map/E03_no_collectible.ber \
+	./map/E05_no_spawn.ber ./map/E06_multi_spawn.ber ./map/E07_not_rectangle.ber ./map/E08_void_line.ber \
+	./map/E09_too_large.ber ./map/E10_unplayable.ber ./map/.ber
 all: ${NAME}
 
 ${LIBFT}:
@@ -45,9 +47,17 @@ fclean: clean
 
 re: fclean all
 
-play:
+play: all 
+	@for map in ${MAPS} ; \
+	do ./${NAME} $$map ; \
+	done
 
-test:
+test: all
+	@for emap in ${ERROR_MAPS} ; \
+	do echo "----$$emap-----" \
+	&& cat $$emap && echo "\n" \
+	&& ./${NAME} $$emap && echo "\n" ; \
+	done
 
 git:
 	git add .
