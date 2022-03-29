@@ -6,19 +6,22 @@ ft_strrchr.c ft_strncmp.c ft_memchr.c ft_memcmp.c ft_strnstr.c ft_atoi.c ft_call
 ft_split.c ft_substr.c ft_strjoin.c ft_strtrim.c ft_itoa.c ft_strmapi.c ft_putchar_fd.c ft_putstr_fd.c \
 ft_putendl_fd.c ft_putnbr_fd.c ft_striteri.c ft_isspace.c ft_lstnew.c ft_lstadd_front.c \
 ft_lstsize.c ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c 
-ADD_SRCS = get_next_line.c ft_isspace.c ft_strtol_d.c ft_strcspn.c ft_matrixlen.c ft_matrixdup.c ft_free_matrix.c
+ADD_SRCS = ft_isspace.c ft_strtol_d.c ft_strcspn.c ft_matrixlen.c ft_matrixdup.c ft_free_matrix.c
+GNL_SRCS = ./get_next_line/get_next_line.c
 PRF_SRCS = ./printf/ft_printf.c ./printf/doprintf.c ./printf/composer.c ./printf/parser.c \
 ./printf/converter.c ./printf/utils.c ./printf/printer.c
 OBJS = ${SRCS:.c=.o}
 ADD_OBJS = ${ADD_SRCS:.c=.o}
 PRF_OBJS = ${PRF_SRCS:.c=.o}
+GNL_OBJS = ${GNL_SRCS:.c=.o}
 PRF_DIR = ./printf
-INCS = -I. -I${PRF_DIR}
+GNL_DIR = ./get_next_line
+INCS = -I. -I${PRF_DIR} -I${GNL_DIR}
 CFLAG = -Wall -Wextra -Werror 
 AR = ar rc
 
-${NAME}: ${OBJS} ${ADD_OBJS} ${PRF_OBJS}
-	${AR} ${NAME} ${OBJS} ${ADD_OBJS} ${PRF_OBJS}
+${NAME}: ${OBJS} ${ADD_OBJS} ${PRF_OBJS} ${GNL_OBJS}
+	${AR} ${NAME} ${OBJS} ${ADD_OBJS} ${PRF_OBJS} ${GNL_OBJS}
 
 .c.o:
 	${CC} ${CFLAG} ${INCS} -c $< -o $@
@@ -26,7 +29,7 @@ ${NAME}: ${OBJS} ${ADD_OBJS} ${PRF_OBJS}
 all: ${NAME}
 
 clean:
-	rm -f ${OBJS} ${ADD_OBJS} ${PRF_OBJS}
+	rm -f ${OBJS} ${ADD_OBJS} ${PRF_OBJS} ${GNL_OBJS}
 
 fclean: clean
 	rm -f ${NAME}

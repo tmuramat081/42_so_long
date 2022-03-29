@@ -10,7 +10,6 @@ void	init_game(t_game *game)
 	game->win = mlx_new_window(game->mlx, win_width, win_height, WINDOW_TITLE);
 	load_images(game);
 	render_map(game);
-	render_player(game);
 	set_events(game);
 	put_steps();
 }
@@ -22,8 +21,10 @@ void input_map(t_game *game, char *map_file)
 	if (is_valid_file_name(map_file) == false)
 		put_error_and_exit(ERR_FILE_NAME);
 	map = load_map_file(map_file);
+	if (!map)
+		put_error_and_exit(ERR_FILE_READ);
 	parse_map(map, game);
-	check_playable_map(game, (const char **)map);
+	check_is_playable_map(game, (const char **)map);
 	game->map = map;
 }
 

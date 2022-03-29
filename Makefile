@@ -4,7 +4,7 @@ SRCS = ./src/main.c \
 	./src/image.c \
 	./src/event.c \
 	./src/render.c \
-	./src/validation.c \
+	./src/validate.c \
 	./src/print.c \
 	./src/utils.c
 OBJS = ${SRCS:.c=.o}
@@ -12,13 +12,11 @@ MLXDIR = ./libs/mlx_linux
 MLX = ${MLXDIR}/libmlx.a
 LIBFTDIR = ./libs/libft
 LIBFT = ${LIBFTDIR}/libft.a
-INCS = -I./incs -I${LIBFTDIR} -I${MLXDIR} -I./libs/libft/printf
+INCS = -I./incs -I${LIBFTDIR} -I${MLXDIR} -I./libs/libft/printf -I./libs/libft/get_next_line
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 MFLAGS = -L/usr/lib -lmlx -lXext -lX11 -lm -lz
 PLAY_MAPS = M00_sample.ber M02_basic.ber
-
-
 
 all: ${NAME}
 

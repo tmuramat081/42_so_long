@@ -28,7 +28,7 @@ int	render_player(t_game *game)
 	return (0);
 }
 
-void	render_map(t_game *game)
+int	render_map(t_game *game)
 {
 	size_t	i;
 	size_t 	j;
@@ -46,4 +46,5 @@ void	render_map(t_game *game)
 		}
 		i++;
 	}
+	return (0);
 }

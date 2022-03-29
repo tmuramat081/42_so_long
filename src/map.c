@@ -24,6 +24,8 @@ void	parse_map(char **map, t_game *game)
 	size_t j;
 	
 	game->map_width = ft_strcspn(map[0], "\n\r");
+	if (game->map_width > MAP_WIDTH_MAX)
+		put_error_and_exit(ERR_MAP_LARGE);
 	i = 0;
 	while (map[i])
 	{
@@ -48,7 +50,7 @@ char **load_map_file(char *file)
 	size_t	i;
 
 	fd = open(file, O_RDONLY);
-	map = malloc(sizeof(char *) * MAP_SIZE_MAX + 1);
+	map = malloc(sizeof(char *) * MAP_HEIGHT_MAX + 1);
 	if (!map)
 		return (NULL);
 	i = 0;

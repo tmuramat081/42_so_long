@@ -1,23 +1,26 @@
 #ifndef GAME_MESSAGE_H
 # define GAME_MESSAGE_H
 
-/***** Game title. *****/
+/***** Game title *****/
 # define WINDOW_TITLE "So long"
 
-/***** Error message. *****/
-# define ERR_ARGS "Error\nInvalid arguments."
-# define ERR_IMG_SIZE "Error\nImage size is wrong."
-# define ERR_MAP_SIZE "Error\nMap size is too large."
-# define ERR_FILE_NAME "Error\nInvalid filename."
-# define ERR_FILE_FMT "Error\nIncalid image file format."
-# define ERR_NO_WALL "Error\nMap has no wall."
-# define ERR_PLAYERS "Error\nPlayer is not single."
-# define ERR_NO_READ "Error\nCan't read the map."
-# define ERR_MAP_FMT "Error\nMap is not rectangle/square."
+/***** essage *****/
+# define ERR_ARGS "Invalid arguments."
+# define ERR_IMG_SIZE "Image size is wrong."
+# define ERR_MAP_SIZE "Map size is too large."
+# define ERR_FILE_NAME "Invalid filename."
+# define ERR_FILE_FMT "Incalid image file format."
+# define ERR_NO_WALL "Map has no wall."
+# define ERR_PLAYERS "Player is not single."
+# define ERR_NO_READ "Can't read the map."
+# define ERR_MAP_FMT "Map is not rectangle/square."
+# define ERR_NOT_PLAYABLE "This map is unsolvanle."
+# define ERR_MAP_LARGE "Map is too large."
+# define ERR_FILE_READ "Fail to read file."
 
-/***** End message. *****/
+/***** End message *****/
 # define WIN_GAME "---Congratulations! you are win.---\n"
-# define LOSE_GAME "---Oops, you are lost.---\n"
+# define LOSE_GAME "---Oops! you are lost.---\n"
 # define EXIT_GAME "---See you, please play again.---\n"
 
 #endif

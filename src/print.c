@@ -20,8 +20,6 @@ void	put_steps(void)
 
 void	put_error_and_exit(char *err_msg)
 {
-	ft_printf("\033[31m");
-	ft_printf(err_msg);
-	ft_printf("\033[49m");
+	ft_printf("Error\n%s", err_msg);
 	exit(EXIT_FAILURE);
 }
