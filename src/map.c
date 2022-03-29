@@ -4,7 +4,6 @@
 /* Count the number of dot, and locate player spawn point. */
 void	check_grid_info(char **map, size_t y, size_t x,  t_game *game)
 {
-
 	if (map[y][x] == 'C')
 		game->rem_dot += 1;
 	if (map[y][x] == 'P')
@@ -14,7 +13,6 @@ void	check_grid_info(char **map, size_t y, size_t x,  t_game *game)
 		game->player_coord.y = y;
 		game->player_coord.x = x;
 	}
-	
 }
 
 /* Check if the map is rectangular or square. */ 
@@ -42,6 +40,18 @@ void	parse_map(char **map, t_game *game)
 	game->map_height = i;
 }
 
+bool	is_last_line(char *line, int row_num)
+{
+	if (line == NULL)
+	{
+		if (row_num == 0)
+			put_error_and_exit(ERR_MAP_EMPTY);
+		else
+			return (true);
+	}
+	return (false);
+}
+
 /* Read a map file line by line, using get_next_line(subject of school 42). */
 char **load_map_file(char *file)
 {
@@ -50,14 +60,18 @@ char **load_map_file(char *file)
 	size_t	i;
 
 	fd = open(file, O_RDONLY);
+	if (fd == -1)
+		put_error_and_exit(ERR_NO_READ);
 	map = malloc(sizeof(char *) * MAP_HEIGHT_MAX + 1);
 	if (!map)
-		return (NULL);
+		put_error_and_exit(ERR_FILE_READ);
 	i = 0;
 	while (true)
 	{
+		if (MAP_HEIGHT_MAX < i)
+			put_error_and_exit(ERR_MAP_LARGE);
 		map[i] = get_next_line(fd);
-		if (map[i] == NULL)
+		if (is_last_line(map[i], i) == true)
 			break ;
 		i++;
 	}

@@ -20,7 +20,7 @@
 # define IMG_FILE_EXIT "./img/exit.xpm"
 # define IMG_FILE_PLAYER "./img/player.xpm"
 
-# define MAP_WIDTH_MAX 50
+# define MAP_WIDTH_MAX 32
 # define MAP_HEIGHT_MAX 32
 # define GRID_SIZE 32
 

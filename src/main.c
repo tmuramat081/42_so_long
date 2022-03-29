@@ -21,8 +21,6 @@ void input_map(t_game *game, char *map_file)
 	if (is_valid_file_name(map_file) == false)
 		put_error_and_exit(ERR_FILE_NAME);
 	map = load_map_file(map_file);
-	if (!map)
-		put_error_and_exit(ERR_FILE_READ);
 	parse_map(map, game);
 	check_is_playable_map(game, (const char **)map);
 	game->map = map;

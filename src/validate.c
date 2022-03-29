@@ -21,8 +21,6 @@ void get_grid_info(char grid, t_chk *map_checker)
 		map_checker->cnt_exit += 1;
 	else if (grid == 'P')
 		map_checker->cnt_player += 1;
-	else if (grid == '\0')
-		put_error_and_exit(ERR_NO_WALL);
 	else
 		put_error_and_exit(ERR_NO_READ);
 }

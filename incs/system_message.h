@@ -6,6 +6,7 @@
 
 /***** essage *****/
 # define ERR_ARGS "Invalid arguments."
+# define ERR_MAP_EMPTY "Map is empty."
 # define ERR_IMG_SIZE "Image size is wrong."
 # define ERR_MAP_SIZE "Map size is too large."
 # define ERR_FILE_NAME "Invalid filename."

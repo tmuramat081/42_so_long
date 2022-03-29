@@ -16,7 +16,7 @@ INCS = -I./incs -I${LIBFTDIR} -I${MLXDIR} -I./libs/libft/printf -I./libs/libft/g
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 MFLAGS = -L/usr/lib -lmlx -lXext -lX11 -lm -lz
-PLAY_MAPS = M00_sample.ber M02_basic.ber
+PLAY_MAPS = M00_basic.ber M01_basic2.ber M02_smallest.ber M03_largest.ber
 
 all: ${NAME}
 
