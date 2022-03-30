@@ -1,3 +1,4 @@
+# Make vars
 NAME = libft.a
 CC = gcc
 SRCS = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_strlen.c ft_memset.c \
@@ -20,19 +21,37 @@ INCS = -I. -I${PRF_DIR} -I${GNL_DIR}
 CFLAG = -Wall -Wextra -Werror 
 AR = ar rc
 
+# Print vars
+PRINTF = printf
+DEFAULT = \033[0;39m
+BLUE = \033[0;94m
+GREEN = \033[0;92m
+RED = \033[0;91m
+
+# Progress vars
+SRC_COUNT_TOT := $(shell expr $(shell echo -n $(SRCS) ${ADD_SRCS} ${GNL_SRCS} ${PRF_SRCS} | wc -w) - $(shell ls -Rl 2>&1 | grep ".o" | wc -l) + 1)
+ifeq ($(shell test $(SRC_COUNT_TOT) -le 0; echo $$?), 0)
+	SRC_COUNT_TOT := $(shell echo -n $(SRCS) ${ADD_SRCS} ${GNL_SRCS} ${PRF_SRCS} | wc -w)
+endif
+SRC_COUNT := 0
+SRC_PCT = $(shell expr 100 \* $(SRC_COUNT) / $(SRC_COUNT_TOT))
+
 ${NAME}: ${OBJS} ${ADD_OBJS} ${PRF_OBJS} ${GNL_OBJS}
-	${AR} ${NAME} ${OBJS} ${ADD_OBJS} ${PRF_OBJS} ${GNL_OBJS}
+	@${AR} ${NAME} ${OBJS} ${ADD_OBJS} ${PRF_OBJS} ${GNL_OBJS}
+	@$(PRINTF) "${GREEN}\r%100s\r${NAME} is up to date!\n${DEFAULT}"
 
 .c.o:
-	${CC} ${CFLAG} ${INCS} -c $< -o $@
+	@$(eval SRC_COUNT = $(shell expr $(SRC_COUNT) + 1))
+	@${PRINTF} "\r%100s\r[ %d/%d (%d%%) ] Compiling ${BLUE}$<${DEFAULT}..." "" $(SRC_COUNT) $(SRC_COUNT_TOT) $(SRC_PCT)
+	@${CC} ${CFLAG} ${INCS} -c $< -o $@
 
 all: ${NAME}
 
 clean:
-	rm -f ${OBJS} ${ADD_OBJS} ${PRF_OBJS} ${GNL_OBJS}
+	@rm -f ${OBJS} ${ADD_OBJS} ${PRF_OBJS} ${GNL_OBJS}
 
 fclean: clean
-	rm -f ${NAME}
+	@rm -f ${NAME}
 
 re: fclean all
 

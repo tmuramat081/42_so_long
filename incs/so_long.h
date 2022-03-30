@@ -46,9 +46,9 @@ void	input_map(t_game *game, char *map_file);
 void	init_game(t_game *game);
 
 /*** input_map.c ***/
-char **load_map_file(char *file);
-void	parse_map(char **map, t_game *game);
-void	check_grid_info(char **map, size_t y, size_t x,  t_game *game);
+char **load_map_file(char *file, t_game *game);
+void	parse_line_info(char *map_line, t_game *game);
+void	pstdr_grid_info(char *map_line, size_t y, size_t x,  t_game *game);
 
 /*** input_image.c ***/ 
 void	load_images(t_game *game);
@@ -63,7 +63,7 @@ void	*get_grid_image(int y, int x, t_game *game);
 void	set_events(t_game *game);
 int		check_key_entry(int keycode, t_game *game);
 void	move_player(t_game *game, int next_x, int next_y);
-bool	 exist_dot(char grid);
+bool	exist_dot(char grid);
 bool	exist_exit(char grid, t_game *game);
 bool	exist_wall(char grid);
 

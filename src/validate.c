@@ -41,7 +41,7 @@ void explore_map(char **map, int x, int y, t_chk *map_checker)
 	}
 }
 
-bool match_explored_info(t_game *game, t_chk map_checker)
+bool compare_parsed_with_explored(t_game *game, t_chk map_checker)
 {
 	if (!map_checker.cnt_dot || game->rem_dot != map_checker.cnt_dot)
 		return (false);
@@ -57,12 +57,12 @@ void	check_is_playable_map(t_game *game, const char **src_map)
 	t_chk	map_checker;
 	char **cpy_map;
 
-	cpy_map = ft_matrixdup(src_map);
 	map_checker = (t_chk){};
 	map_checker.width_lim = game->map_width;
 	map_checker.height_lim = game->map_height;
+	cpy_map = ft_matrixdup(src_map);
 	explore_map(cpy_map, game->player_coord.x, game->player_coord.y, &map_checker);
-	if (match_explored_info(game, map_checker) == false)
+	if (compare_parsed_with_explored(game, map_checker) == false)
 		put_error_and_exit(ERR_NOT_PLAYABLE);
 	ft_free_matrix(&cpy_map);
 }

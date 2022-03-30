@@ -15,7 +15,7 @@
 # define ERR_PLAYERS "Player is not single."
 # define ERR_NO_READ "Can't read the map."
 # define ERR_MAP_FMT "Map is not rectangle."
-# define ERR_NOT_PLAYABLE "This map is unsolvanle."
+# define ERR_NOT_PLAYABLE "This map is unplayable."
 # define ERR_MAP_LARGE "Map is too large."
 # define ERR_FILE_READ "Fail to read file."
 
