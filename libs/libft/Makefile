@@ -31,11 +31,12 @@ SRC_COUNT_TOT := ${shell expr ${words ${SRCS}} - ${shell ls -l ${OBJ_DIR} | grep
 SRC_COUNT := 0
 SRC_PCT = $(shell expr 100 \* $(SRC_COUNT) / $(SRC_COUNT_TOT))
 PROGRESS = $(eval SRC_COUNT = $(shell expr ${SRC_COUNT} + 1)) \
-	@${PRINTF} "${GREEN}\r%100s\r[ %d/%d (%d%%) ] Compiling $< ...${DEFAULT}" "" $(SRC_COUNT) $(SRC_COUNT_TOT) $(SRC_PCT)
+	${PRINTF} "${GREEN}\r%100s\r[ %d/%d (%d%%) ] Compiling $< ...${DEFAULT}" "" $(SRC_COUNT) $(SRC_COUNT_TOT) $(SRC_PCT)
 
 # Command
 ${NAME}: ${OBJS}
 	@${AR} ${NAME} ${OBJS}
+	@echo "\n${BLUE}--- ${NAME} is up to date! ---${DEFAULT}"
 
 ${OBJ_DIR}%.o: %.c
 	@${PROGRESS}
@@ -50,7 +51,6 @@ ${OBJ_DIR}%.o: ${PRF_DIR}%.c
 	@${CC} ${CFLAG} ${INCS} -c $< -o $@
 
 all: ${NAME}
-	@echo "\n${BLUE}--- ${NAME} is up to date! ---${DEFAULT}"
 
 clean:
 	${RM} ${OBJS}

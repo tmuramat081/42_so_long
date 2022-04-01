@@ -20,6 +20,17 @@
 # define IMG_FILE_EXIT "./img/exit.xpm"
 # define IMG_FILE_PLAYER "./img/player.xpm"
 
+# define IMG_FILE_ZERO "./img/digits/0.xpm"
+# define IMG_FILE_ONE "./img/digits/1.xpm"
+# define IMG_FILE_TWO "./img/digits/2.xpm"
+# define IMG_FILE_THREE "./img/digits/3.xpm"
+# define IMG_FILE_FOUR "./img/digits/4.xpm"
+# define IMG_FILE_FIVE "./img/digits/5.xpm"
+# define IMG_FILE_SIX "./img/digits/6.xpm"
+# define IMG_FILE_SEVEN "./img/digits/7.xpm"
+# define IMG_FILE_EIGHT "./img/digits/8.xpm"
+# define IMG_FILE_NINE "./img/digits/9.xpm"
+
 /***** Window resolution (per pixel). *****/
 # define MAP_WIDTH_MAX 50
 # define MAP_HEIGHT_MAX 32

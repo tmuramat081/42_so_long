@@ -10,11 +10,12 @@
 # include <fcntl.h>
 
 typedef struct s_img {
-	void *floor;
-	void *wall;
-	void *dot;
-	void *exit;
-	void *player;
+	void 	*floor;
+	void 	*wall;
+	void	*dot;
+	void	*exit;
+	void	*player;
+	void	*digit[10];
 }	t_img;
 
 typedef struct s_coord {
@@ -39,6 +40,7 @@ typedef struct s_game {
 	t_coord	player_coord;
 	t_img	img;
 	size_t	rem_dot;
+	size_t	cnt_step;
 }	t_game;
 
 /*** main.c ***/
@@ -76,7 +78,7 @@ bool	is_valid_file_name(char *file_name);
 
 int		close_window(t_game *game);
 /*** utils.c ***/
-void	put_steps(void);
+void	put_steps(t_game *game);
 void	put_error_and_exit(char *err_msg);
 void	put_end_message(t_game *game);
 #endif

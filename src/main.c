@@ -11,7 +11,7 @@ void	init_game(t_game *game)
 	load_images(game);
 	render_map(game);
 	set_events(game);
-	put_steps();
+	put_steps(game);
 }
 
 void input_map(t_game *game, char *map_file)

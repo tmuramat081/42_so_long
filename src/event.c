@@ -3,7 +3,7 @@
 
 int 	close_window(t_game *game)
 {
-	put_steps();
+	put_steps(game);
 	put_end_message(game);
 	ft_free_matrix(&game->map);
 	mlx_clear_window(game->mlx, game->win);
@@ -36,7 +36,7 @@ void move_player(t_game *game, int next_x, int next_y)
 	mlx_put_image_to_window(game->mlx, game->win, img, prev_x * GRID_SIZE, prev_y * GRID_SIZE);
 	game->player_coord.x = next_x;
 	game->player_coord.y = next_y;
-	put_steps();
+	put_steps(game);
 }
 
 /* Call functions when keyboard is pressed. */

@@ -9,7 +9,7 @@ MLX = ${MLXDIR}/libmlx.a
 LIBFTDIR = libs/libft/
 LIBFT = ${LIBFTDIR}/libft.a
 INCS = -I./incs -I./${LIBFTDIR} -I./${MLXDIR} -I./${LIBFTDIR}printf -I./${LIBFTDIR}get_next_line
-CC = gcc
+CC = gcc -g
 CFLAGS = -Wall -Wextra -Werror
 MFLAGS = -L/usr/lib -lmlx -lXext -lX11 -lm -lz
 PLAY_MAP_SRCS = M00_basic1.ber M01_basic2.ber M02_smallest.ber M03_largest.ber
@@ -33,11 +33,10 @@ SRC_COUNT_TOT := ${shell expr ${words ${SRCS}} - ${shell ls -l ${OBJ_DIR} | grep
 SRC_COUNT := 0
 SRC_PCT = ${shell expr 100 \* ${SRC_COUNT} / ${SRC_COUNT_TOT}}
 PROGRESS = ${eval SRC_COUNT = ${shell expr ${SRC_COUNT} + 1}} \
-	@${PRINTF} "${GREEN}\r%100s\r[ %d/%d (%d%%) ] Compiling $< ...${DEFAULT}" "" $(SRC_COUNT) $(SRC_COUNT_TOT) $(SRC_PCT)
+	${PRINTF} "${GREEN}\r%100s\r[ %d/%d (%d%%) ] Compiling $< ...${DEFAULT}" "" $(SRC_COUNT) $(SRC_COUNT_TOT) $(SRC_PCT)
 
 # Commands
 all: ${NAME}
-	@echo "${BLUE}--- ${NAME} is up to date! ---${DEFAULT}"
 
 ${LIBFT}:
 	@${MAKE} -C ${LIBFTDIR}
@@ -47,6 +46,7 @@ ${MLX}:
 
 ${NAME}: ${OBJS} ${LIBFT} ${MLX}
 	@${CC} ${CFLAGS} ${OBJS} ${LIBFT} ${MLX} ${MFLAGS} ${INCS} -o $@
+	@echo "${BLUE}--- ${NAME} is up to date! ---${DEFAULT}"
 
 ${OBJ_DIR}%.o: ${SRC_DIR}%.c
 	@mkdir -p ${OBJ_DIR}
@@ -68,13 +68,14 @@ re: fclean
 play: all
 	for map in ${PLAY_MAPS} ; \
 	do ${MEM_CHECK} ./${NAME} $$map ; done
+	echo "${GREEN}----finish----${DEFAULT}"
 
 test: all
 	for emap in ${ERROR_MAPS} ; \
-	do echo "----$$emap-----" ; \
+	do echo "${GREEN}----$$emap-----${DEFAULT}" ; \
 	cat $$emap ; echo "\n" ; \
 	${MEM_CHECK} ./${NAME} $$emap ; done ; \
-	echo "----finish----"
+	echo "${GREEN}----finish----${DEFAULT}"
 
 git:
 	git add .
