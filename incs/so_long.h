@@ -8,6 +8,7 @@
 # include <unistd.h>
 # include <sys/types.h>
 # include <fcntl.h>
+# include <stdio.h>
 
 typedef struct s_img {
 	void 	*floor;
@@ -16,6 +17,9 @@ typedef struct s_img {
 	void	*exit;
 	void	*player;
 	void	*digit[10];
+	void	*menu;
+	void	*logo;
+	void	*title;
 }	t_img;
 
 typedef struct s_coord {
@@ -54,12 +58,14 @@ void	pstdr_grid_info(char *map_line, size_t y, size_t x,  t_game *game);
 
 /*** input_image.c ***/ 
 void	load_images(t_game *game);
-void 	*convert_file_into_image(void *mlx, char *img_file);
+void 	*convert_file_into_image(void *mlx, char *img_file, int size);
 
 /*** render.c ***/
+void	*get_grid_image(int y, int x, t_game *game);
 int		render_map(t_game *game);
 int		render_player(t_game *game);
-void	*get_grid_image(int y, int x, t_game *game);
+int		render_steps(size_t num, t_game *game);
+int		render_footer(t_game *game);
 
 /*** set_event.c ***/
 void	set_events(t_game *game);

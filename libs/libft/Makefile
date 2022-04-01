@@ -7,7 +7,8 @@ ft_strrchr.c ft_strncmp.c ft_memchr.c ft_memcmp.c ft_strnstr.c ft_atoi.c ft_call
 ft_split.c ft_substr.c ft_strjoin.c ft_strtrim.c ft_itoa.c ft_strmapi.c ft_putchar_fd.c ft_putstr_fd.c \
 ft_putendl_fd.c ft_putnbr_fd.c ft_striteri.c ft_isspace.c ft_lstnew.c ft_lstadd_front.c \
 ft_lstsize.c ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
-ADD_SRCS = ft_isspace.c ft_strtol_d.c ft_strcspn.c ft_matrixlen.c ft_matrixdup.c ft_free_matrix.c
+ADD_SRCS = ft_isspace.c ft_strtol_d.c ft_strcspn.c ft_matrixlen.c ft_matrixdup.c ft_free_matrix.c \
+ft_count_digits.c
 GNL_SRCS = get_next_line.c
 PRF_SRCS = ft_printf.c doprintf.c composer.c parser.c converter.c utils.c printer.c
 SRCS = ${LFT_SRCS} ${ADD_SRCS} ${addprefix ${GNL_DIR},${GNL_SRCS}} ${addprefix ${PRF_DIR},${PRF_SRCS}}

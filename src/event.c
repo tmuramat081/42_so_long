@@ -1,6 +1,5 @@
 #include "so_long.h"
 
-
 int 	close_window(t_game *game)
 {
 	put_steps(game);
@@ -65,6 +64,7 @@ int check_key_entry(int keycode, t_game *game)
 void set_events(t_game *game)
 {
 	mlx_expose_hook (game->win, render_map, game);
+	mlx_expose_hook (game->win, render_footer, game);
 	mlx_hook(game->win, 02, 1L<<0, check_key_entry, game);
 	mlx_loop_hook(game->mlx, render_player, game);
 	mlx_hook(game->win, 17, 0, close_window, game);

@@ -68,14 +68,14 @@ re: fclean
 play: all
 	for map in ${PLAY_MAPS} ; \
 	do ${MEM_CHECK} ./${NAME} $$map ; done
-	echo "${GREEN}----finish----${DEFAULT}"
+	@echo "${GREEN}----finish----${DEFAULT}"
 
 test: all
 	for emap in ${ERROR_MAPS} ; \
 	do echo "${GREEN}----$$emap-----${DEFAULT}" ; \
 	cat $$emap ; echo "\n" ; \
 	${MEM_CHECK} ./${NAME} $$emap ; done ; \
-	echo "${GREEN}----finish----${DEFAULT}"
+	@echo "${GREEN}----finish----${DEFAULT}"
 
 git:
 	git add .

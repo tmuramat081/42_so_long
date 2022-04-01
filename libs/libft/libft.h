@@ -6,7 +6,7 @@
 /*   By: tmuramat <mt15hydrangea@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 19:49:55 by tmuramat          #+#    #+#             */
-/*   Updated: 2022/03/27 10:01:46 by tmuramat         ###   ########.fr       */
+/*   Updated: 2022/04/01 16:47:24 by tmuramat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,6 @@ size_t	ft_strcspn(const char *s1, const char *s2);
 size_t	ft_matrixlen(const char **src);
 char	**ft_matrixdup(const char **src);
 void	ft_free_matrix(char ***src);
+int		ft_count_digits(int num, int radix);
 
 #endif

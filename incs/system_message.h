@@ -2,7 +2,8 @@
 # define GAME_MESSAGE_H
 
 /***** Game title *****/
-# define WINDOW_TITLE "So long"
+# define WINDOW_TITLE "So Long"
+# define GAME_TITLE "Thanks for all the animal."
 
 /***** Gmme message *****/
 # define ERR_ARGS "Invalid arguments."
@@ -10,7 +11,7 @@
 # define ERR_IMG_SIZE "Image size is wrong."
 # define ERR_MAP_SIZE "Map size is too large."
 # define ERR_FILE_NAME "Invalid filename."
-# define ERR_FILE_FMT "Incalid image file format."
+# define ERR_FILE_FMT "Invalid image file format."
 # define ERR_NO_WALL "Map has no wall."
 # define ERR_PLAYERS "Player is not single."
 # define ERR_NO_READ "Can't read the map."

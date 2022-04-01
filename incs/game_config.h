@@ -13,12 +13,15 @@
 # define KEY_DOWN 65364
 # define KEY_ESC 65307
 
-/***** Image file (.xpm) locations. *****/
+/***** Image file(.xpm) locations. *****/
 # define IMG_FILE_FLOOR "./img/floor.xpm"
 # define IMG_FILE_WALL "./img/wall.xpm"
 # define IMG_FILE_DOT "./img/dot.xpm"
 # define IMG_FILE_EXIT "./img/exit.xpm"
 # define IMG_FILE_PLAYER "./img/player.xpm"
+# define IMG_FILE_LOGO "./img/logo.xpm"
+# define IMG_FILE_MENU "./img/menubar.xpm"
+# define IMG_FILE_TITLE "./img/title.xpm"
 
 # define IMG_FILE_ZERO "./img/digits/0.xpm"
 # define IMG_FILE_ONE "./img/digits/1.xpm"
