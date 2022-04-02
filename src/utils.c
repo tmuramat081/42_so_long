@@ -11,7 +11,7 @@ bool exist_exit(char grid, t_game *game)
 {
 	if (grid == 'E')
 	{
-		if (game->rem_dot == 0)
+		if (game->cnt_dot == 0)
 			close_window(game);
 		return (true);
 	}

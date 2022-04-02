@@ -2,6 +2,7 @@
 
 # define STEP_MAX 999
 # define BLACK 0x00000000
+# define TITLE_WIDTH 6
 
 void	*get_grid_image(int y, int x, t_game *game)
 {
@@ -24,14 +25,14 @@ int	render_player(t_game *game)
 	int x;
 	int y;
 
-	img = game->img.player;
+	img = game->img.player[game->p_stat];
 	x = game->player_coord.x;
 	y = game->player_coord.y;
 	mlx_put_image_to_window(game->mlx, game->win, img, x * GRID_SIZE, y * GRID_SIZE);
 	return (0);
 }
 
-int	render_map(t_game *game)
+void	render_map(t_game *game)
 {
 	size_t	i;
 	size_t 	j;
@@ -49,10 +50,9 @@ int	render_map(t_game *game)
 		}
 		i++;
 	}
-	return (0);
 }
 
-int	render_steps(size_t num, t_game *game)
+void	render_steps(size_t num, t_game *game)
 {
 	static int	i;
 	void		*img;
@@ -64,33 +64,35 @@ int	render_steps(size_t num, t_game *game)
 		i = 1;
 	mlx_put_image_to_window(game->mlx, game->win, img, i * GRID_SIZE, game->map_height * GRID_SIZE);
 	i++;
-	return (0);
 }
 
-int	render_footer(t_game *game)
+void	render_footer(t_game *game)
 {
 	size_t 	offset;
-	void	*logo;
-	void	*menu;
-	void	*title;
+	t_img	img;
 	size_t	i;
 
-	logo = game->img.logo;
-	menu = game->img.menu;
-	title = game->img.title;
+	img = game->img;
 	offset = game->map_height * GRID_SIZE;
 
-	mlx_put_image_to_window(game->mlx, game->win, logo, 0, offset);
+	mlx_put_image_to_window(game->mlx, game->win, img.logo, 0, offset);
 	i = 1;
 	while (i < game->map_width)
 	{
-		mlx_put_image_to_window(game->mlx, game->win, menu, i * GRID_SIZE, offset);
-		if (i + 6 == game->map_width)
+		mlx_put_image_to_window(game->mlx, game->win, img.menu, i * GRID_SIZE, offset);
+		if (i + TITLE_WIDTH == game->map_width)
 		{
-			mlx_put_image_to_window(game->mlx, game->win, title, i * GRID_SIZE, offset);
+			mlx_put_image_to_window(game->mlx, game->win, img.title, i * GRID_SIZE, offset);
 			break ;
 		}
 		i++;
 	}
+}
+
+int render_frame(t_game *game)
+{
+	render_map(game);
+	render_player(game);
+	render_footer(game);
 	return (0);
 }

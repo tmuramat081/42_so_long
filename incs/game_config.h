@@ -34,6 +34,11 @@
 # define IMG_FILE_EIGHT "./img/digits/8.xpm"
 # define IMG_FILE_NINE "./img/digits/9.xpm"
 
+# define IMG_FILE_P_UP "./img/player/up.xpm"
+# define IMG_FILE_P_DOWN "./img/player/down.xpm"
+# define IMG_FILE_P_LEFT "./img/player/left.xpm"
+# define IMG_FILE_P_RIGHT "./img/player/right.xpm"
+
 /***** Window resolution (per pixel). *****/
 # define MAP_WIDTH_MAX 50
 # define MAP_HEIGHT_MAX 32

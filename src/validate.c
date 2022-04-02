@@ -43,7 +43,7 @@ void explore_map(char **map, int x, int y, t_chk *map_checker)
 
 bool compare_parsed_with_explored(t_game *game, t_chk map_checker)
 {
-	if (!map_checker.cnt_dot || game->rem_dot != map_checker.cnt_dot)
+	if (!map_checker.cnt_dot || game->cnt_dot != map_checker.cnt_dot)
 		return (false);
 	else if (map_checker.cnt_exit == 0)
 		return (false);

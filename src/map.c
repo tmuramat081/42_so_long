@@ -10,7 +10,7 @@ void	parse_grid_info(char *map_line, size_t y, t_game *game)
 	while (map_line[x])
 	{
 		if (map_line[x] == 'C')
-			game->rem_dot += 1;
+			game->cnt_dot += 1;
 		else if (map_line[x] == 'P')
 		{
 			if (game->player_coord.y && game->player_coord.x)

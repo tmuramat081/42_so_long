@@ -3,7 +3,6 @@
 
 /***** Game title *****/
 # define WINDOW_TITLE "So Long"
-# define GAME_TITLE "Thanks for all the animal."
 
 /***** Gmme message *****/
 # define ERR_ARGS "Invalid arguments."
