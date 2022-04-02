@@ -90,7 +90,7 @@ void	move_animation(t_coord *prev, t_coord *next);
 /*** set_event.c ***/
 void	set_events(t_game *game);
 int		check_key_entry(int keycode, t_game *game);
-void	move_player(t_game *game, t_coord next);
+void	move_player(t_game *game);
 bool	exist_dot(char grid);
 bool	exist_exit(char grid, t_game *game);
 bool	exist_wall(char grid);

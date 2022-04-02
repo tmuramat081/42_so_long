@@ -13,6 +13,11 @@
 # define KEY_DOWN 65364
 # define KEY_ESC 65307
 
+/***** Window resolution (per pixel). *****/
+# define MAP_WIDTH_MAX 50
+# define MAP_HEIGHT_MAX 32
+# define GRID_SIZE 32
+
 /***** Image file(.xpm) locations. *****/
 # define IMG_FILE_FLOOR "./img/floor.xpm"
 # define IMG_FILE_WALL "./img/wall.xpm"
@@ -38,10 +43,5 @@
 # define IMG_FILE_P_DOWN "./img/player/down.xpm"
 # define IMG_FILE_P_LEFT "./img/player/left.xpm"
 # define IMG_FILE_P_RIGHT "./img/player/right.xpm"
-
-/***** Window resolution (per pixel). *****/
-# define MAP_WIDTH_MAX 50
-# define MAP_HEIGHT_MAX 32
-# define GRID_SIZE 32
 
 #endif

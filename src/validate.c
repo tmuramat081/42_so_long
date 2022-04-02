@@ -6,7 +6,9 @@ bool is_valid_file_name(char *file_name)
 	size_t len;
 
 	len = ft_strlen(file_name);
-	if (file_name[len - 5] != '/' && ft_strncmp(&file_name[len - 4], ".ber", 4) == 0)
+	if (len <= 4)
+		return (false);
+	else if (file_name[len - 5] != '/' && ft_strncmp(&file_name[len - 4], ".ber", 4) == 0)
 		return (true);
 	return (false);
 }

@@ -12,14 +12,33 @@ int 	close_window(t_game *game)
 	exit(0);
 }
 
+
+t_coord calculate_next_position(t_coord prev, t_stat stat)
+{
+	t_coord next;
+
+	next = prev;
+	if (stat == STAT_LEFT)
+		next.x -= 1;
+	else if (stat == STAT_RIGHT)
+		next.x += 1;
+	else if (stat == STAT_UP)
+		next.y -= 1;
+	else if (stat == STAT_DOWN)
+		next.y += 1;
+	return (next);
+}
+
 /* Check what's ahead of the player, then rewrite own coordinates. */
-void move_player(t_game *game, t_coord next)
+void move_player(t_game *game)
 {
 	void *img;
 	t_coord prev;
+	t_coord next;
 
 	img = game->img.floor;
 	prev = game->player_coord;
+	next = calculate_next_position(prev, game->p_stat);
 	if (exist_wall(game->map[next.y][next.x]) == true)
 		return ;
 	else if (exist_exit(game->map[next.y][next.x], game) == true)
@@ -38,33 +57,17 @@ void move_player(t_game *game, t_coord next)
 /* Set to call functions when keyboard is pressed. */
 int check_key_entry(int keycode, t_game *game)
 {
-	t_coord next_coord;
-
-	next_coord = game->player_coord;
 	if (keycode == KEY_Q || keycode == KEY_ESC)
 		close_window(game);
-	else if (keycode == KEY_A || keycode == KEY_LEFT)
-	{
+	if (keycode == KEY_A || keycode == KEY_LEFT)
 		game->p_stat = STAT_LEFT;
-		next_coord.x -= 1;
-	}
 	else if (keycode == KEY_D || keycode == KEY_RIGHT)
-	{
 		game->p_stat = STAT_RIGHT;
-		next_coord.x += 1;
-	}
 	else if (keycode == KEY_W || keycode == KEY_UP)
-	{
 		game->p_stat = STAT_UP;
-		next_coord.y -= 1;
-	}
 	else if (keycode == KEY_S || keycode == KEY_DOWN)
-	{
 		game->p_stat = STAT_DOWN;
-		next_coord.y += 1;
-	}
-	move_player(game, next_coord);
-//	printf("KEYCODE:%d\n", keycode);
+	move_player(game);
 	return (0);
 }
 
