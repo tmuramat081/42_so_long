@@ -1,6 +1,6 @@
 #include "so_long.h"
 
-void	move_animation(t_game game, t_coord *prev)
+void	move_animation(t_game game, t_vector2 *prev)
 {
 	static floot move_coef = 0.7;
 	static int move_amt = GRID_SIZE;

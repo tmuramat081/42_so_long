@@ -22,13 +22,13 @@ void	*get_grid_image(int y, int x, t_game *game)
 int	render_player(t_game *game)
 {
 	void *img;
-	int x;
-	int y;
+	size_t x;
+	size_t y;
 
 	img = game->img.player[game->p_stat];
-	x = game->player_coord.x;
-	y = game->player_coord.y;
-	mlx_put_image_to_window(game->mlx, game->win, img, x * GRID_SIZE, y * GRID_SIZE);
+	x = game->player_coord.x * GRID_SIZE;
+	y = game->player_coord.y * GRID_SIZE;
+	mlx_put_image_to_window(game->mlx, game->win, img, x, y);
 	return (0);
 }
 

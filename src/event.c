@@ -12,33 +12,15 @@ int 	close_window(t_game *game)
 	exit(0);
 }
 
-
-t_coord calculate_next_position(t_coord prev, t_stat stat)
-{
-	t_coord next;
-
-	next = prev;
-	if (stat == STAT_LEFT)
-		next.x -= 1;
-	else if (stat == STAT_RIGHT)
-		next.x += 1;
-	else if (stat == STAT_UP)
-		next.y -= 1;
-	else if (stat == STAT_DOWN)
-		next.y += 1;
-	return (next);
-}
-
 /* Check what's ahead of the player, then rewrite own coordinates. */
-void move_player(t_game *game)
+void move_player(t_game *game, t_vector2 vector, t_stat stat)
 {
-	void *img;
-	t_coord prev;
-	t_coord next;
+	t_vector2 prev;
+	t_vector2 next;
 
-	img = game->img.floor;
+	game->p_stat = stat;
 	prev = game->player_coord;
-	next = calculate_next_position(prev, game->p_stat);
+	next = ft_add_vector(prev, vector);
 	if (exist_wall(game->map[next.y][next.x]) == true)
 		return ;
 	else if (exist_exit(game->map[next.y][next.x], game) == true)
@@ -48,9 +30,8 @@ void move_player(t_game *game)
 		game->map[next.y][next.x] = '0';
 		game->cnt_dot -= 1;
 	}
-	mlx_put_image_to_window(game->mlx, game->win, img, prev.x * GRID_SIZE, prev.y * GRID_SIZE);
-	game->player_coord.x = next.x;
-	game->player_coord.y = next.y;
+	mlx_put_image_to_window(game->mlx, game->win, game->img.floor, prev.x * GRID_SIZE, prev.y * GRID_SIZE);
+	game->player_coord = next;
 	put_steps(game);
 }
 
@@ -60,16 +41,18 @@ int check_key_entry(int keycode, t_game *game)
 	if (keycode == KEY_Q || keycode == KEY_ESC)
 		close_window(game);
 	if (keycode == KEY_A || keycode == KEY_LEFT)
-		game->p_stat = STAT_LEFT;
+		move_player(game, (t_vector2){-1, 0}, STAT_LEFT);
 	else if (keycode == KEY_D || keycode == KEY_RIGHT)
-		game->p_stat = STAT_RIGHT;
+		move_player(game, (t_vector2){1, 0}, STAT_RIGHT);
 	else if (keycode == KEY_W || keycode == KEY_UP)
-		game->p_stat = STAT_UP;
+		move_player(game, (t_vector2){0, -1}, STAT_UP);
 	else if (keycode == KEY_S || keycode == KEY_DOWN)
-		game->p_stat = STAT_DOWN;
-	move_player(game);
+		move_player(game, (t_vector2){0, 1}, STAT_DOWN);
 	return (0);
 }
+
+
+
 
 /* Hook functions in mlx loop. */
 void set_events(t_game *game)
@@ -78,4 +61,6 @@ void set_events(t_game *game)
 	mlx_hook(game->win, 02, 1L<<0, check_key_entry, game);
 	mlx_loop_hook(game->mlx, render_player, game);
 	mlx_hook(game->win, 17, 0, close_window, game);
+	mlx_do_key_autorepeatoff(game->mlx);
+
 }

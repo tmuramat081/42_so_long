@@ -22,10 +22,10 @@ typedef struct s_img {
 	void	*title;
 }	t_img;
 
-typedef struct s_coord {
+typedef struct s_vector2 {
 	int	x;
 	int	y;
-}	t_coord;
+}	t_vector2;
 
 typedef enum e_stat {
 	STAT_DOWN,
@@ -45,7 +45,7 @@ typedef struct s_chk {
 }	t_chk;
 
 typedef struct s_clist {
-	t_coord coord;
+	t_vector2 coord;
 	t_stat	stat;
 	void	*next;
 }	t_clist;
@@ -56,7 +56,7 @@ typedef struct s_game {
 	char	**map;
 	size_t	map_width;
 	size_t	map_height;
-	t_coord	player_coord;
+	t_vector2	player_coord;
 	t_stat	p_stat;
 	t_img	img;
 	size_t	cnt_dot;
@@ -85,12 +85,12 @@ void	render_steps(size_t num, t_game *game);
 void	render_footer(t_game *game);
 
 /*** animation.c ***/
-void	move_animation(t_coord *prev, t_coord *next);
+void	move_animation(t_vector2 *prev, t_vector2 *next);
 
 /*** set_event.c ***/
 void	set_events(t_game *game);
 int		check_key_entry(int keycode, t_game *game);
-void	move_player(t_game *game);
+void	move_player(t_game *game, t_vector2 vector, t_stat stat);
 bool	exist_dot(char grid);
 bool	exist_exit(char grid, t_game *game);
 bool	exist_wall(char grid);
@@ -107,4 +107,5 @@ int		close_window(t_game *game);
 void	put_steps(t_game *game);
 void	put_error_and_exit(char *err_msg);
 void	put_end_message(t_game *game);
+t_vector2 ft_add_vector(t_vector2 v1, t_vector2 v2);
 #endif
