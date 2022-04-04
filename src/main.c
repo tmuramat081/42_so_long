@@ -36,6 +36,8 @@ int	main (int argc, char **argv)
 	if (argc != 2)
 		put_error_and_exit(ERR_ARGS);
 	game = (t_game){};
+	game.player = malloc(sizeof(t_clist));
+	game.player->is_moving = false; 
 	game.mlx = mlx_init();
 	input_map(&game, argv[1]);
 	init_game(&game);

@@ -1,6 +1,6 @@
 # Compile variables
 NAME = so_long
-SRCS = main.c map.c image.c event.c render.c validate.c print.c utils.c
+SRCS = main.c map.c image.c event.c render.c validate.c print.c utils.c end_game.c animation.c
 SRC_DIR = src/
 OBJS = ${addprefix ${OBJ_DIR}, ${SRCS:.c=.o}}
 OBJ_DIR = obj/

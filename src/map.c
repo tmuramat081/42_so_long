@@ -13,10 +13,10 @@ void	parse_grid_info(char *map_line, size_t y, t_game *game)
 			game->cnt_dot += 1;
 		else if (map_line[x] == 'P')
 		{
-			if (game->player_coord.y && game->player_coord.x)
-				put_error_and_exit(ERR_PLAYERS);
-			game->player_coord.y = y;
-			game->player_coord.x = x;
+//			if (game->player->pos.y && game->player->pos.x)
+//				put_error_and_exit(ERR_PLAYERS);
+			game->player->pos.y = y;
+			game->player->pos.x = x;
 		}
 		x++;
 	}

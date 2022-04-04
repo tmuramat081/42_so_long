@@ -63,7 +63,7 @@ void	check_is_playable_map(t_game *game, const char **src_map)
 	map_checker.width_lim = game->map_width;
 	map_checker.height_lim = game->map_height;
 	cpy_map = ft_matrixdup(src_map);
-	explore_map(cpy_map, game->player_coord.x, game->player_coord.y, &map_checker);
+	explore_map(cpy_map, game->player->pos.x, game->player->pos.y, &map_checker);
 	if (compare_parsed_with_explored(game, map_checker) == false)
 		put_error_and_exit(ERR_NOT_PLAYABLE);
 	ft_free_matrix(&cpy_map);

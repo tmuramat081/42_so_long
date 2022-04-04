@@ -25,11 +25,42 @@ bool exist_dot(char grid)
 	return (false);
 }
 
-t_vector2 ft_add_vector(t_vector2 v1, t_vector2 v2)
+t_vector2 ft_vector_add(t_vector2 v1, t_vector2 v2)
 {
 	t_vector2	ret;
 
 	ret.x = v1.x + v2.x;
 	ret.y = v1.y + v2.y;
+	return (ret);
+}
+
+t_vector2 ft_vector_sub(t_vector2 v1, t_vector2 v2)
+{
+	t_vector2	ret;
+
+	ret.x = v1.x - v2.x;
+	ret.y = v1.y - v2.y;
+	return (ret);
+}
+
+t_vector2 ft_vector_scalar_mul(t_vector2 v1, int t)
+{
+	t_vector2	ret;
+
+	ret.x = v1.x * t;
+	ret.y = v1.y * t;
+	return (ret);
+}
+
+
+t_vector2 ft_vector_lerp(t_vector2 v1, t_vector2 v2, float t) 
+{
+	t_vector2	diff;
+	t_vector2 ret;
+	
+	diff.x = v1.x - v2.x;
+	diff.y = v2.y - v2.y;
+	ret.x = v1.x + (float)diff.x * t;
+	ret.y = v1.y + (float)diff.y * t;
 	return (ret);
 }

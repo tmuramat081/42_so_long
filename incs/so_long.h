@@ -10,17 +10,13 @@
 # include <fcntl.h>
 # include <stdio.h>
 
-typedef struct s_img {
-	void 	*floor;
-	void 	*wall;
-	void	*dot;
-	void	*exit;
-	void	*player[4];
-	void	*digit[10];
-	void	*menu;
-	void	*logo;
-	void	*title;
-}	t_img;
+typedef struct s_chk {
+	size_t	cnt_dot;
+	size_t	cnt_exit;
+	size_t	cnt_player;
+	int		width_lim;
+	int		height_lim;
+}	t_chk;
 
 typedef struct s_vector2 {
 	int	x;
@@ -32,23 +28,28 @@ typedef enum e_stat {
 	STAT_UP,
 	STAT_LEFT,
 	STAT_RIGHT,
-	STAT_FINISHED,
 	STAT_END
 }	t_stat;
 
-typedef struct s_chk {
-	size_t	cnt_dot;
-	size_t	cnt_exit;
-	size_t	cnt_player;
-	int		width_lim;
-	int		height_lim;
-}	t_chk;
-
 typedef struct s_clist {
-	t_vector2 coord;
-	t_stat	stat;
+	t_vector2 	pos;
+	t_vector2	vector;
+	t_stat		state;
+	bool	is_moving;
 	void	*next;
 }	t_clist;
+
+typedef struct s_img {
+	void 	*floor;
+	void 	*wall;
+	void	*dot;
+	void	*exit;
+	void	*player[STAT_END];
+	void	*digit[10];
+	void	*menu;
+	void	*logo;
+	void	*title;
+}	t_img;
 
 typedef struct s_game {
 	void	*mlx;
@@ -56,8 +57,8 @@ typedef struct s_game {
 	char	**map;
 	size_t	map_width;
 	size_t	map_height;
-	t_vector2	player_coord;
-	t_stat	p_stat;
+	t_clist	*player;
+	t_clist	*enemy;
 	t_img	img;
 	size_t	cnt_dot;
 	size_t	cnt_step;
@@ -85,12 +86,13 @@ void	render_steps(size_t num, t_game *game);
 void	render_footer(t_game *game);
 
 /*** animation.c ***/
-void	move_animation(t_vector2 *prev, t_vector2 *next);
+void	render_moving_animation(t_game *game);
+void	render_standing_animation(t_game *game);
 
 /*** set_event.c ***/
 void	set_events(t_game *game);
 int		check_key_entry(int keycode, t_game *game);
-void	move_player(t_game *game, t_vector2 vector, t_stat stat);
+void	set_key_input(t_game *game, t_vector2 vector, t_stat stat);
 bool	exist_dot(char grid);
 bool	exist_exit(char grid, t_game *game);
 bool	exist_wall(char grid);
@@ -107,5 +109,7 @@ int		close_window(t_game *game);
 void	put_steps(t_game *game);
 void	put_error_and_exit(char *err_msg);
 void	put_end_message(t_game *game);
-t_vector2 ft_add_vector(t_vector2 v1, t_vector2 v2);
+t_vector2 ft_vector_add(t_vector2 v1, t_vector2 v2);
+t_vector2 ft_vector_scalar_mul(t_vector2 v1, int t);
+t_vector2 ft_vector_lerp(t_vector2 v1, t_vector2 v2, float t);
 #endif
