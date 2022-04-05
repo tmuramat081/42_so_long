@@ -29,6 +29,8 @@ void input_map(t_game *game, char *map_file)
 	game->map = map;
 }
 
+#include "ft_snprintf.h"
+
 int	main (int argc, char **argv)
 {
 	t_game game;

@@ -1,6 +1,6 @@
 # Compile variables
 NAME = so_long
-SRCS = main.c map.c image.c event.c render.c validate.c print.c utils.c end_game.c animation.c
+SRCS = main.c map.c load_image.c load_animation.c event.c render.c validate.c print.c utils.c end_game.c animation.c
 SRC_DIR = src/
 OBJS = ${addprefix ${OBJ_DIR}, ${SRCS:.c=.o}}
 OBJ_DIR = obj/
@@ -8,7 +8,8 @@ MLXDIR = libs/mlx_linux/
 MLX = ${MLXDIR}/libmlx.a
 LIBFTDIR = libs/libft/
 LIBFT = ${LIBFTDIR}/libft.a
-INCS = -I./incs -I./${LIBFTDIR} -I./${MLXDIR} -I./${LIBFTDIR}printf -I./${LIBFTDIR}get_next_line
+INCS = -I./incs -I./${LIBFTDIR} -I./${MLXDIR} -I./${LIBFTDIR}printf \
+	-I./${LIBFTDIR}get_next_line -I./${LIBFTDIR}snprintf
 CC = gcc -g
 CFLAGS = -Wall -Wextra -Werror
 MFLAGS = -L/usr/lib -lmlx -lXext -lX11 -lm -lz

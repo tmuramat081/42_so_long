@@ -162,7 +162,7 @@ char	*mlx_int_get_line(char *ptr,int *pos,int size)
 
 
 
-char	*mlx_int_static_line(char **xpm_data,int *pos,int size)
+char	*mlx_int_diric_line(char **xpm_data,int *pos,int size)
 {
   static char	*copy = 0;
   static int	len = 0;
@@ -380,5 +380,5 @@ void	*mlx_xpm_file_to_image(void *xvar,char *file,int *width,int *height)
 
 void	*mlx_xpm_to_image(void *xvar,char **xpm_data,int *width,int *height)
 {
-  return (mlx_int_parse_xpm(xvar,xpm_data,0,mlx_int_static_line, width, height));
+  return (mlx_int_parse_xpm(xvar,xpm_data,0,mlx_int_diric_line, width, height));
 }

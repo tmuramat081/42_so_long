@@ -4,7 +4,7 @@
 /***** Game title *****/
 # define WINDOW_TITLE "So Long"
 
-/***** Gmme message *****/
+/***** Error message *****/
 # define ERR_ARGS "Invalid arguments."
 # define ERR_MAP_EMPTY "Map is empty."
 # define ERR_IMG_SIZE "Image size is wrong."

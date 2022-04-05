@@ -24,7 +24,7 @@ int	render_player(t_game *game)
 	void *img;
 	t_vector2 put_pos;
 
-	img = game->img.player[game->player->state];
+	img = game->img.player[game->player->dir][0];
 	put_pos = ft_vector_scalar_mul(game->player->pos, GRID_SIZE);
 	mlx_put_image_to_window(game->mlx, game->win, img, put_pos.x, put_pos.y);
 	return (0);

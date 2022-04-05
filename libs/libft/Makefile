@@ -8,15 +8,19 @@ ft_split.c ft_substr.c ft_strjoin.c ft_strtrim.c ft_itoa.c ft_strmapi.c ft_putch
 ft_putendl_fd.c ft_putnbr_fd.c ft_striteri.c ft_isspace.c ft_lstnew.c ft_lstadd_front.c \
 ft_lstsize.c ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
 ADD_SRCS = ft_isspace.c ft_strtol_d.c ft_strcspn.c ft_matrixlen.c ft_matrixdup.c ft_free_matrix.c \
-ft_count_digits.c
+ft_count_digits.c ft_strtoupper.c
 GNL_SRCS = get_next_line.c
 PRF_SRCS = ft_printf.c doprintf.c composer.c parser.c converter.c utils.c printer.c
-SRCS = ${LFT_SRCS} ${ADD_SRCS} ${addprefix ${GNL_DIR},${GNL_SRCS}} ${addprefix ${PRF_DIR},${PRF_SRCS}}
-OBJS = ${addprefix ${OBJ_DIR},${LFT_SRCS:.c=.o} ${ADD_SRCS:.c=.o} ${GNL_SRCS:.c=.o} ${PRF_SRCS:.c=.o}}
+SPRF_SRCS = ft_snprintf.c sconverter.c sutils.c
+SRCS = ${LFT_SRCS} ${ADD_SRCS} ${addprefix ${GNL_DIR},${GNL_SRCS}} ${addprefix ${PRF_DIR},${PRF_SRCS}} \
+	${addprefix ${SPRF_DIR},${SPRF_SRCS}}
+OBJS = ${addprefix ${OBJ_DIR},${LFT_SRCS:.c=.o} ${ADD_SRCS:.c=.o} ${GNL_SRCS:.c=.o} ${PRF_SRCS:.c=.o} \
+	${SPRF_SRCS:.c=.o}}
 OBJ_DIR = obj/
 PRF_DIR = printf/
+SPRF_DIR = snprintf/
 GNL_DIR = get_next_line/
-INCS = -I. -I.${PRF_DIR} -I.${GNL_DIR}
+INCS = -I. -I.${PRF_DIR} -I.${GNL_DIR} -I.${SPRF_DIR}
 CFLAG = -Wall -Wextra -Werror
 AR = ar rc
 
@@ -48,6 +52,10 @@ ${OBJ_DIR}%.o: ${GNL_DIR}%.c
 	@${CC} ${CFLAG} ${INCS} -c $< -o $@
 
 ${OBJ_DIR}%.o: ${PRF_DIR}%.c
+	@${PROGRESS}
+	@${CC} ${CFLAG} ${INCS} -c $< -o $@
+
+${OBJ_DIR}%.o: ${SPRF_DIR}%.c
 	@${PROGRESS}
 	@${CC} ${CFLAG} ${INCS} -c $< -o $@
 

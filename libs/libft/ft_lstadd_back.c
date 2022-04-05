@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmuramat <tmuramat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tmuramat <mt15hydrangea@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 19:48:23 by tmuramat          #+#    #+#             */
-/*   Updated: 2022/02/25 19:48:25 by tmuramat         ###   ########.fr       */
+/*   Updated: 2022/04/04 23:59:39 by tmuramat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 
 	if (!lst)
 		return ;
-	else if (!*lst)
+	if (!*lst)
 	{
 		*lst = new;
 		return ;

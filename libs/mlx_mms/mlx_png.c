@@ -279,10 +279,10 @@ int	mipng_crc(unsigned char *ptr, int len)
 int	mipng_structure(unsigned char *ptr, int size, unsigned char **hdr, unsigned char **dat)
 {
   unsigned int	len;
-  int		dat_state;
+  int		dat_dire;
   int		end;
 
-  dat_state = 0;
+  dat_dire = 0;
   *hdr = NULL;
   *dat = NULL;
   end = 0;
@@ -311,17 +311,17 @@ int	mipng_structure(unsigned char *ptr, int size, unsigned char **hdr, unsigned 
 	    }
 	  if (mipng_is_type(ptr, "IDAT"))
 	    {
-	      if (dat_state == 0)
+	      if (dat_dire == 0)
 		{
-		  dat_state = 1;
+		  dat_dire = 1;
 		  *dat = ptr;
 		}
-	      if (dat_state == 2)
+	      if (dat_dire == 2)
 		return (ERR_STRUCT_DAT);
 	    }
 	  else
-	    if (dat_state == 1)
-	      dat_state = 2;
+	    if (dat_dire == 1)
+	      dat_dire = 2;
 	  size -= 4+4+4+len;
 	  ptr += 4+4+4+len;
 	}

@@ -1,13 +1,13 @@
 #include "so_long.h"
 
 /* Check what's ahead of the player, then rewrite own coordinates. */
-void set_player_move(t_game *game, t_vector2 vector, t_stat state)
+void set_player_move(t_game *game, t_vector2 vector, t_dir dir)
 {
 	t_clist *player;
 	t_vector2 next;
 
 	player = game->player;
-	player->state = state;
+	player->dir = dir;
 	player->vector = vector;
 	next = ft_vector_add(player->pos, player->vector);
 	if (exist_wall(game->map[next.y][next.x]) == true)
@@ -31,13 +31,13 @@ int check_key_entry(int keycode, t_game *game)
 	if (keycode == KEY_Q || keycode == KEY_ESC)
 		close_window(game);
 	if (keycode == KEY_A || keycode == KEY_LEFT)
-		set_player_move(game, (t_vector2){-1, 0}, STAT_LEFT);
+		set_player_move(game, (t_vector2){-1, 0}, DIR_LEFT);
 	else if (keycode == KEY_D || keycode == KEY_RIGHT)
-		set_player_move(game, (t_vector2){1, 0}, STAT_RIGHT);
+		set_player_move(game, (t_vector2){1, 0}, DIR_RIGHT);
 	else if (keycode == KEY_W || keycode == KEY_UP)
-		set_player_move(game, (t_vector2){0, -1}, STAT_UP);
+		set_player_move(game, (t_vector2){0, -1}, DIR_UP);
 	else if (keycode == KEY_S || keycode == KEY_DOWN)
-		set_player_move(game, (t_vector2){0, 1}, STAT_DOWN);
+		set_player_move(game, (t_vector2){0, 1}, DIR_DOWN);
 	return (0);
 }
 
@@ -50,7 +50,7 @@ int	update_game(t_game *game)
 		render_moving_animation(game);
 	else
 		render_standing_animation(game);
-	usleep(2000);
+	usleep(1500);
 	return (0);
 }
 
@@ -62,5 +62,5 @@ void set_events(t_game *game)
 	mlx_hook(game->win, 02, 1L<<0, check_key_entry, game);
 	mlx_expose_hook (game->win, render_frame, game);
 	mlx_hook(game->win, 17, 0, close_window, game);
-//	mlx_do_key_autorepeatoff(game->mlx);
+	mlx_do_key_autorepeatoff(game->mlx);
 }

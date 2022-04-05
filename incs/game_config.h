@@ -13,35 +13,38 @@
 # define KEY_DOWN 65364
 # define KEY_ESC 65307
 
-/***** Window resolution (per pixel). *****/
+/***** Window resolution. *****/
 # define MAP_WIDTH_MAX 50
 # define MAP_HEIGHT_MAX 32
 # define GRID_SIZE 32
 
+# define ANI_SPEED 75
+
 /***** Image file(.xpm) locations. *****/
-# define IMG_FILE_FLOOR "./img/floor.xpm"
-# define IMG_FILE_WALL "./img/wall.xpm"
-# define IMG_FILE_DOT "./img/dot.xpm"
-# define IMG_FILE_EXIT "./img/exit.xpm"
-# define IMG_FILE_PLAYER "./img/player.xpm"
-# define IMG_FILE_LOGO "./img/logo.xpm"
-# define IMG_FILE_MENU "./img/menubar.xpm"
-# define IMG_FILE_TITLE "./img/title.xpm"
+/////* Object file*/////
+# define XPM_FLOOR "./img/object/floor.xpm"
+# define XPM_WALL "./img/object/wall.xpm"
+# define XPM_DOT "./img/object/dot.xpm"
+# define XPM_EXIT "./img/object/exit.xpm"
 
-# define IMG_FILE_ZERO "./img/digits/0.xpm"
-# define IMG_FILE_ONE "./img/digits/1.xpm"
-# define IMG_FILE_TWO "./img/digits/2.xpm"
-# define IMG_FILE_THREE "./img/digits/3.xpm"
-# define IMG_FILE_FOUR "./img/digits/4.xpm"
-# define IMG_FILE_FIVE "./img/digits/5.xpm"
-# define IMG_FILE_SIX "./img/digits/6.xpm"
-# define IMG_FILE_SEVEN "./img/digits/7.xpm"
-# define IMG_FILE_EIGHT "./img/digits/8.xpm"
-# define IMG_FILE_NINE "./img/digits/9.xpm"
+/////* Footer file*/////
+# define XPM_MENU "./img/footer/menu.xpm"
+# define XPM_TITLE "./img/footer/title.xpm"
+# define XPM_LOGO "./img/footer/logo.xpm"
 
-# define IMG_FILE_P_UP "./img/player/up.xpm"
-# define IMG_FILE_P_DOWN "./img/player/down.xpm"
-# define IMG_FILE_P_LEFT "./img/player/left.xpm"
-# define IMG_FILE_P_RIGHT "./img/player/right.xpm"
+/////* Counter file directory (0-9.xpm)*/////
+# define IMG_PATH_DIGIT "./img/counter/"
+
+/////* Player file directory (0-3.xpm)*/////
+# define XPM_P_UP "./img/player/up/"
+# define XPM_P_DOWN "./img/player/down/"
+# define XPM_P_LEFT "./img/player/left/"
+# define XPM_P_RIGHT "./img/player/right/"
+
+/////* Enemy file directory (0-3.xpm) */////
+# define XPM_E_UP "./img/enemy/up/"
+# define XPM_E_DOWN "./img/enemy/down/"
+# define XPM_E_LEFT "./img/enemy/left/"
+# define XPM_E_RIGHT "./img/enemy/right/"
 
 #endif

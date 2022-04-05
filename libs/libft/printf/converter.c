@@ -6,7 +6,7 @@
 /*   By: tmuramat <mt15hydrangea@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 22:41:42 by tmuramat          #+#    #+#             */
-/*   Updated: 2022/03/25 23:29:34 by tmuramat         ###   ########.fr       */
+/*   Updated: 2022/04/05 22:44:42 by tmuramat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int	convert_into_hexadecimal(va_list *ap, t_finfo input)
 	value = va_arg(*ap, unsigned int);
 	set_body(value, 16, &output, input);
 	if (input.specifier == SP_XL)
-		str_toupper(output.body);
+		ft_strtoupper(output.body);
 	if (value)
 		set_prefix(&output, input);
 	set_padding(&output, input);

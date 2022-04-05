@@ -56,21 +56,6 @@ int	ft_putstr_cnt(char *str)
 	return (ret_len);
 }
 
-/* Convert a string to uppercase. */
-void	str_toupper(char *str)
-{
-	size_t	i;
-
-	if (!str)
-		return ;
-	i = 0;
-	while (str[i] != '\0')
-	{
-		str[i] = ft_toupper(str[i]);
-		i++;
-	}
-}
-
 /* If the augument is null, return 0. */
 int	ft_strlen_s(const char *c)
 {

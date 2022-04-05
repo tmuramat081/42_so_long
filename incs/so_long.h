@@ -2,7 +2,7 @@
 # define SO_LONG_H
 
 # include "game_config.h"
-# include "system_message.h"
+# include "game_message.h"
 # include "mlx.h"
 # include "libft.h"
 # include <unistd.h>
@@ -23,18 +23,19 @@ typedef struct s_vector2 {
 	int	y;
 }	t_vector2;
 
-typedef enum e_stat {
-	STAT_DOWN,
-	STAT_UP,
-	STAT_LEFT,
-	STAT_RIGHT,
-	STAT_END
-}	t_stat;
+typedef enum e_dir {
+	DIR_DOWN,
+	DIR_UP,
+	DIR_LEFT,
+	DIR_RIGHT,
+	DIR_END
+}	t_dir;
 
 typedef struct s_clist {
 	t_vector2 	pos;
 	t_vector2	vector;
-	t_stat		state;
+	t_dir		dir;
+	int			slide;
 	bool	is_moving;
 	void	*next;
 }	t_clist;
@@ -44,7 +45,8 @@ typedef struct s_img {
 	void 	*wall;
 	void	*dot;
 	void	*exit;
-	void	*player[STAT_END];
+	void	*player[DIR_END][4];
+	void	*enemy[DIR_END][4];
 	void	*digit[10];
 	void	*menu;
 	void	*logo;
@@ -75,7 +77,11 @@ void	pstdr_grid_info(char *map_line, size_t y, size_t x,  t_game *game);
 
 /*** input_image.c ***/ 
 void	load_images(t_game *game);
-void 	*convert_file_into_image(void *mlx, char *img_file, int size);
+void 	*convert_file_into_image(void *mlx, char *XPM, int size);
+
+void load_player_images(t_game *game);
+void load_enemy_images(t_game *game);
+
 
 /*** render.c ***/
 void	*get_grid_image(int y, int x, t_game *game);
@@ -92,7 +98,7 @@ void	render_standing_animation(t_game *game);
 /*** set_event.c ***/
 void	set_events(t_game *game);
 int		check_key_entry(int keycode, t_game *game);
-void	set_key_input(t_game *game, t_vector2 vector, t_stat stat);
+void	set_key_input(t_game *game, t_vector2 vector, t_dir stat);
 bool	exist_dot(char grid);
 bool	exist_exit(char grid, t_game *game);
 bool	exist_wall(char grid);
