@@ -81,8 +81,7 @@ void 	*convert_file_into_image(void *mlx, char *XPM, int size);
 
 void load_player_images(t_game *game);
 void load_enemy_images(t_game *game);
-
-
+void	load_animation(t_game *game);
 /*** render.c ***/
 void	*get_grid_image(int y, int x, t_game *game);
 int		render_frame(t_game *game);
@@ -116,6 +115,8 @@ void	put_steps(t_game *game);
 void	put_error_and_exit(char *err_msg);
 void	put_end_message(t_game *game);
 t_vector2 ft_vector_add(t_vector2 v1, t_vector2 v2);
-t_vector2 ft_vector_scalar_mul(t_vector2 v1, int t);
+t_vector2 ft_vector_scalar_mul(t_vector2 v1, float t);
 t_vector2 ft_vector_lerp(t_vector2 v1, t_vector2 v2, float t);
+
+void set_new_character(t_clist **lst, t_vector2 pos);
 #endif

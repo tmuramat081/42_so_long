@@ -12,12 +12,9 @@ void	parse_grid_info(char *map_line, size_t y, t_game *game)
 		if (map_line[x] == 'C')
 			game->cnt_dot += 1;
 		else if (map_line[x] == 'P')
-		{
-//			if (game->player->pos.y && game->player->pos.x)
-//				put_error_and_exit(ERR_PLAYERS);
-			game->player->pos.y = y;
-			game->player->pos.x = x;
-		}
+			set_new_character(&game->player, (t_vector2){x, y});
+		else if (map_line[x] == 'O')
+			set_new_character(&game->enemy, (t_vector2){x, y});
 		x++;
 	}
 }

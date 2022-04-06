@@ -43,12 +43,12 @@ t_vector2 ft_vector_sub(t_vector2 v1, t_vector2 v2)
 	return (ret);
 }
 
-t_vector2 ft_vector_scalar_mul(t_vector2 v1, int t)
+t_vector2 ft_vector_scalar_mul(t_vector2 v1, float t)
 {
 	t_vector2	ret;
 
-	ret.x = v1.x * t;
-	ret.y = v1.y * t;
+	ret.x = (float)v1.x * t;
+	ret.y = (float)v1.y * t;
 	return (ret);
 }
 
@@ -60,7 +60,7 @@ t_vector2 ft_vector_lerp(t_vector2 v1, t_vector2 v2, float t)
 	
 	diff.x = v1.x - v2.x;
 	diff.y = v2.y - v2.y;
-	ret.x = v1.x + (float)diff.x * t;
-	ret.y = v1.y + (float)diff.y * t;
+	ret.x = (float)v1.x + (float)diff.x * t;
+	ret.y = (float)v1.y + (float)diff.y * t;
 	return (ret);
 }

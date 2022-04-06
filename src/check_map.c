@@ -15,14 +15,12 @@ bool is_valid_file_name(char *file_name)
 
 void get_grid_info(char grid, t_chk *map_checker)
 {
-	if (grid == '0')
+	if (grid == '0' || grid == 'P' || grid == 'O')
 		return ;
 	else if (grid == 'C')
 		map_checker->cnt_dot += 1;
 	else if (grid == 'E')
 		map_checker->cnt_exit += 1;
-	else if (grid == 'P')
-		map_checker->cnt_player += 1;
 	else
 		put_error_and_exit(ERR_NO_READ);
 }
@@ -48,8 +46,6 @@ bool compare_parsed_with_explored(t_game *game, t_chk map_checker)
 	if (!map_checker.cnt_dot || game->cnt_dot != map_checker.cnt_dot)
 		return (false);
 	else if (map_checker.cnt_exit == 0)
-		return (false);
-	else if (map_checker.cnt_player > 1)
 		return (false);
 	return (true);
 }

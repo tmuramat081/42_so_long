@@ -1,13 +1,13 @@
 #include "so_long.h"
 #include "ft_snprintf.h"
 
-void *convert_file_into_image(void *mlx, char *XPM, int size)
+void *convert_file_into_image(void *mlx, char *img_file, int size)
 {
 	int img_width;
 	int img_height;
 	void *image;
 
-	image = mlx_xpm_file_to_image(mlx, XPM, &img_width, &img_height);
+	image = mlx_xpm_file_to_image(mlx, img_file, &img_width, &img_height);
 	if (image == NULL || (size && img_height != size) || (size && img_width != size))
 		put_error_and_exit(ERR_FILE_FMT);
 	return (image);
@@ -47,8 +47,7 @@ void load_images(t_game *game)
 	load_object_images(game);
 	load_footer_images(game);
 	load_counter_images(game);
-	load_player_images(game);
-//	load_enemy_images(game);
+	load_animation(game);
 }
 
 

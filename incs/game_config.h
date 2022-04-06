@@ -19,7 +19,7 @@
 # define GRID_SIZE 32
 
 /***** Frame rate *****/
-# define FPS 30.0
+# define FPS_MAX 30.0
 # define ANI_FRAME 4
 # define ANI_SPEED 75
 
