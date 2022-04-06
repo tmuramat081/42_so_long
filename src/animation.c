@@ -2,16 +2,8 @@
 
 void	set_next_animation_image(int *slide)
 {
-	static int redraw_cnt = 0;
-
-	if (redraw_cnt == ANI_SPEED)
-	{
-		redraw_cnt = 0;
-		*slide += 1;
-		if (*slide == 4)
-			*slide = 0;
-	}
-	redraw_cnt++;
+	*slide += 1;
+	if (*slide == 4)
 }
 
 void	render_moving_animation(t_game *game)
@@ -29,7 +21,7 @@ void	render_moving_animation(t_game *game)
 		game->player->pos = ft_vector_add(game->player->pos, game->player->vector);
 		return ;
 	}
-	img = game->img.player[game->player->dir][0];
+	img = game->img.player[game->player->dir][game->player->slide];
 	mlx_put_image_to_window(game->mlx, game->win, game->img.floor, draw_pos.x, draw_pos.y);
 	draw_pos = ft_vector_add(draw_pos, game->player->vector);
 	mlx_put_image_to_window(game->mlx, game->win, img, draw_pos.x, draw_pos.y);

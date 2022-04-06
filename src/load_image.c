@@ -36,7 +36,7 @@ void load_counter_images(t_game *game)
 	i = 0;
 	while (i < 10)
 	{
-		ft_snprintf(file_path, sizeof(file_path), "%s%d.xpm", IMG_PATH_DIGIT, i);
+		ft_snprintf(file_path, sizeof(file_path), "%s%d.xpm", XPM_DIGIT, i);
 		game->img.digit[i] = convert_file_into_image(game->mlx, file_path, GRID_SIZE);
 		i++;
 	}

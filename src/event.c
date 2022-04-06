@@ -1,4 +1,7 @@
 #include "so_long.h"
+#include "time.h"
+
+const double	g_frame_time = 1.0 / FPS;
 
 /* Check what's ahead of the player, then rewrite own coordinates. */
 void set_player_move(t_game *game, t_vector2 vector, t_dir dir)
@@ -41,19 +44,35 @@ int check_key_entry(int keycode, t_game *game)
 	return (0);
 }
 
+/* Limit FPS(Frame Per Second), using usleep function. */
+void	limit_frame_rate(clock_t start_time)
+{
+	double	took_time;
+	static double wait_time;
+
+	took_time = (double)(clock() - start_time) / CLOCKS_PER_SEC;
+	if (g_frame_time > took_time)
+	{
+		wait_time = (g_frame_time - took_time) * 1000000;
+		printf("[WAIT:%f]\n", wait_time);
+		usleep(wait_time);	
+	}
+}
+
 int	update_game(t_game *game)
 {
+	clock_t start_time;
 	t_clist	*player;
 
+	start_time = clock();
 	player = game->player;
 	if (player->is_moving == true)
 		render_moving_animation(game);
 	else
 		render_standing_animation(game);
-	usleep(1500);
+	limit_frame_rate(start_time);
 	return (0);
 }
-
 
 /* Hook functions in mlx loop. */
 void set_events(t_game *game)

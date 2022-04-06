@@ -19,17 +19,6 @@ void	*get_grid_image(int y, int x, t_game *game)
 	return (img);
 }
 
-int	render_player(t_game *game)
-{
-	void *img;
-	t_vector2 put_pos;
-
-	img = game->img.player[game->player->dir][0];
-	put_pos = ft_vector_scalar_mul(game->player->pos, GRID_SIZE);
-	mlx_put_image_to_window(game->mlx, game->win, img, put_pos.x, put_pos.y);
-	return (0);
-}
-
 void	render_map(t_game *game)
 {
 	size_t	i;
@@ -90,7 +79,8 @@ void	render_footer(t_game *game)
 int render_frame(t_game *game)
 {
 	render_map(game);
-	render_player(game);
 	render_footer(game);
+	render_steps(0, game);
+	render_standing_animation(game);
 	return (0);
 }

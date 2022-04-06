@@ -18,6 +18,9 @@
 # define MAP_HEIGHT_MAX 32
 # define GRID_SIZE 32
 
+/***** Frame rate *****/
+# define FPS 30.0
+# define ANI_FRAME 4
 # define ANI_SPEED 75
 
 /***** Image file(.xpm) locations. *****/
@@ -33,15 +36,15 @@
 # define XPM_LOGO "./img/footer/logo.xpm"
 
 /////* Counter file directory (0-9.xpm)*/////
-# define IMG_PATH_DIGIT "./img/counter/"
+# define XPM_DIGIT "./img/counter/"
 
-/////* Player file directory (0-3.xpm)*/////
+/////* Player file directory (0-9.xpm)*/////
 # define XPM_P_UP "./img/player/up/"
 # define XPM_P_DOWN "./img/player/down/"
 # define XPM_P_LEFT "./img/player/left/"
 # define XPM_P_RIGHT "./img/player/right/"
 
-/////* Enemy file directory (0-3.xpm) */////
+/////* Enemy file directory (0-9.xpm) */////
 # define XPM_E_UP "./img/enemy/up/"
 # define XPM_E_DOWN "./img/enemy/down/"
 # define XPM_E_LEFT "./img/enemy/left/"
