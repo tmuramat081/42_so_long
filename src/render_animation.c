@@ -44,17 +44,17 @@ void 	render_standing_animation(t_game *game)
 
 	player = game->player;
 	enemy = game->enemy;
-	img = game->img.player[player->dir][player->slide];
 	while (player)
 	{
+		img = game->img.player[player->dir][player->slide];
 		set_next_animation_image(&(player->slide));
 		draw_pos = ft_vector_scalar_mul(player->pos, GRID_SIZE);
 		mlx_put_image_to_window(game->mlx, game->win, img, draw_pos.x, draw_pos.y);
 		player = player->next;
 	}
-	img = game->img.enemy[enemy->dir][enemy->slide];
 	while (enemy)
 	{
+		img = game->img.enemy[enemy->dir][enemy->slide];
 		set_next_animation_image(&(enemy->slide));
 		draw_pos = ft_vector_scalar_mul(enemy->pos, GRID_SIZE);
 		mlx_put_image_to_window(game->mlx, game->win, img, draw_pos.x, draw_pos.y);
@@ -62,3 +62,18 @@ void 	render_standing_animation(t_game *game)
 	}
 	return ;
 }
+
+/*
+void *s_img
+t_vector2 draw_pos
+{
+		img = game->img.player[character->dir][character->slide];
+		set_next_animation_image(&(character->slide));
+		draw_pos = ft_vector_scalar_mul(character->pos, GRID_SIZE);
+		mlx_put_image_to_window(game->mlx, game->win, img, draw_pos.x, draw_pos.y);
+	
+}
+
+	chracter_lstiter(game, player, render_standing_animation);
+	chracter_lstiter(game, enemy, render_standing_animation);
+*/

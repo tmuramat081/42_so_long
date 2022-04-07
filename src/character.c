@@ -1,5 +1,16 @@
 # include "so_long.h"
 
+void	character_lstiter(t_clist *lst, void (*f)(void *))
+{
+	if (!lst)
+		return ;
+	while (lst)
+	{
+		f(&lst->pos);
+		lst = lst->next;
+	}
+}
+
 
 t_clist	*character_lstlast(t_clist *lst)
 {
