@@ -1,4 +1,5 @@
 #include "so_long.h"
+#include <time.h>
 
 void	set_next_animation_image(int *slide)
 {
@@ -13,67 +14,42 @@ void	set_next_animation_image(int *slide)
 	i++;
 }
 
-void	render_moving_animation(t_game *game)
+void	render_moving_animation(t_game *game, t_clist *character)
 {
-	static int move = 0;
-	static t_vector2 draw_pos;
-	void *img;
-
-	if (!move)
-		draw_pos = ft_vector_scalar_mul(game->player->pos, GRID_SIZE);
-	if (move == GRID_SIZE)
+	void 		*img;
+	t_vector2	start;
+	t_vector2	end;
+	t_vector2 	tmp;
+	while (character)
 	{
-		move = 0;
-		game->player->is_moving = false;
-		game->player->pos = ft_vector_add(game->player->pos, game->player->vector);
-		return ;
+		if (character->is_moving == true)
+		{
+			img = game->img.player[character->dir][character->slide];
+			start = character->draw_pos;
+			end = ft_vector_scalar_mul(character->next_pos, GRID_SIZE);
+			mlx_put_image_to_window(game->mlx, game->win, game->img.floor, character->draw_pos.x, character->draw_pos.y);
+			tmp = ft_vector_lerp(start, end, 0.1);
+			mlx_put_image_to_window(game->mlx, game->win, img, tmp.x, tmp.y);
+		}
+		character = character->next;
 	}
-	img = game->img.player[game->player->dir][game->player->slide];
-	mlx_put_image_to_window(game->mlx, game->win, game->img.floor, draw_pos.x, draw_pos.y);
-	draw_pos = ft_vector_add(draw_pos, game->player->vector);
-	mlx_put_image_to_window(game->mlx, game->win, img, draw_pos.x, draw_pos.y);
-	move++;
 }
 
-void 	render_standing_animation(t_game *game)
+void 	render_standing_animation(t_game *game, t_clist *character)
 {
-	t_clist *player;
-	t_clist *enemy;
 	void *img;
 	t_vector2 draw_pos;
 
-	player = game->player;
-	enemy = game->enemy;
-	while (player)
+	while (character)
 	{
-		img = game->img.player[player->dir][player->slide];
-		set_next_animation_image(&(player->slide));
-		draw_pos = ft_vector_scalar_mul(player->pos, GRID_SIZE);
-		mlx_put_image_to_window(game->mlx, game->win, img, draw_pos.x, draw_pos.y);
-		player = player->next;
-	}
-	while (enemy)
-	{
-		img = game->img.enemy[enemy->dir][enemy->slide];
-		set_next_animation_image(&(enemy->slide));
-		draw_pos = ft_vector_scalar_mul(enemy->pos, GRID_SIZE);
-		mlx_put_image_to_window(game->mlx, game->win, img, draw_pos.x, draw_pos.y);
-		enemy = enemy->next;
-	}
-	return ;
-}
-
-/*
-void *s_img
-t_vector2 draw_pos
-{
-		img = game->img.player[character->dir][character->slide];
+		if (character->type == TYPE_PLAYER)
+			img = game->img.player[character->dir][character->slide];
+		else	
+			img = game->img.enemy[character->dir][character->slide];
 		set_next_animation_image(&(character->slide));
 		draw_pos = ft_vector_scalar_mul(character->pos, GRID_SIZE);
 		mlx_put_image_to_window(game->mlx, game->win, img, draw_pos.x, draw_pos.y);
-	
+		character = character->next;
+	}
+	return ;
 }
-
-	chracter_lstiter(game, player, render_standing_animation);
-	chracter_lstiter(game, enemy, render_standing_animation);
-*/

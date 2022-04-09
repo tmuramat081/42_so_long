@@ -1,5 +1,13 @@
 #include "so_long.h"
 
+void put_image_to_window(t_game *game, void *img, t_vector2 pos)
+{
+	t_vector2 draw_pos;
+
+	draw_pos = ft_vector_scalar_mul(pos, GRID_SIZE);
+	mlx_put_image_to_window(game->mlx, game->win, img, draw_pos.x, draw_pos.y);
+}
+
 bool exist_wall(char grid)
 {
 	if (grid == '1')
@@ -55,12 +63,9 @@ t_vector2 ft_vector_scalar_mul(t_vector2 v1, float t)
 
 t_vector2 ft_vector_lerp(t_vector2 v1, t_vector2 v2, float t) 
 {
-	t_vector2	diff;
 	t_vector2 ret;
 	
-	diff.x = v1.x - v2.x;
-	diff.y = v2.y - v2.y;
-	ret.x = (float)v1.x + (float)diff.x * t;
-	ret.y = (float)v1.y + (float)diff.y * t;
+	ret.x = (1.0f - t) * (float)v1.x + t * (float)v2.x;
+	ret.y = (1.0f - t) * (float)v1.y + t * (float)v2.y;
 	return (ret);
 }

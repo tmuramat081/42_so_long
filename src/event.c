@@ -3,43 +3,40 @@
 
 const double	g_frame_time = 1.0 / FPS_MAX;
 
-bool is_legal_move(t_game *game, t_vector2 next)
+bool is_legal_move(t_game *game, char *grid)
 {
-	char **map;
-
-	map = game->map;
-	if (map[next.y][next.x] == '1')
+	if (*grid == '1')
 		return (false);
-	else if (map[next.y][next.x] == 'E')
+	else if (*grid == 'E')
 	{
 		if (game->cnt_dot == 0)
 			close_window(game);
 		return (false);
 	}
-	else if (map[next.y][next.x] == 'C')
+	else if (*grid == 'C')
 	{
-		game->map[next.y][next.x] = '0';
+		*grid = '0';
 		game->cnt_dot -= 1;
 	}
 	return (true);
 }
 
 /* Check what's ahead of the player, then rewrite own coordinates. */
-void set_player_move(t_game *game, t_vector2 vector, t_dir dir)
+void	set_player_dir(t_clist *player, t_dir dir)
 {
-	t_clist *player;
-	t_vector2 next_pos;
-
-	player = game->player;
 	while (player)
 	{
-		player->vector = vector;
 		player->dir = dir;
-		next_pos = ft_vector_add(player->pos, player->vector);
-		if (is_legal_move(game, next_pos) == false)
-			break ;
-		player->is_moving = true;
-		put_steps(game);
+		if (dir == DIR_DOWN)
+			player->vector = (t_vector2){0, 1};
+		else if (dir == DIR_UP)
+			player->vector = (t_vector2){0, -1};
+		else if (dir == DIR_LEFT)
+			player->vector = (t_vector2){-1, 0};
+		else if (dir == DIR_RIGHT)
+			player->vector = (t_vector2){1, 0};
+		player->next_pos = ft_vector_add(player->pos, player->vector);
+		player->draw_pos = ft_vector_scalar_mul(player->pos, GRID_SIZE);
 		player = player->next;
 	}
 }
@@ -47,22 +44,23 @@ void set_player_move(t_game *game, t_vector2 vector, t_dir dir)
 /* Set to call functions when keyboard is pressed. */
 int check_key_entry(int keycode, t_game *game)
 {
-	if (game->player->is_moving == true)
+	if (game->is_key_pressed == true)
 		return (0);
 	if (keycode == KEY_Q || keycode == KEY_ESC)
 		close_window(game);
 	if (keycode == KEY_A || keycode == KEY_LEFT)
-		set_player_move(game, (t_vector2){-1, 0}, DIR_LEFT);
+		set_player_dir(game->player, DIR_LEFT);
 	else if (keycode == KEY_D || keycode == KEY_RIGHT)
-		set_player_move(game, (t_vector2){1, 0}, DIR_RIGHT);
+		set_player_dir(game->player, DIR_RIGHT);
 	else if (keycode == KEY_W || keycode == KEY_UP)
-		set_player_move(game, (t_vector2){0, -1}, DIR_UP);
+		set_player_dir(game->player, DIR_UP);
 	else if (keycode == KEY_S || keycode == KEY_DOWN)
-		set_player_move(game, (t_vector2){0, 1}, DIR_DOWN);
+		set_player_dir(game->player, DIR_DOWN);
+	game->is_key_pressed = true;
 	return (0);
 }
 
-/* Limit FPS_MAX(Frame Per Second), using usleep function. */
+/* Limit max FPS(Frame Per Second), using usleep function. */
 void	limit_frame_rate(clock_t start_time)
 {
 	double	took_time;
@@ -76,15 +74,32 @@ void	limit_frame_rate(clock_t start_time)
 	}
 }
 
+void	update_action(t_game *game, t_clist *player)
+{
+	t_vector2 next;
+
+	while (player)
+	{
+		next = ft_vector_add(player->pos, player->vector);
+		if (is_legal_move(game, &game->map[next.y][next.x]) == true)
+			player->is_moving = true;
+		player = player->next ;
+	}
+}
+
 int	update_game(t_game *game)
 {
 	clock_t start_time;
 
 	start_time = clock();
-	if (game->player->is_moving == true)
-		render_moving_animation(game);
-	else
-		render_standing_animation(game);
+	if(game->is_key_pressed == true)
+	{
+		update_action(game, game->player);
+		game->is_key_pressed = false;
+	}
+	render_moving_animation(game, game->player);
+	render_standing_animation(game, game->player);
+//	render_standing_animation(game, game->enemy);
 	limit_frame_rate(start_time);
 	return (0);
 }

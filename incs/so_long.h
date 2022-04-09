@@ -31,8 +31,16 @@ typedef enum e_dir {
 	DIR_END
 }	t_dir;
 
+typedef enum e_type {
+	TYPE_PLAYER,
+	TYPE_ENEMY,
+}	t_type;
+
 typedef struct s_clist {
+	t_type		type;
 	t_vector2 	pos;
+	t_vector2	next_pos;
+	t_vector2	draw_pos;
 	t_vector2	vector;
 	t_dir		dir;
 	int			slide;
@@ -64,6 +72,7 @@ typedef struct s_game {
 	t_img	img;
 	size_t	cnt_dot;
 	size_t	cnt_step;
+	bool	is_key_pressed;
 }	t_game;
 
 /*** main.c ***/
@@ -91,8 +100,8 @@ void	render_steps(size_t num, t_game *game);
 void	render_footer(t_game *game);
 
 /*** animation.c ***/
-void	render_moving_animation(t_game *game);
-void	render_standing_animation(t_game *game);
+void	render_moving_animation(t_game *game, t_clist *character);
+void	render_standing_animation(t_game *game, t_clist *character);
 
 /*** set_event.c ***/
 void	set_events(t_game *game);
@@ -116,7 +125,8 @@ void	put_error_and_exit(char *err_msg);
 void	put_end_message(t_game *game);
 t_vector2 ft_vector_add(t_vector2 v1, t_vector2 v2);
 t_vector2 ft_vector_scalar_mul(t_vector2 v1, float t);
+
 t_vector2 ft_vector_lerp(t_vector2 v1, t_vector2 v2, float t);
 
-void set_new_character(t_clist **lst, t_vector2 pos);
+void character_lstnew(t_clist **lst, t_vector2 pos, t_type type);
 #endif

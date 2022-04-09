@@ -9,11 +9,10 @@ MLXDIR = libs/mlx_linux/
 MLX = ${MLXDIR}/libmlx.a
 LIBFTDIR = libs/libft/
 LIBFT = ${LIBFTDIR}/libft.a
-INCS = -I./incs -I./${LIBFTDIR} -I./${MLXDIR} -I./${LIBFTDIR}printf \
-	-I./${LIBFTDIR}get_next_line -I./${LIBFTDIR}snprintf
-CC = gcc -g
+INCS = -I./incs -I./${LIBFTDIR}/incs/ -I./${MLXDIR}
+CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-MFLAGS = -L/usr/lib -lmlx -lXext -lX11 -lm -lz
+MFLAGS = -L/usr/lib -lXext -lX11 -lm -lz
 PLAY_MAP_SRCS = M00_basic1.ber M01_basic2.ber M02_smallest.ber M03_largest.ber
 ERROR_MAP_SRCS = E00_empty.ber E01_not_closed.ber E02_not_closed2.ber E03_no_collectible.ber \
 	E05_no_spawn.ber E06_multi_spawn.ber E07_not_rectangle.ber E08_void_line.ber \
