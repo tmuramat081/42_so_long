@@ -18,11 +18,6 @@ typedef struct s_chk {
 	int		height_lim;
 }	t_chk;
 
-typedef struct s_vector2 {
-	int	x;
-	int	y;
-}	t_vector2;
-
 typedef enum e_dir {
 	DIR_DOWN,
 	DIR_UP,
@@ -36,15 +31,17 @@ typedef enum e_type {
 	TYPE_ENEMY,
 }	t_type;
 
+typedef struct timespec t_timespec;
+
 typedef struct s_clist {
 	t_type		type;
 	t_vector2 	pos;
 	t_vector2	next_pos;
-	t_vector2	draw_pos;
 	t_vector2	vector;
+	t_timespec	anim_time;
+	t_vector2	anim_pos;
 	t_dir		dir;
 	int			slide;
-	bool	is_moving;
 	void	*next;
 }	t_clist;
 
@@ -100,6 +97,7 @@ void	render_steps(size_t num, t_game *game);
 void	render_footer(t_game *game);
 
 /*** animation.c ***/
+void	render_animation(t_game *game, t_clist *character);
 void	render_moving_animation(t_game *game, t_clist *character);
 void	render_standing_animation(t_game *game, t_clist *character);
 
@@ -124,9 +122,11 @@ void	put_steps(t_game *game);
 void	put_error_and_exit(char *err_msg);
 void	put_end_message(t_game *game);
 t_vector2 ft_vector_add(t_vector2 v1, t_vector2 v2);
-t_vector2 ft_vector_scalar_mul(t_vector2 v1, float t);
+t_vector2 ft_vector_mul(t_vector2 v1, float t);
 
 t_vector2 ft_vector_lerp(t_vector2 v1, t_vector2 v2, float t);
 
 void character_lstnew(t_clist **lst, t_vector2 pos, t_type type);
+void	put_image_to_window(t_game *game, void *img, t_vector2 pos);
+
 #endif
