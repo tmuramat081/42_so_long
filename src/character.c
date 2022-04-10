@@ -1,5 +1,16 @@
 # include "so_long.h"
 
+bool	is_hit_character(t_vector2 next, t_clist *character)
+{
+	while(character)
+	{  
+		if (ft_vector_cmp(next, character->pos))
+			return (true);
+		character = character->next;
+	}
+	return (false);
+}
+
 void	character_lstiter(t_clist *lst, void (*f)(void *))
 {
 	if (!lst)

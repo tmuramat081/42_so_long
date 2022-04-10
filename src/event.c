@@ -3,8 +3,11 @@
 
 const double	g_frame_time = 1.0 / FPS_MAX;
 
-bool is_legal_move(t_game *game, char *grid)
+bool is_legal_move(t_game *game, t_vector2 next)
 {
+	char *grid;
+
+	grid = &game->map[next.y][next.x];
 	if (*grid == '1')
 		return (false);
 	else if (*grid == 'E')
@@ -79,8 +82,12 @@ void	update_action(t_game *game, t_clist *player)
 	while (player)
 	{
 		next = ft_vector_add(player->pos, player->vector);
-		if (is_legal_move(game, &game->map[next.y][next.x]) == false)	
+		if (is_legal_move(game, next) == false)	
 			player->vector = (t_vector2){};
+		if (is_hit_character(next, game->player) == true)
+			close_window(game);
+		if (is_hit_character(next, game->enemy) == true)
+			close_window(game);
 		player = player->next ;
 	}
 }
@@ -95,7 +102,7 @@ int	update_game(t_game *game)
 		update_action(game, game->player);
 	}
 	render_animation(game, game->player);
-//	render_animation(game, game->enemy);
+	render_animation(game, game->enemy);
 	limit_frame_rate(start_time);
 	return (0);
 }

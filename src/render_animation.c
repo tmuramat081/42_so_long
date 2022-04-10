@@ -14,8 +14,6 @@ void	set_next_animation_image(int *slide)
 	i++;
 }
 
-
-
 void draw_lerp_position(t_game *game, t_clist *character, float time)
 {
 	t_vector2 start;
