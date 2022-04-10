@@ -31,12 +31,10 @@ typedef enum e_type {
 	TYPE_ENEMY,
 }	t_type;
 
-typedef struct timespec t_timespec;
 
 typedef struct s_clist {
 	t_type		type;
 	t_vector2 	pos;
-	t_vector2	next_pos;
 	t_vector2	vector;
 	t_timespec	anim_time;
 	t_vector2	anim_pos;

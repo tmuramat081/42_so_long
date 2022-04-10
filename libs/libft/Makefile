@@ -8,14 +8,15 @@ IS_SRCS = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_is
 STR_SRCS = ft_strlen.c ft_split.c ft_strchr.c ft_strcspn.c ft_strdup.c ft_striteri.c ft_strjoin.c ft_strlcat.c ft_strlcpy.c \
 	ft_strmapi.c ft_strncmp.c ft_strnstr.c ft_strrchr.c ft_strtol_d.c ft_substr.c ft_strtoupper.c
 MEM_SRCS = ft_bzero.c ft_calloc.c ft_free_matrix.c ft_matrixdup.c ft_matrixlen.c ft_memchr.c ft_memcmp.c ft_memcpy.c ft_memmove.c ft_memset.c
-MTH_SRCS = ft_abs.c ft_vector_add.c ft_vector_cmp.c ft_vector_lerp.c ft_vector_mul.c ft_vector_sub.c
+MTH_SRCS = ft_abs.c ft_vector_add.c ft_vector_cmp.c ft_vector_lerp.c ft_vector_mul.c ft_vector_sub.c \
+	ft_diff_timespec.c
 CNV_SRCS = ft_atoi.c ft_itoa.c ft_tolower.c ft_toupper.c
 LST_SRCS = ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c ft_lstiter.c ft_lstlast.c ft_lstmap.c ft_lstnew.c ft_lstsize.c
 GNL_SRCS = get_next_line.c
 PRF_SRCS = ft_printf.c doprintf.c composer.c parser.c converter.c utils.c printer.c
 SPRF_SRCS = ft_snprintf.c sconverter.c sutils.c
 
-IS_DIR = srcs/is_func/
+IS_DIR = srcs/char_func/
 STR_DIR = srcs/str_func/
 MEM_DIR = srcs/mem_func/
 MTH_DIR = srcs/mth_func/

@@ -35,7 +35,6 @@ void	set_player_dir(t_clist *player, t_dir dir)
 			player->vector = (t_vector2){-1, 0};
 		else if (dir == DIR_RIGHT)
 			player->vector = (t_vector2){1, 0};
-		player->next_pos = ft_vector_add(player->pos, player->vector);
 		player = player->next;
 	}
 }
@@ -79,7 +78,7 @@ void	update_action(t_game *game, t_clist *player)
 
 	while (player)
 	{
-		next = player->next_pos;
+		next = ft_vector_add(player->pos, player->vector);
 		if (is_legal_move(game, &game->map[next.y][next.x]) == false)	
 			player->vector = (t_vector2){};
 		player = player->next ;
@@ -94,7 +93,6 @@ int	update_game(t_game *game)
 	if(game->is_key_pressed == true)
 	{
 		update_action(game, game->player);
-		game->is_key_pressed = false;
 	}
 	render_animation(game, game->player);
 //	render_animation(game, game->enemy);

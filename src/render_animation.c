@@ -25,20 +25,11 @@ void draw_lerp_position(t_game *game, t_clist *character, float time)
 
 	img = game->img.player[character->dir][character->slide];			
 	start = ft_vector_mul(character->pos, GRID_SIZE);
-	end = ft_vector_mul(character->next_pos, GRID_SIZE);
+	end = ft_vector_mul(ft_vector_add(character->pos, character->vector), GRID_SIZE);
 	if (character->anim_pos.x || character->anim_pos.y)
 		mlx_put_image_to_window(game->mlx, game->win, game->img.floor, character->anim_pos.x, character->anim_pos.y);
 	tmp = ft_vector_lerp(start, end, time / 0.5f);
 	mlx_put_image_to_window(game->mlx, game->win, img, tmp.x, tmp.y);
-}
-
-double	ft_diff_timespec(const struct timespec *t1, const struct timespec *t2 )
-{
-	double ret_sec;
-	
-	ret_sec = t2->tv_sec - t1->tv_sec;
-	ret_sec +=  (t2->tv_nsec - t1->tv_nsec) / 1000000000.0f;
-	return (ret_sec);
 }
 
 void	render_moving_animation(t_game *game, t_clist *character)
@@ -53,7 +44,7 @@ void	render_moving_animation(t_game *game, t_clist *character)
 	printf("%f\n", passed);
 	if (passed > 0.5f)
 	{
-		character->pos =  character->next_pos;
+		character->pos =  ft_vector_add(character->pos, character->vector);
 		character->vector = (t_vector2){0, 0};
 		character->anim_time = (t_timespec){};
 		return ;
@@ -77,12 +68,20 @@ void 	render_standing_animation(t_game *game, t_clist *character)
 
 void	render_animation(t_game *game, t_clist *player)
 {
+	bool is_any_moving;
+
+	is_any_moving = false;
 	while (player)
 	{
 		if (player->vector.x || player->vector.y)
+		{
 			render_moving_animation(game, player);
+			is_any_moving = true;
+		}
 		else
 			render_standing_animation(game, player);
 		player = player->next;
 	}
+	if (is_any_moving == false)
+		game->is_key_pressed = false;
 }

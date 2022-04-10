@@ -21,58 +21,59 @@ void	*get_grid_image(int y, int x, t_game *game)
 
 void	render_map(t_game *game)
 {
-	size_t	i;
-	size_t 	j;
+	size_t	x;
+	size_t 	y;
 	void	*img;
 
-	i = 0;
-	while (i < game->map_height)
+	y = 0;
+	while (y < game->map_height)
 	{
-		j = 0;
-		while (j < game->map_width)
+		x = 0;
+		while (x < game->map_width)
 		{
-			img = get_grid_image(i, j, game);
-			mlx_put_image_to_window(game->mlx, game->win, img, j * GRID_SIZE, i * GRID_SIZE);
-			j++;
+			img = get_grid_image(y, x, game);
+			put_image_to_window(game, img, (t_vector2){x, y});
+			x++;
 		}
-		i++;
+		y++;
 	}
 }
 
 void	render_steps(size_t num, t_game *game)
 {
-	static int	i;
+	size_t y_offset;
+	static int	x;
 	void		*img;
 
+	y_offset = game->map_height;
 	img = game->img.digit[num % 10];
 	if (num / 10)
 		render_steps(num / 10, game);
-	else
-		i = 1;
-	mlx_put_image_to_window(game->mlx, game->win, img, i * GRID_SIZE, game->map_height * GRID_SIZE);
-	i++;
+	x = 1;
+	put_image_to_window(game, img, (t_vector2){x, y_offset});
+	x++;
 }
 
 void	render_footer(t_game *game)
 {
-	size_t 	offset;
+	size_t 	y_offset;
 	t_img	img;
-	size_t	i;
+	size_t	x;
 
 	img = game->img;
-	offset = game->map_height * GRID_SIZE;
+	y_offset = game->map_height;
 
-	mlx_put_image_to_window(game->mlx, game->win, img.logo, 0, offset);
-	i = 1;
-	while (i < game->map_width)
+	put_image_to_window(game, img.logo, (t_vector2){0, y_offset});
+	x = 1;
+	while (x < game->map_width)
 	{
-		mlx_put_image_to_window(game->mlx, game->win, img.menu, i * GRID_SIZE, offset);
-		if (i + TITLE_WIDTH == game->map_width)
+		put_image_to_window(game, img.menu, (t_vector2){x, y_offset});
+		if (x + TITLE_WIDTH == game->map_width)
 		{
-			mlx_put_image_to_window(game->mlx, game->win, img.title, i * GRID_SIZE, offset);
+			put_image_to_window(game, img.title, (t_vector2){x, y_offset});
 			break ;
 		}
-		i++;
+		x++;
 	}
 }
 
@@ -82,6 +83,6 @@ int render_frame(t_game *game)
 	render_footer(game);
 	render_steps(0, game);
 	render_animation(game, game->player);
-//	render_animation(game, game->enemy);
+//	render_standing_animation(game, game->enemy);
 	return (0);
 }

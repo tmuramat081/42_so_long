@@ -6,7 +6,7 @@
 /*   By: tmuramat <mt15hydrangea@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 19:49:55 by tmuramat          #+#    #+#             */
-/*   Updated: 2022/04/09 23:35:19 by tmuramat         ###   ########.fr       */
+/*   Updated: 2022/04/10 11:22:12 by tmuramat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ typedef struct s_vector2 {
 	int	x;
 	int	y;
 }	t_vector2;
+
+typedef struct timespec t_timespec;
 
 /*** checker functions ***/
 int			ft_isalpha(int c);
@@ -101,5 +103,5 @@ bool		ft_vector_cmp(t_vector2 v1, t_vector2 v2);
 t_vector2	ft_vector_lerp(t_vector2 v1, t_vector2 v2, float t);
 int			ft_abs(int n);
 int			ft_count_digits(long long int num, int radix);
-
+double		ft_diff_timespec(const t_timespec *t1, const t_timespec *t2);
 #endif
