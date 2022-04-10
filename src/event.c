@@ -84,11 +84,22 @@ void	update_action(t_game *game, t_clist *player)
 		next = ft_vector_add(player->pos, player->vector);
 		if (is_legal_move(game, next) == false)	
 			player->vector = (t_vector2){};
-		if (is_hit_character(next, game->player) == true)
-			player->vector = (t_vector2){};
-		if (is_hit_character(next, game->enemy) == true)
-			close_window(game);
 		player = player->next ;
+	}
+}
+
+void	check_hit(t_game *game, t_clist	*character)
+{
+	t_vector2	my_pos;
+	t_vector2	my_next;
+
+	while (character)
+	{
+		my_pos = character->pos;
+		my_next = ft_vector_add(my_pos, character->vector);
+		if (is_hit_character(my_pos, my_next, game->player) == true)
+			character->vector = (t_vector2){};
+		character = character->next;
 	}
 }
 
@@ -100,6 +111,9 @@ int	update_game(t_game *game)
 	if(game->is_key_pressed == true)
 	{
 		update_action(game, game->player);
+		check_hit(game, game->player);
+//		check_hit(game, game->enemy);
+		
 	}
 	render_animation(game, game->player);
 	render_animation(game, game->enemy);

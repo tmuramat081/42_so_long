@@ -126,6 +126,6 @@ t_vector2 ft_vector_lerp(t_vector2 v1, t_vector2 v2, float t);
 
 void character_lstnew(t_clist **lst, t_vector2 pos, t_type type);
 void	put_image_to_window(t_game *game, void *img, t_vector2 pos);
-bool	is_hit_character(t_vector2 next, t_clist *character);
+bool	is_hit_character(t_vector2 pos, t_vector2 next, t_clist *character);
 
 #endif

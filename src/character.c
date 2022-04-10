@@ -1,17 +1,17 @@
 # include "so_long.h"
 
-bool	is_hit_character(t_vector2 next, t_clist *character)
+bool	is_hit_character(t_vector2 my_pos, t_vector2 my_next, t_clist *you)
 {
-	t_vector2 next2;
+	t_vector2 you_next;
 
-	while(character)
+	while(you)
 	{ 
-		next2 = ft_vector_add(chraracter->pos, character->vector);
-		if (ft_vector_cmp(next, next2)
+		you_next = ft_vector_add(you->pos, you->vector);
+		if (ft_vector_cmp(my_pos, you->pos) == false && ft_vector_cmp(my_next, you_next) == true)
 		{
 			return (true);
 		}
-		character = character->next;
+		you = you->next;
 	}
 	return (false);
 }
