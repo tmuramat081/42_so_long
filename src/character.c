@@ -5,7 +5,11 @@ bool	is_hit_character(t_vector2 next, t_clist *character)
 	while(character)
 	{  
 		if (ft_vector_cmp(next, character->pos))
+		{
+			if (character->vector.x || character->vector.y)
+				return (false);
 			return (true);
+		}
 		character = character->next;
 	}
 	return (false);
