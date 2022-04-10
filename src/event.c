@@ -85,7 +85,7 @@ void	update_action(t_game *game, t_clist *player)
 		if (is_legal_move(game, next) == false)	
 			player->vector = (t_vector2){};
 		if (is_hit_character(next, game->player) == true)
-			close_window(game);
+			player->vector = (t_vector2){};
 		if (is_hit_character(next, game->enemy) == true)
 			close_window(game);
 		player = player->next ;
