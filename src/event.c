@@ -54,19 +54,33 @@ void	limit_frame_rate(clock_t start_time)
 	}
 }
 
+void	check_state(t_game *game, t_clist *player)
+{
+	bool is_any_moving;
+	
+	is_any_moving = false;
+	while (player)
+	{	
+		if (player->vector.x || player->vector.y)
+			is_any_moving = true;
+		player = player->next;
+	}
+	if (is_any_moving == false)
+	{
+		game->is_key_pressed = false;
+	}
+}
+
 int	update_game(t_game *game)
 {
 	clock_t start_time;
 
 	start_time = clock();
-	if(game->is_key_pressed == true)
-	{
-		char_lstiter(game, &set_to_move_character);
-		char_lstiter(game, &check_hit);
-	}
+	char_lstiter(game, &set_to_move_character);
+	char_lstiter(game, &check_hit);
 	char_lstiter(game, &render_animation);
+	check_state(game, game->player);	
 	limit_frame_rate(start_time);
-	game->is_key_pressed = false;
 	return (0);
 }
 

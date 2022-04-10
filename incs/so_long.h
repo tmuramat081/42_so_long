@@ -39,7 +39,7 @@ typedef struct s_clist {
 	t_timespec	anim_time;
 	t_vector2	anim_pos;
 	t_dir		dir;
-	int			slide;
+	short		slide;
 	void	*next;
 }	t_clist;
 

@@ -20,9 +20,8 @@
 
 /***** Animation *****/
 # define FPS_MAX 30.0
-# define N_FRAMES 4
-# define ANI_FRAME 4
-# define ANI_SPEED 75
+# define N_FRAMES 8
+# define MOVE_DURATION 0.3
 
 /***** Image file(.xpm) locations. *****/
 

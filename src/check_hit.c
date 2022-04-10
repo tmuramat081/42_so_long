@@ -18,7 +18,6 @@ void	check_hit(t_game *game, t_clist	*character)
 {
 	t_vector2	pos;
 	t_vector2	next_pos;
-	t_clist		opponent;
 
 	pos = character->pos;
 	next_pos = ft_vector_add(pos, character->vector);

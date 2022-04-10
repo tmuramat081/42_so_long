@@ -1,11 +1,10 @@
 #include "so_long.h"
 #include "ft_snprintf.h"
 
-
 void load_character_images(t_game *game, void **img, const char *directory)
 {
-	int i;
 	char file_path[PATH_MAX];
+	int i;
 
 	i = 0;
 	while (i < N_FRAMES)
