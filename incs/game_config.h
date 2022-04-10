@@ -14,40 +14,42 @@
 # define KEY_ESC 65307
 
 /***** Window resolution. *****/
-# define MAP_WIDTH_MAX 50
-# define MAP_HEIGHT_MAX 32
+# define MAP_WIDTH_MAX 128
+# define MAP_HEIGHT_MAX 64
 # define GRID_SIZE 32
 
-/***** Frame rate *****/
+/***** Animation *****/
 # define FPS_MAX 30.0
+# define N_FRAMES 4
 # define ANI_FRAME 4
 # define ANI_SPEED 75
 
 /***** Image file(.xpm) locations. *****/
-/////* Object file*/////
+
+/////* Object image file */////
 # define XPM_FLOOR "./img/object/floor.xpm"
 # define XPM_WALL "./img/object/wall.xpm"
 # define XPM_DOT "./img/object/dot.xpm"
 # define XPM_EXIT "./img/object/exit.xpm"
 
-/////* Footer file*/////
+/////* Footer image file */////
 # define XPM_MENU "./img/footer/menu.xpm"
 # define XPM_TITLE "./img/footer/title.xpm"
 # define XPM_LOGO "./img/footer/logo.xpm"
 
-/////* Counter file directory (0-9.xpm)*/////
+/////* Counter image file directory (0-9.xpm)*/////
 # define XPM_DIGIT "./img/counter/"
 
-/////* Player file directory (0-9.xpm)*/////
-# define XPM_P_UP "./img/player/up/"
-# define XPM_P_DOWN "./img/player/down/"
-# define XPM_P_LEFT "./img/player/left/"
-# define XPM_P_RIGHT "./img/player/right/"
+/////* Player image file directory (0-9.xpm)*/////
+# define XPM_PLAYER_UP "./img/player/up/"
+# define XPM_PLAYER_DOWN "./img/player/down/"
+# define XPM_PLAYER_LEFT "./img/player/left/"
+# define XPM_PLAYER_RIGHT "./img/player/right/"
 
-/////* Enemy file directory (0-9.xpm) */////
-# define XPM_E_UP "./img/enemy/up/"
-# define XPM_E_DOWN "./img/enemy/down/"
-# define XPM_E_LEFT "./img/enemy/left/"
-# define XPM_E_RIGHT "./img/enemy/right/"
+/////* Enemy image file directory (0-9.xpm) */////
+# define XPM_ENEMY_UP "./img/enemy/up/"
+# define XPM_ENEMY_DOWN "./img/enemy/down/"
+# define XPM_ENEMY_LEFT "./img/enemy/left/"
+# define XPM_ENEMY_RIGHT "./img/enemy/right/"
 
 #endif

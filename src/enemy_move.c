@@ -1,12 +1,5 @@
 # include "so_long.h"
 
-bool	ft_vector_cmp(t_vector2 v1, t_vector2 v2)
-{
-	if (v1.x == v2.x && v1.y == v2.y)
-		return (true)
-	return (false);
-}
-
 bool	check_hit_enemy(t_game *game, t_vector2 player_pos)
 {
 	while (enemy)
@@ -17,7 +10,6 @@ bool	check_hit_enemy(t_game *game, t_vector2 player_pos)
 	}
 	return (false);
 }
-
 
 void set_enemy_move(t_game *game)
 {

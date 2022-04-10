@@ -66,20 +66,8 @@ void 	render_standing_animation(t_game *game, t_clist *character)
 
 void	render_animation(t_game *game, t_clist *player)
 {
-	bool is_any_moving;
-
-	is_any_moving = false;
-	while (player)
-	{
-		if (player->vector.x || player->vector.y)
-		{
-			render_moving_animation(game, player);
-			is_any_moving = true;
-		}
-		else
-			render_standing_animation(game, player);
-		player = player->next;
-	}
-	if (is_any_moving == false)
-		game->is_key_pressed = false;
+	if (player->vector.x || player->vector.y)
+		render_moving_animation(game, player);
+	else
+		render_standing_animation(game, player);
 }

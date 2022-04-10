@@ -48,8 +48,8 @@ typedef struct s_img {
 	void 	*wall;
 	void	*dot;
 	void	*exit;
-	void	*player[DIR_END][4];
-	void	*enemy[DIR_END][4];
+	void	*player[DIR_END][N_FRAMES];
+	void	*enemy[DIR_END][N_FRAMES];
 	void	*digit[10];
 	void	*menu;
 	void	*logo;
@@ -81,7 +81,7 @@ void	pstdr_grid_info(char *map_line, size_t y, size_t x,  t_game *game);
 
 /*** input_image.c ***/ 
 void	load_images(t_game *game);
-void 	*convert_file_into_image(void *mlx, char *XPM, int size);
+void 	*xpm_file_to_image(void *mlx, char *XPM, int size);
 
 void load_player_images(t_game *game);
 void load_enemy_images(t_game *game);
@@ -119,13 +119,13 @@ int		close_window(t_game *game);
 void	put_steps(t_game *game);
 void	put_error_and_exit(char *err_msg);
 void	put_end_message(t_game *game);
-t_vector2 ft_vector_add(t_vector2 v1, t_vector2 v2);
-t_vector2 ft_vector_mul(t_vector2 v1, float t);
 
-t_vector2 ft_vector_lerp(t_vector2 v1, t_vector2 v2, float t);
 
 void character_lstnew(t_clist **lst, t_vector2 pos, t_type type);
 void	put_image_to_window(t_game *game, void *img, t_vector2 pos);
 bool	is_hit_character(t_vector2 pos, t_vector2 next, t_clist *character);
+void	char_lstiter(t_game *game, void(*func)(t_game *, t_clist *character));
+void	check_hit(t_game *game, t_clist *character);
+void	limit_frame_rate(clock_t start_time);
 
 #endif

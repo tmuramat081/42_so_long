@@ -1,4 +1,5 @@
 #include "so_long.h"
+#include <time.h>
 
 void put_image_to_window(t_game *game, void *img, t_vector2 pos)
 {
@@ -8,27 +9,38 @@ void put_image_to_window(t_game *game, void *img, t_vector2 pos)
 	mlx_put_image_to_window(game->mlx, game->win, img, draw_pos.x, draw_pos.y);
 }
 
-bool exist_wall(char grid)
+void *xpm_file_to_image(void *mlx, char *img_file, int size)
 {
-	if (grid == '1')
-		return (true);
-	return (false);
+	int img_width;
+	int img_height;
+	void *image;
+
+	image = mlx_xpm_file_to_image(mlx, img_file, &img_width, &img_height);
+	if (image == NULL || (size && img_height != size) || (size && img_width != size))
+		put_error_and_exit(ERR_FILE_FMT);
+	return (image);
 }
 
-bool exist_exit(char grid, t_game *game)
+
+void	char_lstiter(t_game *game, void(*func)(t_game *, t_clist *character))
 {
-	if (grid == 'E')
+	t_clist	*player;
+	t_clist	*enemy;
+
+	player = game->player;
+	if (!player)
+		return ;
+	while (player)
 	{
-		if (game->cnt_dot == 0)
-			close_window(game);
-		return (true);
+		func(game, player);
+		player = player->next;
 	}
-	return (false);
-}
-
-bool exist_dot(char grid)
-{
-	if (grid == 'C')
-		return (true);
-	return (false);
+	enemy = game->enemy;
+	if (!enemy)
+		return ;
+	while (enemy)
+	{
+		func(game, enemy);
+		enemy = enemy->next;
+	}
 }

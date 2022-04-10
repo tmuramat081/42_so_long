@@ -1,20 +1,5 @@
 # include "so_long.h"
 
-bool	is_hit_character(t_vector2 my_pos, t_vector2 my_next, t_clist *you)
-{
-	t_vector2 you_next;
-
-	while(you)
-	{ 
-		you_next = ft_vector_add(you->pos, you->vector);
-		if (ft_vector_cmp(my_pos, you->pos) == false && ft_vector_cmp(my_next, you_next) == true)
-		{
-			return (true);
-		}
-		you = you->next;
-	}
-	return (false);
-}
 
 void	character_lstiter(t_clist *lst, void (*f)(void *))
 {
