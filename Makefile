@@ -54,7 +54,8 @@ BONUS_MAP_SRCS = B00_enemy.ber \
 				B02_multi_enemy.ber \
 				B03_multi_char.ber
 PLAY_MAP_SRCS = M00_maze.ber \
-				M01_forty_two.ber \
+				M01_puzzle.ber \
+				M02_action.ber
 
 MAP_DIR = map/
 TEST_MAPS = ${addprefix ${MAP_DIR},${TEST_MAP_SRCS:.c=.o}}

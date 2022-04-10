@@ -5,10 +5,12 @@ void set_next_animation_image(short *slide)
 {
 	static int i;
 
-	if (i % 4 == 0)
+	if (i % 8 == 0)
 		*slide += 1;
 	if (*slide == N_FRAMES)
 		*slide = 0;
+	if (i == 32)
+		i = 0;
 }
 
 void draw_lerp_position(t_game *game, t_clist *character, float time)
@@ -41,6 +43,7 @@ void	render_moving_animation(t_game *game, t_clist *character)
 	passed = ft_diff_timespec(&character->anim_time, &current);
 	if (passed > MOVE_DUR)
 	{
+		put_image_to_window(game, game->img.floor, character->pos);
 		character->pos =  ft_vector_add(character->pos, character->vector);
 		character->vector = (t_vector2){0, 0};
 		character->anim_time = (t_timespec){};
@@ -59,7 +62,6 @@ void 	render_standing_animation(t_game *game, t_clist *character)
 		img = game->img.enemy[character->dir][character->slide];
 	set_next_animation_image(&character->slide);
 	put_image_to_window(game, img, character->pos);
-	character = character->next;
 	return ;
 }
 
