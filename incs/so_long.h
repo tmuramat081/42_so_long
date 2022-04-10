@@ -127,5 +127,6 @@ bool	is_hit_character(t_vector2 pos, t_vector2 next, t_clist *character);
 void	char_lstiter(t_game *game, void(*func)(t_game *, t_clist *character));
 void	check_hit(t_game *game, t_clist *character);
 void	limit_frame_rate(clock_t start_time);
+void	set_enemy_move(t_game *game);
 
 #endif

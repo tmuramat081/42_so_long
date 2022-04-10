@@ -49,7 +49,8 @@ void	render_steps(size_t num, t_game *game)
 	img = game->img.digit[num % 10];
 	if (num / 10)
 		render_steps(num / 10, game);
-	x = 1;
+	else
+		x = 1;
 	put_image_to_window(game, img, (t_vector2){x, y_offset});
 	x++;
 }

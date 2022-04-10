@@ -14,7 +14,8 @@ SRCS =	main.c \
 		end_game.c \
 		character.c \
 		key_input.c \
-		check_hit.c
+		check_hit.c \
+		enemy_move.c
 
 SRC_DIR = src/
 OBJS = ${addprefix ${OBJ_DIR}, ${SRCS:.c=.o}}
@@ -32,10 +33,10 @@ CFLAGS = -Wall -Wextra -Werror
 MFLAGS = -L/usr/lib -lXext -lX11 -lm -lz
 
 # Map files
-PLAY_MAP_SRCS = M00_basic1.ber \
-				M01_basic2.ber \
-				M02_smallest.ber \
-				M03_largest.ber
+TEST_MAP_SRCS = T00_basic1.ber \
+				T01_basic2.ber \
+				T02_smallest.ber \
+				T03_largest.ber
 ERROR_MAP_SRCS = E00_empty.ber \
 				E01_not_closed.ber \
 				E02_not_closed2.ber \
@@ -48,10 +49,18 @@ ERROR_MAP_SRCS = E00_empty.ber \
 				E10_unplayable.ber \
 				E11_wrong_char.ber \
 				.ber
+BONUS_MAP_SRCS = B00_enemy.ber \
+				B01_multi_player.ber \
+				B02_multi_enemy.ber \
+				B03_multi_char.ber
+PLAY_MAP_SRCS = M00_maze.ber \
+				M01_forty_two.ber \
 
 MAP_DIR = map/
-PLAY_MAPS = ${addprefix ${MAP_DIR},${PLAY_MAP_SRCS:.c=.o}}
+TEST_MAPS = ${addprefix ${MAP_DIR},${TEST_MAP_SRCS:.c=.o}}
 ERROR_MAPS = ${addprefix ${MAP_DIR},${ERROR_MAP_SRCS:.c=.o}}
+BONUS_MAPS = ${addprefix ${MAP_DIR},${BONUS_MAP_SRCS:.c=.o}}
+PLAY_MAPS = ${addprefix ${MAP_DIR},${PLAY_MAP_SRCS:.c=.o}}
 
 # Debug option
 MEM_CHECK = valgrind --leak-check=full
@@ -98,21 +107,27 @@ clean:
 
 fclean: clean
 	${RM} ${NAME}
-	${MAKE} fclean -C -s ${LIBFTDIR}
+	${MAKE} fclean -C ${LIBFTDIR}
 
 re: fclean
 	${MAKE} -s all
 
-play: all
-	for map in ${PLAY_MAPS} ; \
+play_test: all
+	for map in ${TEST_MAPS} ; \
 	do ${MEM_CHECK} ./${NAME} $$map ; done
 	@echo "${GREEN}----finish----${DEFAULT}"
 
-test: all
+error_test: all
 	for emap in ${ERROR_MAPS} ; \
 	do echo "${GREEN}----$$emap-----${DEFAULT}" ; \
 	cat $$emap ; echo "\n" ; \
 	${MEM_CHECK} ./${NAME} $$emap ; done ; \
+	@echo "${GREEN}----finish----${DEFAULT}"
+
+play: all
+	for emap in ${PLAY_MAPS} ; \
+	do echo "${GREEN}----$$emap-----${DEFAULT}" ; \
+	cat $$emap ; echo "\n" ; \
 	@echo "${GREEN}----finish----${DEFAULT}"
 
 git:
@@ -120,4 +135,4 @@ git:
 	git commit 
 	git push
 
-.PHONY: all clean fclean re test play git
+.PHONY: all clean fclean re error_test play_test git

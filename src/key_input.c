@@ -34,5 +34,6 @@ int check_key_entry(int keycode, t_game *game)
 	else if (keycode == KEY_S || keycode == KEY_DOWN)
 		set_player_dir(game->player, DIR_DOWN);
 	game->is_key_pressed = true;
+	put_steps(game);
 	return (0);
 }

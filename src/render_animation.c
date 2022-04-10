@@ -18,7 +18,10 @@ void draw_lerp_position(t_game *game, t_clist *character, float time)
 	void 		*img;
 	t_vector2 tmp;
 
-	img = game->img.player[character->dir][character->slide];			
+	if (character->type == TYPE_PLAYER)
+		img = game->img.player[character->dir][character->slide];		
+	else
+		img = game->img.enemy[character->dir][character->slide];		
 	start = ft_vector_mul(character->pos, GRID_SIZE);
 	end = ft_vector_mul(ft_vector_add(character->pos, character->vector), GRID_SIZE);
 	if (character->anim_pos.x || character->anim_pos.y)
@@ -52,7 +55,7 @@ void 	render_standing_animation(t_game *game, t_clist *character)
 
 	if (character->type == TYPE_PLAYER)
 		img = game->img.player[character->dir][character->slide];
-	else	
+	else
 		img = game->img.enemy[character->dir][character->slide];
 	set_next_animation_image(&character->slide);
 	put_image_to_window(game, img, character->pos);

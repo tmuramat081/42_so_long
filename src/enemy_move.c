@@ -1,28 +1,35 @@
 # include "so_long.h"
 
-bool	check_hit_enemy(t_game *game, t_vector2 player_pos)
+void	random_horizontal_move(t_clist *enemy)
 {
-	while (enemy)
+	short	direction;
+
+	direction = rand() % 3;
+	if (direction == 0)
 	{
-		if (ft_vector_cmp(player_pos, enemy_pos) == true)
-			return (true);
-		next = enemy->next;
+		enemy->dir = DIR_LEFT;
+		enemy->vector = (t_vector2){-1, 0};
 	}
-	return (false);
+	else if (direction == 1)
+	{
+		enemy->dir = DIR_RIGHT;
+		enemy->vector = (t_vector2){1, 0};
+	}
+	else
+	{
+		
+	}
 }
 
 void set_enemy_move(t_game *game)
 {
-	t_dir dir;
+	t_clist *enemy;
 
-	srand((unsigned int)time(NULL));
+	enemy = game->enemy;
 	while (enemy)
 	{
-		if (enemy->is_moving == FALSE)
-		{
-			dir = rund() % DIR_END + 1;
-			set_player_dir(enemy, dir);
-		}
+		if (enemy->vector.x == 0 && enemy->vector.y == 0)
+			random_horizontal_move(enemy);
 		enemy = enemy->next;
 	}
 }

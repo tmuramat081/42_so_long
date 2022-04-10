@@ -54,7 +54,7 @@ void	limit_frame_rate(clock_t start_time)
 	}
 }
 
-void	check_state(t_game *game, t_clist *player)
+void	check_game_state(t_game *game, t_clist *player)
 {
 	bool is_any_moving;
 	
@@ -74,10 +74,12 @@ int	update_game(t_game *game)
 	clock_t start_time;
 
 	start_time = clock();
+
+	set_enemy_move(game);
 	char_lstiter(game, &set_to_move_character);
 	char_lstiter(game, &check_hit);
 	char_lstiter(game, &render_animation);
-	check_state(game, game->player);	
+	check_game_state(game, game->player);	
 	limit_frame_rate(start_time);
 	return (0);
 }
@@ -89,5 +91,4 @@ void set_events(t_game *game)
 	mlx_hook(game->win, 17, 0, close_window, game);
 	mlx_loop_hook(game->mlx, update_game, game);
 	mlx_expose_hook (game->win, render_frame, game);
-	mlx_do_key_autorepeatoff(game->mlx);
 }
