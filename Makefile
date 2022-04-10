@@ -1,25 +1,59 @@
 # Compile variables
 NAME = so_long
-SRCS = main.c input_map.c check_map.c load_image.c load_animation.c event.c render_image.c render_animation.c \
-	print.c utils.c end_game.c character.c key_input.c check_hit.c
+
+SRCS =	main.c \
+		input_map.c \
+		check_map.c \
+		load_image.c \
+		load_animation.c \
+		event.c \
+		render_image.c \
+		render_animation.c \
+		print.c \
+		utils.c \
+		end_game.c \
+		character.c \
+		key_input.c \
+		check_hit.c
+
 SRC_DIR = src/
 OBJS = ${addprefix ${OBJ_DIR}, ${SRCS:.c=.o}}
 OBJ_DIR = obj/
+
 MLXDIR = libs/mlx_linux/
 MLX = ${MLXDIR}/libmlx.a
+
 LIBFTDIR = libs/libft/
 LIBFT = ${LIBFTDIR}/libft.a
+
 INCS = -I./incs -I./${LIBFTDIR}/incs/ -I./${MLXDIR}
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 MFLAGS = -L/usr/lib -lXext -lX11 -lm -lz
-PLAY_MAP_SRCS = M00_basic1.ber M01_basic2.ber M02_smallest.ber M03_largest.ber
-ERROR_MAP_SRCS = E00_empty.ber E01_not_closed.ber E02_not_closed2.ber E03_no_collectible.ber \
-	E05_no_spawn.ber E06_multi_spawn.ber E07_not_rectangle.ber E08_void_line.ber \
-	E09_too_large.ber E10_unplayable.ber E11_wrong_char.ber .ber
+
+# Map files
+PLAY_MAP_SRCS = M00_basic1.ber \
+				M01_basic2.ber \
+				M02_smallest.ber \
+				M03_largest.ber
+ERROR_MAP_SRCS = E00_empty.ber \
+				E01_not_closed.ber \
+				E02_not_closed2.ber \
+				E03_no_collectible.ber \
+				E05_no_spawn.ber \
+				E06_multi_spawn.ber \
+				E07_not_rectangle.ber \
+				E08_void_line.ber \
+				E09_too_large.ber \
+				E10_unplayable.ber \
+				E11_wrong_char.ber \
+				.ber
+
 MAP_DIR = map/
 PLAY_MAPS = ${addprefix ${MAP_DIR},${PLAY_MAP_SRCS:.c=.o}}
 ERROR_MAPS = ${addprefix ${MAP_DIR},${ERROR_MAP_SRCS:.c=.o}}
+
+# Debug option
 MEM_CHECK = valgrind --leak-check=full
 
 # Print variables
@@ -31,6 +65,9 @@ RED = \033[0;91m
 
 # Progress variables
 SRC_COUNT_TOT := ${shell expr ${words ${SRCS}} - ${shell ls -l ${OBJ_DIR} | grep .o$ | wc -l} + 1}
+ifndef SRC_COUNT_TOT
+	SRC_COUNT_TOT := ${words ${SRCS}}
+endif
 SRC_COUNT := 0
 SRC_PCT = ${shell expr 100 \* ${SRC_COUNT} / ${SRC_COUNT_TOT}}
 PROGRESS = ${eval SRC_COUNT = ${shell expr ${SRC_COUNT} + 1}} \
@@ -55,16 +92,16 @@ ${OBJ_DIR}%.o: ${SRC_DIR}%.c
 	@${CC} ${CFLAGS} -I/usr/include ${INCS} -O3 -c $< -o $@
 
 clean:
-	${MAKE} clean -C ${LIBFTDIR} --no-print-directory
-	${MAKE} clean -C ${MLXDIR} --no-print-directory
+	${MAKE} clean -C ${LIBFTDIR}
+	${MAKE} clean -C ${MLXDIR}
 	${RM} ${OBJS}
 
 fclean: clean
 	${RM} ${NAME}
-	${MAKE} fclean -C ${LIBFTDIR} --no-print-directory
+	${MAKE} fclean -C -s ${LIBFTDIR}
 
 re: fclean
-	${MAKE} all
+	${MAKE} -s all
 
 play: all
 	for map in ${PLAY_MAPS} ; \

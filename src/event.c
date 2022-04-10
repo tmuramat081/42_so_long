@@ -66,9 +66,7 @@ void	check_state(t_game *game, t_clist *player)
 		player = player->next;
 	}
 	if (is_any_moving == false)
-	{
 		game->is_key_pressed = false;
-	}
 }
 
 int	update_game(t_game *game)

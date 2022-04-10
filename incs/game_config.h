@@ -19,9 +19,9 @@
 # define GRID_SIZE 32
 
 /***** Animation *****/
-# define FPS_MAX 30.0
+# define FPS_MAX 30
 # define N_FRAMES 8
-# define MOVE_DURATION 0.3
+# define MOVE_DUR 0.3
 
 /***** Image file(.xpm) locations. *****/
 

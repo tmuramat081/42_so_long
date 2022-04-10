@@ -3,7 +3,10 @@
 
 void set_next_animation_image(short *slide)
 {
-	*slide += 1;
+	static int i;
+
+	if (i % 4 == 0)
+		*slide += 1;
 	if (*slide == N_FRAMES)
 		*slide = 0;
 }
@@ -20,7 +23,7 @@ void draw_lerp_position(t_game *game, t_clist *character, float time)
 	end = ft_vector_mul(ft_vector_add(character->pos, character->vector), GRID_SIZE);
 	if (character->anim_pos.x || character->anim_pos.y)
 		mlx_put_image_to_window(game->mlx, game->win, game->img.floor, character->anim_pos.x, character->anim_pos.y);
-	tmp = ft_vector_lerp(start, end, time / 0.3f);
+	tmp = ft_vector_lerp(start, end, time / MOVE_DUR);
 	mlx_put_image_to_window(game->mlx, game->win, img, tmp.x, tmp.y);
 }
 
@@ -33,8 +36,7 @@ void	render_moving_animation(t_game *game, t_clist *character)
 		timespec_get(&character->anim_time, TIME_UTC);
 	timespec_get(&current, TIME_UTC);
 	passed = ft_diff_timespec(&character->anim_time, &current);
-	printf("%f\n", passed);
-	if (passed > 0.3f)
+	if (passed > MOVE_DUR)
 	{
 		character->pos =  ft_vector_add(character->pos, character->vector);
 		character->vector = (t_vector2){0, 0};
