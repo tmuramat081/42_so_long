@@ -2,12 +2,13 @@
 
 bool	is_hit_character(t_vector2 next, t_clist *character)
 {
+	t_vector2 next2;
+
 	while(character)
-	{  
-		if (ft_vector_cmp(next, character->pos))
+	{ 
+		next2 = ft_vector_add(chraracter->pos, character->vector);
+		if (ft_vector_cmp(next, next2)
 		{
-			if (character->vector.x || character->vector.y)
-				return (false);
 			return (true);
 		}
 		character = character->next;
