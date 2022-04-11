@@ -1,26 +1,32 @@
 #include "so_long.h"
 
-bool	is_hit_character(t_vector2 pos, t_vector2 next_pos, t_clist *opponent)
+t_clist	*target_exists(t_vector2 pos, t_vector2 next_pos, t_clist *target)
 {
-	t_vector2 opponent_next;
-
-	while(opponent)
-	{ 
-		opponent_next = ft_vector_add(opponent->pos, opponent->vector);
-		if (ft_vector_cmp(pos, opponent->pos) == false && ft_vector_cmp(next_pos, opponent_next) == true)
-			return (true);
-		opponent = opponent->next;
+	while(target)
+	{
+		if (ft_vector_cmp(pos, target->pos) == false &&
+			ft_vector_cmp(next_pos, ft_vector_add(target->pos, target->vector)) == true)
+			return (target);
+		target = target->next;
 	}
-	return (false);
+	return (NULL);
 }
 
 void	check_hit(t_game *game, t_clist	*character)
 {
-	t_vector2	pos;
 	t_vector2	next_pos;
+	t_clist		*target;
 
-	pos = character->pos;
-	next_pos = ft_vector_add(pos, character->vector);
-	if (is_hit_character(pos, next_pos, game->player) == true)
-		character->vector = (t_vector2){};
+	if (character->vector.x == 0 && character->vector.y == 0)
+		return ;
+	next_pos = ft_vector_add(character->pos, character->vector);
+	target = target_exists(character->pos, next_pos, game->player);
+	if (!target)
+		return ;
+	else if (target->type == TYPE_ENEMY)
+		close_window(game);
+	else if (target->type == TYPE_PLAYER)
+		check_hit(game, target);
+	puts("OK");
+	character->vector = (t_vector2){};
 }

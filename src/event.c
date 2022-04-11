@@ -91,4 +91,5 @@ void set_events(t_game *game)
 	mlx_hook(game->win, 17, 0, close_window, game);
 	mlx_loop_hook(game->mlx, update_game, game);
 	mlx_expose_hook (game->win, render_frame, game);
+	mlx_do_key_autorepeatoff(game->mlx);
 }

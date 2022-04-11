@@ -127,8 +127,7 @@ error_test: all
 
 play: all
 	for emap in ${PLAY_MAPS} ; \
-	do echo "${GREEN}----$$emap-----${DEFAULT}" ; \
-	cat $$emap ; echo "\n" ; \
+	do ./${NAME} $$emap ; done
 	@echo "${GREEN}----finish----${DEFAULT}"
 
 git:

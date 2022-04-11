@@ -39,7 +39,7 @@ typedef struct s_clist {
 	t_timespec	anim_time;
 	t_vector2	anim_pos;
 	t_dir		dir;
-	short		slide;
+	short		frame;
 	void	*next;
 }	t_clist;
 
@@ -67,6 +67,7 @@ typedef struct s_game {
 	t_img	img;
 	size_t	cnt_dot;
 	size_t	cnt_step;
+	short	frame;
 	bool	is_key_pressed;
 }	t_game;
 
@@ -123,7 +124,6 @@ void	put_end_message(t_game *game);
 
 void character_lstnew(t_clist **lst, t_vector2 pos, t_type type);
 void	put_image_to_window(t_game *game, void *img, t_vector2 pos);
-bool	is_hit_character(t_vector2 pos, t_vector2 next, t_clist *character);
 void	char_lstiter(t_game *game, void(*func)(t_game *, t_clist *character));
 void	check_hit(t_game *game, t_clist *character);
 void	limit_frame_rate(clock_t start_time);
