@@ -62,8 +62,7 @@ typedef struct s_game {
 	char	**map;
 	size_t	map_width;
 	size_t	map_height;
-	t_clist	*player;
-	t_clist	*enemy;
+	t_clist	*character;
 	t_img	img;
 	size_t	cnt_dot;
 	size_t	cnt_step;
@@ -127,6 +126,6 @@ void	put_image_to_window(t_game *game, void *img, t_vector2 pos);
 void	char_lstiter(t_game *game, void(*func)(t_game *, t_clist *character));
 void	check_hit(t_game *game, t_clist *character);
 void	limit_frame_rate(clock_t start_time);
-void	set_enemy_move(t_game *game);
+void	set_enemy_move(t_game *game, t_clist *character);
 
 #endif

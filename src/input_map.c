@@ -12,9 +12,9 @@ void	parse_grid_info(char *map_line, size_t y, t_game *game)
 		if (map_line[x] == 'C')
 			game->cnt_dot += 1;
 		else if (map_line[x] == 'P')
-			character_lstnew(&game->player, (t_vector2){x, y}, TYPE_PLAYER);
+			character_lstnew(&game->character, (t_vector2){x, y}, TYPE_PLAYER);
 		else if (map_line[x] == 'O')
-			character_lstnew(&game->enemy, (t_vector2){x, y}, TYPE_ENEMY);
+			character_lstnew(&game->character, (t_vector2){x, y}, TYPE_ENEMY);
 		x++;
 	}
 }

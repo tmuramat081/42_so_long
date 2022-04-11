@@ -21,15 +21,12 @@ void	random_horizontal_move(t_clist *enemy)
 	}
 }
 
-void set_enemy_move(t_game *game)
+void set_enemy_move(t_game *game, t_clist *character)
 {
-	t_clist *enemy;
-
-	enemy = game->enemy;
-	while (enemy)
+	(void)game;
+	if (character->type == TYPE_ENEMY)
 	{
-		if (enemy->vector.x == 0 && enemy->vector.y == 0)
-			random_horizontal_move(enemy);
-		enemy = enemy->next;
+		if (character->vector.x == 0 && character->vector.y == 0)
+			random_horizontal_move(character);
 	}
 }

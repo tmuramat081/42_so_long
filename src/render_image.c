@@ -83,6 +83,6 @@ int render_frame(t_game *game)
 	render_map(game);
 	render_footer(game);
 	render_steps(0, game);
-	render_animation(game, game->player);
+	char_lstiter(game, &render_animation);
 	return (0);
 }

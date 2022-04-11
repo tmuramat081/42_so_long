@@ -20,7 +20,7 @@ void	check_hit(t_game *game, t_clist	*character)
 	if (character->vector.x == 0 && character->vector.y == 0)
 		return ;
 	next_pos = ft_vector_add(character->pos, character->vector);
-	target = target_exists(character->pos, next_pos, game->player);
+	target = target_exists(character->pos, next_pos, character);
 	if (!target)
 		return ;
 	else if (target->type == TYPE_ENEMY)

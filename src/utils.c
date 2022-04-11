@@ -21,26 +21,16 @@ void *xpm_file_to_image(void *mlx, char *img_file, int size)
 	return (image);
 }
 
-
-void	char_lstiter(t_game *game, void(*func)(t_game *, t_clist *character))
+void	char_lstiter(t_game *game, void(*func)(t_game *, t_clist *))
 {
-	t_clist	*player;
-	t_clist	*enemy;
+	t_clist *character;
 
-	player = game->player;
-	if (!player)
+	character = game->character;
+	if (!character)
 		return ;
-	while (player)
+	while (character)
 	{
-		func(game, player);
-		player = player->next;
-	}
-	enemy = game->enemy;
-	if (!enemy)
-		return ;
-	while (enemy)
-	{
-		func(game, enemy);
-		enemy = enemy->next;
+		func(game, character);
+		character = character->next;
 	}
 }

@@ -50,7 +50,7 @@ void	limit_frame_rate(clock_t start_time)
 	if (g_frame_time > took_time)
 	{
 		wait_time = (g_frame_time - took_time) * 1000000;
-		usleep(wait_time);	
+		usleep(wait_time);
 	}
 }
 
@@ -74,12 +74,11 @@ int	update_game(t_game *game)
 	clock_t start_time;
 
 	start_time = clock();
-
-	set_enemy_move(game);
+	char_lstiter(game, &set_enemy_move);
 	char_lstiter(game, &set_to_move_character);
 	char_lstiter(game, &check_hit);
 	char_lstiter(game, &render_animation);
-	check_game_state(game, game->player);	
+	check_game_state(game, game->character);	
 	limit_frame_rate(start_time);
 	return (0);
 }
