@@ -1,5 +1,5 @@
 #include "so_long.h"
-#include "time.h"
+#include <time.h>
 
 const double	g_frame_time = 1.0 / FPS_MAX;
 
@@ -40,19 +40,7 @@ void	set_to_move_character(t_game *game, t_clist *character)
 		game->cnt_dot -= 1;
 }
 
-/* Limit max FPS(Frame Per Second), using usleep function. */
-void	limit_frame_rate(clock_t start_time)
-{
-	double	took_time;
-	static double wait_time;
 
-	took_time = (double)(clock() - start_time) / CLOCKS_PER_SEC;
-	if (g_frame_time > took_time)
-	{
-		wait_time = (g_frame_time - took_time) * 1000000;
-		usleep(wait_time);
-	}
-}
 
 void	check_game_state(t_game *game, t_clist *player)
 {
@@ -69,17 +57,33 @@ void	check_game_state(t_game *game, t_clist *player)
 		game->is_key_pressed = false;
 }
 
+/* Limit max FPS(Frame Per Second), using usleep function. */
+void	limit_frame_rate(t_timespec *start_time)
+{
+	t_timespec	current_time;
+	static double took_time;
+	double	wait_time;
+
+	clock_gettime(CLOCK_REALTIME, &current_time);
+	took_time = ft_diff_timespec(start_time, &current_time);
+	if (g_frame_time > took_time)
+	{
+		wait_time = (g_frame_time - took_time) * 1000000;
+		usleep(wait_time);
+	}
+}
+
 int	update_game(t_game *game)
 {
-	clock_t start_time;
+	t_timespec start_time;
 
-	start_time = clock();
+	clock_gettime(CLOCK_REALTIME, &start_time);
 	char_lstiter(game, &set_enemy_move);
 	char_lstiter(game, &set_to_move_character);
-	char_lstiter(game, &check_hit);
+	char_lstiter(game, &detect_character_collision);
 	char_lstiter(game, &render_animation);
 	check_game_state(game, game->character);	
-	limit_frame_rate(start_time);
+	limit_frame_rate(&start_time);
 	return (0);
 }
 

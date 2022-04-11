@@ -125,7 +125,7 @@ void character_lstnew(t_clist **lst, t_vector2 pos, t_type type);
 void	put_image_to_window(t_game *game, void *img, t_vector2 pos);
 void	char_lstiter(t_game *game, void(*func)(t_game *, t_clist *character));
 void	check_hit(t_game *game, t_clist *character);
-void	limit_frame_rate(clock_t start_time);
+void	limit_frame_rate(t_timespec *start_time);
 void	set_enemy_move(t_game *game, t_clist *character);
-
+void	detect_character_collision(t_game *game, t_clist *character);
 #endif

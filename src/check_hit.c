@@ -12,7 +12,7 @@ t_clist	*target_exists(t_vector2 pos, t_vector2 next_pos, t_clist *target)
 	return (NULL);
 }
 
-void	check_hit(t_game *game, t_clist	*character)
+void	detect_character_collision(t_game *game, t_clist	*character)
 {
 	t_vector2	next_pos;
 	t_clist		*target;
@@ -23,10 +23,9 @@ void	check_hit(t_game *game, t_clist	*character)
 	target = target_exists(character->pos, next_pos, character);
 	if (!target)
 		return ;
-	else if (target->type == TYPE_ENEMY)
+	else if (target->type != character->type)
 		close_window(game);
-	else if (target->type == TYPE_PLAYER)
-		check_hit(game, target);
-	puts("OK");
+	else if (target->type == character->type)
+		detect_character_collision(game, target);
 	character->vector = (t_vector2){};
 }
