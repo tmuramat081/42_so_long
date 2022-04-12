@@ -2,20 +2,20 @@
 NAME = so_long
 
 SRCS =	main.c \
-		input_map.c \
-		check_map.c \
+		map_input.c \
+		map_check.c \
 		load_image.c \
 		load_animation.c \
-		event.c \
 		render_image.c \
 		render_animation.c \
-		print.c \
-		utils.c \
-		end_game.c \
-		character.c \
-		key_input.c \
-		check_hit.c \
-		enemy_move.c
+		game_event.c \
+		game_key.c \
+		game_collision.c \
+		game_enemy.c \
+		game_end.c \
+		utils_wrapper.c \
+		utils_list.c \
+		utils_print.c
 
 SRC_DIR = src/
 OBJS = ${addprefix ${OBJ_DIR}, ${SRCS:.c=.o}}
@@ -28,7 +28,7 @@ LIBFTDIR = libs/libft/
 LIBFT = ${LIBFTDIR}/libft.a
 
 INCS = -I./incs -I./${LIBFTDIR}/incs/ -I./${MLXDIR}
-CC = gcc
+CC = gcc -g
 CFLAGS = -Wall -Wextra -Werror
 MFLAGS = -L/usr/lib -lXext -lX11 -lm -lz
 

@@ -3,14 +3,17 @@
 
 # define STEP_MAX 999
 # define GREEN "\033[32m"
+# define RED "\033[31m"
 # define DEFAULT "\033[m"
 
 void	put_end_message(t_game *game)
 {
+	ft_printf(GREEN);
 	if (game->cnt_dot == 0)
 		ft_printf(WIN_GAME);
 	else
 		ft_printf(EXIT_GAME);
+	ft_printf(DEFAULT);
 }
 
 void	put_steps(t_game *game)
@@ -27,6 +30,8 @@ void	put_steps(t_game *game)
 
 void	put_error_and_exit(char *err_msg)
 {
+	ft_printf(RED);
 	ft_printf("Error\n%s\n", err_msg);
+	ft_printf(DEFAULT);
 	exit(EXIT_FAILURE);
 }

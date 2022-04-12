@@ -29,6 +29,7 @@ typedef enum e_dir {
 typedef enum e_type {
 	TYPE_PLAYER,
 	TYPE_ENEMY,
+	TYPE_NONE
 }	t_type;
 
 
@@ -103,9 +104,6 @@ void	render_standing_animation(t_game *game, t_clist *character);
 void	set_events(t_game *game);
 int		check_key_entry(int keycode, t_game *game);
 void	set_key_input(t_game *game, t_vector2 vector, t_dir stat);
-bool	exist_dot(char grid);
-bool	exist_exit(char grid, t_game *game);
-bool	exist_wall(char grid);
 
 /*** validate_map.c ***/
 void	check_is_playable_map(t_game *game, const char **src_map);
@@ -115,6 +113,10 @@ bool	is_valid_map(char **map);
 bool	is_valid_file_name(char *file_name);
 
 int		close_window(t_game *game);
+
+
+void	detect_object_collision(t_game *game, t_clist *character);
+
 /*** utils.c ***/
 void	put_steps(t_game *game);
 void	put_error_and_exit(char *err_msg);
@@ -128,4 +130,5 @@ void	check_hit(t_game *game, t_clist *character);
 void	limit_frame_rate(t_timespec *start_time);
 void	set_enemy_move(t_game *game, t_clist *character);
 void	detect_character_collision(t_game *game, t_clist *character);
+void	character_lstclear(t_clist **character);
 #endif

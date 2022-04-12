@@ -9,8 +9,10 @@ void *get_animation_image(t_game *game, t_clist *character)
 	frame = character->frame / 3;
 	if (character->type == TYPE_PLAYER)
 		img = game->img.player[character->dir][frame];
-	else
+	else if  (character->type == TYPE_ENEMY)
 		img = game->img.enemy[character->dir][frame];
+	else
+		img = game->img.floor;
 	character->frame += 1;
 	if (character->frame / 3 == N_FRAMES)
 		character->frame = 0;

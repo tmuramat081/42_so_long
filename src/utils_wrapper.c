@@ -13,12 +13,12 @@ void *xpm_file_to_image(void *mlx, char *img_file, int size)
 {
 	int img_width;
 	int img_height;
-	void *image;
+	void *img;
 
-	image = mlx_xpm_file_to_image(mlx, img_file, &img_width, &img_height);
-	if (image == NULL || (size && img_height != size) || (size && img_width != size))
+	img = mlx_xpm_file_to_image(mlx, img_file, &img_width, &img_height);
+	if (img == NULL || (size && img_height != size) || (size && img_width != size))
 		put_error_and_exit(ERR_FILE_FMT);
-	return (image);
+	return (img);
 }
 
 void	char_lstiter(t_game *game, void(*func)(t_game *, t_clist *))
@@ -30,7 +30,8 @@ void	char_lstiter(t_game *game, void(*func)(t_game *, t_clist *))
 		return ;
 	while (character)
 	{
-		func(game, character);
+		if (character->type == TYPE_PLAYER || character->type == TYPE_ENEMY)
+			func(game, character);
 		character = character->next;
 	}
 }

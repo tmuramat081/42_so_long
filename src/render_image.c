@@ -1,7 +1,6 @@
 #include "so_long.h"
 
 # define STEP_MAX 999
-# define BLACK 0x00000000
 # define TITLE_WIDTH 6
 
 void	*get_grid_image(int y, int x, t_game *game)
@@ -83,6 +82,5 @@ int render_frame(t_game *game)
 	render_map(game);
 	render_footer(game);
 	render_steps(0, game);
-	char_lstiter(game, &render_animation);
 	return (0);
 }

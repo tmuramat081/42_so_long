@@ -1,14 +1,16 @@
 # include "so_long.h"
 
-
-void	character_lstiter(t_clist *lst, void (*f)(void *))
+void	character_lstclear(t_clist **character)
 {
-	if (!lst)
+	t_clist	*tmp;
+
+	if (!character)
 		return ;
-	while (lst)
+	while (*character)
 	{
-		f(&lst);
-		lst = lst->next;
+		tmp = (*character)->next;
+		free(*character);
+		*character = tmp;
 	}
 }
 
@@ -42,4 +44,3 @@ void character_lstnew(t_clist **lst, t_vector2 pos, t_type type)
 	new_character->next = NULL;
 	character_lstadd_back(lst, new_character);
 }
-

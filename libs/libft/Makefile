@@ -2,36 +2,38 @@
 NAME = libft.a
 CC = gcc
 
-VPATH = ${IS_DIR}:${STR_DIR}:${MEM_DIR}:${MTH_DIR}:${CNV_DIR}:${LST_DIR}:${GNL_DIR}:${PRF_DIR}:${SPRF_DIR}
+VPATH = ${CHR_DIR}:${STR_DIR}:${MEM_DIR}:${MTH_DIR}:${CNV_DIR}:${PUT_DIR}:${LST_DIR}:${GNL_DIR}:${PRF_DIR}:${SPRF_DIR}
 
-IS_SRCS = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_isspace.c
+CHR_SRCS = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_isspace.c
 STR_SRCS = ft_strlen.c ft_split.c ft_strchr.c ft_strcspn.c ft_strdup.c ft_striteri.c ft_strjoin.c ft_strlcat.c ft_strlcpy.c \
 	ft_strmapi.c ft_strncmp.c ft_strnstr.c ft_strrchr.c ft_strtol_d.c ft_substr.c ft_strtoupper.c
 MEM_SRCS = ft_bzero.c ft_calloc.c ft_free_matrix.c ft_matrixdup.c ft_matrixlen.c ft_memchr.c ft_memcmp.c ft_memcpy.c ft_memmove.c ft_memset.c
 MTH_SRCS = ft_abs.c ft_vector_add.c ft_vector_cmp.c ft_vector_lerp.c ft_vector_mul.c ft_vector_sub.c \
 	ft_diff_timespec.c
 CNV_SRCS = ft_atoi.c ft_itoa.c ft_tolower.c ft_toupper.c
+PUT_SRCS = ft_putchar_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c
 LST_SRCS = ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c ft_lstiter.c ft_lstlast.c ft_lstmap.c ft_lstnew.c ft_lstsize.c
 GNL_SRCS = get_next_line.c
 PRF_SRCS = ft_printf.c doprintf.c composer.c parser.c converter.c utils.c printer.c
 SPRF_SRCS = ft_snprintf.c sconverter.c sutils.c
 
-IS_DIR = srcs/char_func/
-STR_DIR = srcs/str_func/
-MEM_DIR = srcs/mem_func/
-MTH_DIR = srcs/mth_func/
-CNV_DIR = srcs/cnv_func/
-LST_DIR = srcs/lst_func/
+CHR_DIR = srcs/character_func/
+STR_DIR = srcs/string_func/
+MEM_DIR = srcs/memory_func/
+MTH_DIR = srcs/math_func/
+CNV_DIR = srcs/convert_func/
+PUT_DIR = srcs/output_func/
+LST_DIR = srcs/list_func/
 GNL_DIR = srcs/get_next_line/
 PRF_DIR = srcs/printf/
 SPRF_DIR = srcs/snprintf/
 
-ALL_SRCS = ${addprefix ${IS_DIR},${IS_SRCS}} ${addprefix ${STR_DIR},${STR_SRCS}} ${addprefix ${MEM_DIR},${MEM_SRCS}} ${addprefix ${MTH_DIR},${MTH_SRCS}} \
-	${addprefix ${CNV_DIR},${CNV_SRCS}} ${addprefix ${LST_DIR},${LST_SRCS}} ${addprefix ${GNL_DIR},${GNL_SRCS}} ${addprefix ${PRF_DIR},${PRF_SRCS}} \
+ALL_SRCS = ${addprefix ${CHR_DIR},${CHR_SRCS}} ${addprefix ${STR_DIR},${STR_SRCS}} ${addprefix ${MEM_DIR},${MEM_SRCS}} ${addprefix ${MTH_DIR},${MTH_SRCS}} \
+	${addprefix ${CNV_DIR},${CNV_SRCS}} ${addprefix ${PUT_DIR},${PUT_SRCS}} ${addprefix ${LST_DIR},${LST_SRCS}} ${addprefix ${GNL_DIR},${GNL_SRCS}} ${addprefix ${PRF_DIR},${PRF_SRCS}} \
 	${addprefix ${SPRF_DIR},${SPRF_SRCS}}
 
-ALL_OBJS = ${addprefix ${OBJ_DIR},${IS_SRCS:.c=.o} ${STR_SRCS:.c=.o} ${MEM_SRCS:.c=.o} ${MTH_SRCS:.c=.o} ${CNV_SRCS:.c=.o} ${LST_SRCS:.c=.o} \
-	${GNL_SRCS:.c=.o} ${PRF_SRCS:.c=.o} ${SPRF_SRCS:.c=.o}}
+ALL_OBJS = ${addprefix ${OBJ_DIR},${CHR_SRCS:.c=.o} ${STR_SRCS:.c=.o} ${MEM_SRCS:.c=.o} ${MTH_SRCS:.c=.o} ${CNV_SRCS:.c=.o} ${LST_SRCS:.c=.o} \
+	${PUT_SRCS:.c=.o} ${GNL_SRCS:.c=.o} ${PRF_SRCS:.c=.o} ${SPRF_SRCS:.c=.o}}
 
 OBJ_DIR = objs/
 INCS = -I./incs
