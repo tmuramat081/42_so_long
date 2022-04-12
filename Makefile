@@ -1,6 +1,5 @@
 # Compile variables
 NAME = so_long
-
 SRCS =	main.c \
 		map_input.c \
 		map_check.c \
@@ -8,7 +7,7 @@ SRCS =	main.c \
 		load_animation.c \
 		render_image.c \
 		render_animation.c \
-		game_event.c \
+		game.c \
 		game_key.c \
 		game_collision.c \
 		game_enemy.c \
@@ -16,10 +15,10 @@ SRCS =	main.c \
 		utils_wrapper.c \
 		utils_list.c \
 		utils_print.c
-
-SRC_DIR = src/
+SRC_DIR = srcs/
 OBJS = ${addprefix ${OBJ_DIR}, ${SRCS:.c=.o}}
-OBJ_DIR = obj/
+OBJ_DIR = objs/
+DEPS = ${addprefix ${OBJ_DIR}, ${SRCS:.c=.d}}
 
 MLXDIR = libs/mlx_linux/
 MLX = ${MLXDIR}/libmlx.a
@@ -28,7 +27,7 @@ LIBFTDIR = libs/libft/
 LIBFT = ${LIBFTDIR}/libft.a
 
 INCS = -I./incs -I./${LIBFTDIR}/incs/ -I./${MLXDIR}
-CC = gcc -g
+CC = gcc -g -MMD -MP
 CFLAGS = -Wall -Wextra -Werror
 MFLAGS = -L/usr/lib -lXext -lX11 -lm -lz
 
@@ -57,7 +56,7 @@ PLAY_MAP_SRCS = M00_maze.ber \
 				M01_puzzle.ber \
 				M02_action.ber
 
-MAP_DIR = map/
+MAP_DIR = maps/
 TEST_MAPS = ${addprefix ${MAP_DIR},${TEST_MAP_SRCS:.c=.o}}
 ERROR_MAPS = ${addprefix ${MAP_DIR},${ERROR_MAP_SRCS:.c=.o}}
 BONUS_MAPS = ${addprefix ${MAP_DIR},${BONUS_MAP_SRCS:.c=.o}}
@@ -75,7 +74,7 @@ RED = \033[0;91m
 
 # Progress variables
 SRC_COUNT_TOT := ${shell expr ${words ${SRCS}} - ${shell ls -l ${OBJ_DIR} | grep .o$ | wc -l} + 1}
-ifndef SRC_COUNT_TOT
+ifndef ${SRC_COUNT_TOT}
 	SRC_COUNT_TOT := ${words ${SRCS}}
 endif
 SRC_COUNT := 0
@@ -104,7 +103,7 @@ ${OBJ_DIR}%.o: ${SRC_DIR}%.c
 clean:
 	${MAKE} clean -C ${LIBFTDIR}
 	${MAKE} clean -C ${MLXDIR}
-	${RM} ${OBJS}
+	${RM} ${OBJS} ${DEPS}
 
 fclean: clean
 	${RM} ${NAME}
@@ -130,9 +129,15 @@ play: all
 	do ./${NAME} $$emap ; done
 	@echo "${GREEN}----finish----${DEFAULT}"
 
+-include ${DEPS}
+
 git:
 	git add .
 	git commit 
 	git push
+
+norm:
+	norminette ${SRC_DIR} ${LIBFTDIR}
+	echo $?
 
 .PHONY: all clean fclean re error_test play_test git

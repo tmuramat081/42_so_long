@@ -40,7 +40,8 @@ void	draw_lerp_position(t_game *game, t_clist *character, float time)
 
 	img = get_animation_image(game, character);
 	start = ft_vector_mul(character->pos, GRID_SIZE);
-	end = ft_vector_mul(ft_vector_add(character->pos, character->vector), GRID_SIZE);
+	end = ft_vector_mul(ft_vector_add(character->pos, \
+		character->vector), GRID_SIZE);
 	if (character->anim_pos.x || character->anim_pos.y)
 		mlx_put_image_to_window(game->mlx, game->win, game->img.floor, \
 			character->anim_pos.x, character->anim_pos.y);

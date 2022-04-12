@@ -18,13 +18,10 @@
 #define RED "\033[31m"
 #define DEFAULT "\033[m"
 
-void	put_end_message(t_game *game)
+void	put_end_message(char *message)
 {
 	ft_printf(GREEN);
-	if (game->cnt_dot == 0)
-		ft_printf(WIN_GAME);
-	else
-		ft_printf(EXIT_GAME);
+	ft_printf(message);
 	ft_printf(DEFAULT);
 }
 

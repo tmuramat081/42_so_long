@@ -39,7 +39,7 @@ int	check_key_entry(int keycode, t_game *game)
 	if (game->is_key_pressed == true)
 		return (0);
 	if (keycode == KEY_Q || keycode == KEY_ESC)
-		close_window(game);
+		close_window(game, EXIT_GAME);
 	if (keycode == KEY_A || keycode == KEY_LEFT)
 		set_player_dir(game->character, DIR_LEFT);
 	else if (keycode == KEY_D || keycode == KEY_RIGHT)

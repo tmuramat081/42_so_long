@@ -21,8 +21,8 @@ void	init_game(t_game *game)
 	win_height = (game->map_height + 1) * GRID_SIZE;
 	game->win = mlx_new_window(game->mlx, win_width, win_height, WINDOW_TITLE);
 	load_images(game);
+	set_game_hooks(game);
 	render_frame(game);
-	set_events(game);
 	put_steps(game);
 }
 

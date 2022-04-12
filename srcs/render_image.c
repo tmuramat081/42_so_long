@@ -15,41 +15,6 @@
 #define STEP_MAX 999
 #define TITLE_WIDTH 6
 
-void	*get_grid_image(int y, int x, t_game *game)
-{
-	void	*img;
-
-	if (game->map[y][x] == '1')
-		img = game->img.wall;
-	else if (game->map[y][x] == 'C')
-		img = game->img.dot;
-	else if (game->map[y][x] == 'E')
-		img = game->img.exit;
-	else
-		img = game->img.floor;
-	return (img);
-}
-
-void	render_map(t_game *game)
-{
-	size_t	x;
-	size_t	y;
-	void	*img;
-
-	y = 0;
-	while (y < game->map_height)
-	{
-		x = 0;
-		while (x < game->map_width)
-		{
-			img = get_grid_image(y, x, game);
-			put_image_to_window(game, img, (t_vector2){x, y});
-			x++;
-		}
-		y++;
-	}
-}
-
 void	render_steps(size_t num, t_game *game)
 {
 	size_t		y_offset;
@@ -85,6 +50,41 @@ void	render_footer(t_game *game)
 			break ;
 		}
 		x++;
+	}
+}
+
+void	*get_grid_image(int y, int x, t_game *game)
+{
+	void	*img;
+
+	if (game->map[y][x] == '1')
+		img = game->img.wall;
+	else if (game->map[y][x] == 'C')
+		img = game->img.dot;
+	else if (game->map[y][x] == 'E')
+		img = game->img.exit;
+	else
+		img = game->img.floor;
+	return (img);
+}
+
+void	render_map(t_game *game)
+{
+	size_t	x;
+	size_t	y;
+	void	*img;
+
+	y = 0;
+	while (y < game->map_height)
+	{
+		x = 0;
+		while (x < game->map_width)
+		{
+			img = get_grid_image(y, x, game);
+			put_image_to_window(game, img, (t_vector2){x, y});
+			x++;
+		}
+		y++;
 	}
 }
 

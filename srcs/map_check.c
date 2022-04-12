@@ -59,7 +59,7 @@ void	explore_map(char **map, t_vector2 pos, t_chk *map_checker)
 	}
 }
 
-bool	compare_parsed_with_explored(t_game *game, t_chk map_checker)
+bool	compare_explored_map(t_game *game, t_chk map_checker)
 {
 	if (!map_checker.cnt_dot || game->cnt_dot != map_checker.cnt_dot)
 		return (false);
@@ -78,7 +78,7 @@ void	check_is_playable_map(t_game *game, const char **src_map)
 	map_checker.height_lim = game->map_height;
 	cpy_map = ft_matrixdup(src_map);
 	explore_map(cpy_map, game->character->pos, &map_checker);
-	if (compare_parsed_with_explored(game, map_checker) == false)
+	if (compare_explored_map(game, map_checker) == false)
 		put_error_and_exit(ERR_NOT_PLAYABLE);
 	ft_free_matrix(&cpy_map);
 }
