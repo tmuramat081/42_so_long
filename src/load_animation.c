@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   load_animation.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tmuramat <mt15hydrangea@gmail.com>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/12 18:22:03 by tmuramat          #+#    #+#             */
+/*   Updated: 2022/04/12 18:22:03 by tmuramat         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 #include "ft_snprintf.h"
 
-void load_character_images(t_game *game, void **img, const char *directory)
+void	load_character_images(t_game *game, void **img, const char *directory)
 {
-	char file_path[PATH_MAX];
-	int i;
+	char	file_path[PATH_MAX];
+	int		i;
 
 	i = 0;
 	while (i < N_FRAMES)
@@ -17,25 +29,25 @@ void load_character_images(t_game *game, void **img, const char *directory)
 
 void	load_animation(t_game *game)
 {
-	const char *player_img_directory[4] = {
+	const char	*player_directory[4] = {
 		XPM_PLAYER_DOWN,
 		XPM_PLAYER_UP,
 		XPM_PLAYER_LEFT,
 		XPM_PLAYER_RIGHT,
 	};
-	const char *enemy_img_directory[4] = {
+	const char	*enemy_directory[4] = {
 		XPM_ENEMY_DOWN,
 		XPM_ENEMY_UP,
 		XPM_ENEMY_LEFT,
 		XPM_ENEMY_RIGHT,
 	};
-	int i;
-	
+	int			i;
+
 	i = 0;
 	while (i < DIR_END)
 	{
-		load_character_images(game, game->img.player[i], player_img_directory[i]);
-		load_character_images(game, game->img.enemy[i], enemy_img_directory[i]);
+		load_character_images(game, game->img.player[i], player_directory[i]);
+		load_character_images(game, game->img.enemy[i], enemy_directory[i]);
 		i++;
 	}
 }

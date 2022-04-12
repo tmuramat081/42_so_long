@@ -104,7 +104,7 @@ void	render_standing_animation(t_game *game, t_clist *character);
 void	set_events(t_game *game);
 int		check_key_entry(int keycode, t_game *game);
 void	set_key_input(t_game *game, t_vector2 vector, t_dir stat);
-
+void check_game_state(t_game *game, t_clist *character);
 /*** validate_map.c ***/
 void	check_is_playable_map(t_game *game, const char **src_map);
 void 	expolore_map(char **map, int x, int y, t_chk *map_checker);

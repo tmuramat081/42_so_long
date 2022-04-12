@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   load_image.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tmuramat <mt15hydrangea@gmail.com>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/12 18:20:51 by tmuramat          #+#    #+#             */
+/*   Updated: 2022/04/12 18:20:51 by tmuramat         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 #include "ft_snprintf.h"
 
-void load_counter_images(t_game *game)
+void	load_counter_images(t_game *game)
 {
-	char file_path[PATH_MAX];
-	int i;
+	char	file_path[PATH_MAX];
+	int		i;
 
 	i = 0;
 	while (i < 10)
@@ -15,7 +27,7 @@ void load_counter_images(t_game *game)
 	}
 }
 
-void load_footer_images(t_game *game)
+void	load_footer_images(t_game *game)
 {
 	game->img.menu = xpm_file_to_image(game->mlx, XPM_MENU, 0);
 	game->img.logo = xpm_file_to_image(game->mlx, XPM_LOGO, 0);
@@ -25,17 +37,15 @@ void load_footer_images(t_game *game)
 void	load_object_images(t_game *game)
 {
 	game->img.floor = xpm_file_to_image(game->mlx, XPM_FLOOR, GRID_SIZE);
-	game->img.wall = xpm_file_to_image(game->mlx, XPM_WALL, GRID_SIZE); 
+	game->img.wall = xpm_file_to_image(game->mlx, XPM_WALL, GRID_SIZE);
 	game->img.dot = xpm_file_to_image(game->mlx, XPM_DOT, GRID_SIZE);
 	game->img.exit = xpm_file_to_image(game->mlx, XPM_EXIT, GRID_SIZE);
 }
 
-void load_images(t_game *game)
+void	load_images(t_game *game)
 {
 	load_object_images(game);
 	load_footer_images(game);
 	load_counter_images(game);
 	load_animation(game);
 }
-
-

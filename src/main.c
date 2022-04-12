@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tmuramat <mt15hydrangea@gmail.com>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/12 18:14:15 by tmuramat          #+#    #+#             */
+/*   Updated: 2022/04/12 18:14:15 by tmuramat         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 void	init_game(t_game *game)
 {
-	size_t win_width;
-	size_t win_height;
+	size_t	win_width;
+	size_t	win_height;
 
 	win_width = game->map_width * GRID_SIZE;
 	win_height = (game->map_height + 1) * GRID_SIZE;
@@ -14,24 +26,24 @@ void	init_game(t_game *game)
 	put_steps(game);
 }
 
-void input_map(t_game *game, char *map_file)
+void	input_map(t_game *game, char *map_file)
 {
-	char **map;
+	char	**map;
 
 	if (is_valid_file_name(map_file) == false)
 		put_error_and_exit(ERR_FILE_NAME);
 	map = load_map_file(map_file, game);
 	if (!map)
 		put_error_and_exit(ERR_FILE_READ);
-	else if (!*map)	
+	else if (!*map)
 		put_error_and_exit(ERR_MAP_EMPTY);
 	check_is_playable_map(game, (const char **)map);
 	game->map = map;
 }
 
-int	main (int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_game game;
+	t_game	game;
 
 	if (argc != 2)
 		put_error_and_exit(ERR_ARGS);
@@ -39,6 +51,6 @@ int	main (int argc, char **argv)
 	game.mlx = mlx_init();
 	input_map(&game, argv[1]);
 	init_game(&game);
-	mlx_loop(game.mlx);	
+	mlx_loop(game.mlx);
 	return (0);
 }

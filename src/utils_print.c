@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_print.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tmuramat <mt15hydrangea@gmail.com>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/12 18:07:56 by tmuramat          #+#    #+#             */
+/*   Updated: 2022/04/12 18:07:56 by tmuramat         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 #include "ft_printf.h"
 
-# define STEP_MAX 999
-# define GREEN "\033[32m"
-# define RED "\033[31m"
-# define DEFAULT "\033[m"
+#define STEP_MAX 999
+#define GREEN "\033[32m"
+#define RED "\033[31m"
+#define DEFAULT "\033[m"
 
 void	put_end_message(t_game *game)
 {

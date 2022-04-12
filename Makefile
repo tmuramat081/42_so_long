@@ -114,19 +114,19 @@ re: fclean
 	${MAKE} -s all
 
 play_test: all
-	for map in ${TEST_MAPS} ; \
+	@for map in ${TEST_MAPS} ; \
 	do ${MEM_CHECK} ./${NAME} $$map ; done
 	@echo "${GREEN}----finish----${DEFAULT}"
 
 error_test: all
-	for emap in ${ERROR_MAPS} ; \
+	@for emap in ${ERROR_MAPS} ; \
 	do echo "${GREEN}----$$emap-----${DEFAULT}" ; \
 	cat $$emap ; echo "\n" ; \
 	${MEM_CHECK} ./${NAME} $$emap ; done ; \
 	@echo "${GREEN}----finish----${DEFAULT}"
 
 play: all
-	for emap in ${PLAY_MAPS} ; \
+	@for emap in ${PLAY_MAPS} ; \
 	do ./${NAME} $$emap ; done
 	@echo "${GREEN}----finish----${DEFAULT}"
 

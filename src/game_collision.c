@@ -1,10 +1,10 @@
 #include "so_long.h"
 
-t_clist	*target_exists(t_vector2 next_pos, t_clist *target)
+t_clist	*target_exists(t_vector2 pos, t_vector2 next_pos, t_clist *target)
 {
 	while(target)
 	{
-		if (target->type != TYPE_NONE && ft_vector_cmp(next_pos, target->pos) == true)
+		if (ft_vector_cmp(pos, target->pos) == false && target->type != TYPE_NONE && ft_vector_cmp(next_pos, target->pos) == true)
 			return (target);
 		target = target->next;
 	}
@@ -16,14 +16,15 @@ void	detect_character_collision(t_game *game, t_clist	*character)
 	t_vector2	next_pos;
 	t_clist		*target;
 
+	if (!character)
+		return ;
 	if (character->vector.x == 0 && character->vector.y == 0)
 		return ;
 	next_pos = ft_vector_add(character->pos, character->vector);
-	target = target_exists(next_pos, game->character);
-	if (!target)
-		return ;
+	target = target_exists(character->pos, next_pos, game->character);
 	detect_character_collision(game, target);
-	character->vector = (t_vector2){};
+	if (target && (target->vector.x == 0 && target->vector.y == 0))
+		character->vector = (t_vector2){};
 }
 
 bool exist_wall(t_game *game, t_vector2 next)

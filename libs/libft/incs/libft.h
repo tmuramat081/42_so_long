@@ -6,7 +6,7 @@
 /*   By: tmuramat <mt15hydrangea@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 19:49:55 by tmuramat          #+#    #+#             */
-/*   Updated: 2022/04/10 11:22:12 by tmuramat         ###   ########.fr       */
+/*   Updated: 2022/04/12 18:43:32 by tmuramat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct s_vector2 {
 	int	y;
 }	t_vector2;
 
-typedef struct timespec t_timespec;
+typedef struct timespec	t_timespec;
 
 /*** checker functions ***/
 int			ft_isalpha(int c);

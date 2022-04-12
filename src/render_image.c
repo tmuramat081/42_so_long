@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render_image.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tmuramat <mt15hydrangea@gmail.com>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/12 18:26:51 by tmuramat          #+#    #+#             */
+/*   Updated: 2022/04/12 18:26:51 by tmuramat         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
-# define STEP_MAX 999
-# define TITLE_WIDTH 6
+#define STEP_MAX 999
+#define TITLE_WIDTH 6
 
 void	*get_grid_image(int y, int x, t_game *game)
 {
-	void *img;
+	void	*img;
 
 	if (game->map[y][x] == '1')
 		img = game->img.wall;
@@ -21,7 +33,7 @@ void	*get_grid_image(int y, int x, t_game *game)
 void	render_map(t_game *game)
 {
 	size_t	x;
-	size_t 	y;
+	size_t	y;
 	void	*img;
 
 	y = 0;
@@ -40,7 +52,7 @@ void	render_map(t_game *game)
 
 void	render_steps(size_t num, t_game *game)
 {
-	size_t y_offset;
+	size_t		y_offset;
 	static int	x;
 	void		*img;
 
@@ -56,13 +68,12 @@ void	render_steps(size_t num, t_game *game)
 
 void	render_footer(t_game *game)
 {
-	size_t 	y_offset;
+	size_t	y_offset;
 	t_img	img;
 	size_t	x;
 
 	img = game->img;
 	y_offset = game->map_height;
-
 	put_image_to_window(game, img.logo, (t_vector2){0, y_offset});
 	x = 1;
 	while (x < game->map_width)
@@ -77,7 +88,7 @@ void	render_footer(t_game *game)
 	}
 }
 
-int render_frame(t_game *game)
+int	render_frame(t_game *game)
 {
 	render_map(game);
 	render_footer(game);

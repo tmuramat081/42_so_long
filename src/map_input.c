@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_input.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tmuramat <mt15hydrangea@gmail.com>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/12 18:40:36 by tmuramat          #+#    #+#             */
+/*   Updated: 2022/04/12 18:40:36 by tmuramat         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 #include "get_next_line.h"
 
 /* Count the number of dot, and locate player spawn point. */
 void	parse_grid_info(char *map_line, size_t y, t_game *game)
 {
-	size_t x;
+	size_t	x;
 
 	x = 0;
 	while (map_line[x])
@@ -19,7 +31,7 @@ void	parse_grid_info(char *map_line, size_t y, t_game *game)
 	}
 }
 
-/* Check if the map is rectangular or square. */ 
+/* Check if the map is rectangular or square. */
 void	parse_line_info(char *map_line, t_game *game)
 {
 	if (!game->map_width)
@@ -32,7 +44,7 @@ void	parse_line_info(char *map_line, t_game *game)
 }
 
 /* Read a map file line by line, using get_next_line(subject of school 42). */
-char **load_map_file(char *file, t_game *game)
+char	**load_map_file(char *file, t_game *game)
 {
 	int		fd;
 	char	**map;
@@ -49,7 +61,7 @@ char **load_map_file(char *file, t_game *game)
 	{
 		map[i] = get_next_line(fd);
 		if (!map[i])
-			return (map) ;
+			return (map);
 		parse_line_info(map[i], game);
 		parse_grid_info(map[i], i, game);
 		i++;

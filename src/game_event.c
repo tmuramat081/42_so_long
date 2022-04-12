@@ -3,29 +3,6 @@
 
 const double	g_frame_time = 1.0 / FPS_MAX;
 
-void	check_game_state(t_game *game, t_clist *character)
-{
-	bool is_any_moving;
-	bool is_any_playing;
-	
-	is_any_moving = false;
-	is_any_playing = false;
-	while (character)
-	{	
-		if (character->type == TYPE_PLAYER)
-		{
-			if (character->vector.x || character->vector.y)
-				is_any_moving = true;
-			is_any_playing = true;
-		}
-		character = character->next;
-	}
-	if (is_any_moving == false)
-		game->is_key_pressed = false;
-	if (is_any_playing == false)
-		close_window(game);	
-}
-
 /* Limit max FPS(Frame Per Second), using usleep function. */
 void	limit_frame_rate(t_timespec *start_time)
 {
@@ -47,6 +24,7 @@ void debug(t_clist *character)
 	int i;
 
 	i = 0;
+	sleep(1);
 	while (character)
 	{
 		printf("(%d)pos:[%d, %d] ", i, character->pos.x, character->pos.y);
@@ -64,6 +42,7 @@ int	update_game(t_game *game)
 	char_lstiter(game, &set_enemy_move);
 	char_lstiter(game, &detect_object_collision);
 	char_lstiter(game, &detect_character_collision);
+	char_lstiter(game, &set_enemy_move);
 	check_game_state(game, game->character);
 	char_lstiter(game, &render_animation);
 	limit_frame_rate(&start_time);

@@ -1,4 +1,16 @@
-# include "so_long.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_list.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tmuramat <mt15hydrangea@gmail.com>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/12 18:08:27 by tmuramat          #+#    #+#             */
+/*   Updated: 2022/04/12 18:08:27 by tmuramat         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "so_long.h"
 
 void	character_lstclear(t_clist **character)
 {
@@ -16,7 +28,7 @@ void	character_lstclear(t_clist **character)
 
 void	character_lstadd_back(t_clist **lst, t_clist *new_character)
 {
-	t_clist *prev;
+	t_clist	*prev;
 
 	if (!lst)
 		return ;
@@ -31,9 +43,9 @@ void	character_lstadd_back(t_clist **lst, t_clist *new_character)
 	prev->next = new_character;
 }
 
-void character_lstnew(t_clist **lst, t_vector2 pos, t_type type)
+void	character_lstnew(t_clist **lst, t_vector2 pos, t_type type)
 {
-	t_clist *new_character;
+	t_clist	*new_character;
 
 	new_character = malloc(sizeof(t_clist));
 	if (!new_character)

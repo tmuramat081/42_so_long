@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   game_key.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tmuramat <mt15hydrangea@gmail.com>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/12 18:25:24 by tmuramat          #+#    #+#             */
+/*   Updated: 2022/04/12 18:25:24 by tmuramat         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 /* Check what's ahead of the player, then rewrite own coordinates. */
@@ -22,7 +34,7 @@ void	set_player_dir(t_clist *character, t_dir dir)
 }
 
 /* Set to call functions when keyboard is pressed. */
-int check_key_entry(int keycode, t_game *game)
+int	check_key_entry(int keycode, t_game *game)
 {
 	if (game->is_key_pressed == true)
 		return (0);
