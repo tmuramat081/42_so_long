@@ -77,13 +77,13 @@ void	detect_object_collision(t_game *game, t_clist *character)
 	if (wall_exists(game, next_pos) == true)
 		character->vector = (t_vector2){};
 	else if (collective_exists(game, next_pos) == true)
-		game->cnt_dot -= 1;
+		game->cnt_collect -= 1;
 	else if (exit_exists(game, next_pos) == true)
 	{
-		if (game->cnt_dot == 0)
+		if (game->cnt_collect == 0)
 		{
 			character->type = TYPE_NONE;
-			put_image_to_window(game, game->img.floor, character->pos);
+			put_image_to_window(game, game->img.back, character->pos);
 		}
 		character->vector = (t_vector2){};
 	}

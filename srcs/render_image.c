@@ -53,18 +53,18 @@ void	render_footer(t_game *game)
 	}
 }
 
-void	*get_grid_image(int y, int x, t_game *game)
+void	*get_object_image(int y, int x, t_game *game)
 {
 	void	*img;
 
 	if (game->map[y][x] == '1')
 		img = game->img.wall;
 	else if (game->map[y][x] == 'C')
-		img = game->img.dot;
+		img = game->img.collect;
 	else if (game->map[y][x] == 'E')
 		img = game->img.exit;
 	else
-		img = game->img.floor;
+		img = game->img.back;
 	return (img);
 }
 
@@ -80,7 +80,7 @@ void	render_map(t_game *game)
 		x = 0;
 		while (x < game->map_width)
 		{
-			img = get_grid_image(y, x, game);
+			img = get_object_image(y, x, game);
 			put_image_to_window(game, img, (t_vector2){x, y});
 			x++;
 		}

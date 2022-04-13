@@ -28,17 +28,14 @@ void	init_game(t_game *game)
 
 void	input_map(t_game *game, char *map_file)
 {
-	char	**map;
-
 	if (is_valid_file_name(map_file) == false)
 		put_error_and_exit(ERR_FILE_NAME);
-	map = load_map_file(map_file, game);
-	if (!map)
+	game->map = load_map_file(map_file, game);
+	if (!game->map)
 		put_error_and_exit(ERR_FILE_READ);
-	else if (!*map)
+	else if (!*game->map)
 		put_error_and_exit(ERR_MAP_EMPTY);
-	check_is_playable_map(game, (const char **)map);
-	game->map = map;
+	validate_map_playability(game);
 }
 
 int	main(int argc, char **argv)

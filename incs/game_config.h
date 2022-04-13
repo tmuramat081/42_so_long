@@ -38,9 +38,9 @@
 /***** Image file(.xpm) locations. *****/
 
 /////* Object image file */////
-# define XPM_FLOOR "./img/object/floor.xpm"
+# define XPM_BACK "./img/object/back.xpm"
 # define XPM_WALL "./img/object/wall.xpm"
-# define XPM_DOT "./img/object/dot.xpm"
+# define XPM_COLLECT "./img/object/collect.xpm"
 # define XPM_EXIT "./img/object/exit.xpm"
 
 /////* Footer image file */////

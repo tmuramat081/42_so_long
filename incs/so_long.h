@@ -23,9 +23,10 @@
 # include <stdio.h>
 
 typedef struct s_chk {
-	size_t	cnt_dot;
+	size_t	cnt_collect;
 	size_t	cnt_exit;
 	size_t	cnt_player;
+	bool	is_obj_error;
 	int		width_lim;
 	int		height_lim;
 }	t_chk;
@@ -56,9 +57,9 @@ typedef struct s_clist {
 }	t_clist;
 
 typedef struct s_img {
-	void	*floor;
+	void	*back;
 	void	*wall;
-	void	*dot;
+	void	*collect;
 	void	*exit;
 	void	*player[DIR_END][N_FRAMES];
 	void	*enemy[DIR_END][N_FRAMES];
@@ -76,7 +77,7 @@ typedef struct s_game {
 	size_t	map_height;
 	t_clist	*character;
 	t_img	img;
-	size_t	cnt_dot;
+	size_t	cnt_collect;
 	size_t	cnt_step;
 	short	frame;
 	bool	is_key_pressed;
@@ -88,30 +89,30 @@ void	init_game(t_game *game);
 
 /*** map_input.c ***/
 char	**load_map_file(char *file, t_game *game);
-void	parse_line_info(char *map_line, t_game *game);
-void	parse_grid_info(char *map_line, size_t y, size_t x, t_game *game);
+void	parse_line_size(char *map_line, t_game *game);
+void	parse_grid_object(char *map_line, size_t y, t_game *game);
+bool	is_valid_file_name(char *file_name);
 
 /*** map_check.c ***/
-void	check_is_playable_map(t_game *game, const char **src_map);
+void	validate_map_playability(t_game *game);
 bool	compare_explored_map(t_game *game, t_chk map_checker);
 void	explore_map(char **map, t_vector2 pos, t_chk *map_checker);
-void	get_grid_info(char grid, t_chk *map_checker);
-bool	is_valid_file_name(char *file_name);
+void	check_grid_object(char grid, t_chk *map_checker);
 
 /*** load_image.c ***/
 void	load_images(t_game *game);
 void	load_object_images(t_game *game);
-void	load_character_images(t_game *game, void **img, const char *directory);
+void	load_character_sprites(t_game *game, void **img, const char *directory);
 void	load_footer_images(t_game *game);
 void	load_counter_images(t_game *game);
 
 /*** load_animation.c ***/
 void	load_animation(t_game *game);
-void	load_character_images(t_game *game, void **img, const char *directory);
+void	load_character_frames(t_game *game, void **img, const char *directory);
 
 /*** render_image.c ***/
 int		render_frame(t_game *game);
-void	*get_grid_image(int y, int x, t_game *game);
+void	*get_object_image(int y, int x, t_game *game);
 void	render_map(t_game *game);
 void	render_footer(t_game *game);
 void	render_steps(size_t num, t_game *game);
@@ -137,6 +138,8 @@ void	detect_object_collision(t_game *game, t_clist *character);
 bool	collective_exists(t_game *game, t_vector2 next);
 bool	exit_exists(t_game *game, t_vector2 next);
 bool	wall_exists(t_game *game, t_vector2 next);
+
+/*** game_  ***/
 void	detect_character_collision(t_game *game, t_clist	*character);
 t_clist	*target_exists(t_vector2 pos, t_vector2 next_pos, t_clist *target);
 

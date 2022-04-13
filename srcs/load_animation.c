@@ -13,7 +13,7 @@
 #include "so_long.h"
 #include "ft_snprintf.h"
 
-void	load_character_images(t_game *game, void **img, const char *directory)
+void	load_character_frames(t_game *game, void **img, const char *directory)
 {
 	char	file_path[PATH_MAX];
 	int		i;
@@ -46,8 +46,8 @@ void	load_animation(t_game *game)
 	i = 0;
 	while (i < DIR_END)
 	{
-		load_character_images(game, game->img.player[i], player_directory[i]);
-		load_character_images(game, game->img.enemy[i], enemy_directory[i]);
+		load_character_frames(game, game->img.player[i], player_directory[i]);
+		load_character_frames(game, game->img.enemy[i], enemy_directory[i]);
 		i++;
 	}
 }

@@ -24,7 +24,7 @@ void	*get_animation_image(t_game *game, t_clist *character)
 	else if (character->type == TYPE_ENEMY)
 		img = game->img.enemy[character->dir][frame];
 	else
-		img = game->img.floor;
+		img = game->img.back;
 	character->frame += 1;
 	if (character->frame / 3 == N_FRAMES)
 		character->frame = 0;
@@ -43,7 +43,7 @@ void	draw_lerp_position(t_game *game, t_clist *character, float time)
 	end = ft_vector_mul(ft_vector_add(character->pos, \
 		character->vector), GRID_SIZE);
 	if (character->anim_pos.x || character->anim_pos.y)
-		mlx_put_image_to_window(game->mlx, game->win, game->img.floor, \
+		mlx_put_image_to_window(game->mlx, game->win, game->img.back, \
 			character->anim_pos.x, character->anim_pos.y);
 	tmp = ft_vector_lerp(start, end, time / MOVE_DUR);
 	mlx_put_image_to_window(game->mlx, game->win, img, tmp.x, tmp.y);
@@ -60,7 +60,7 @@ void	render_moving_animation(t_game *game, t_clist *character)
 	passed = ft_diff_timespec(&character->anim_time, &current);
 	if (passed > MOVE_DUR)
 	{
-		put_image_to_window(game, game->img.floor, character->pos);
+		put_image_to_window(game, game->img.back, character->pos);
 		character->pos = ft_vector_add(character->pos, character->vector);
 		character->vector = (t_vector2){};
 		character->anim_time = (t_timespec){};

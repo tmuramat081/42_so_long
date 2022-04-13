@@ -36,9 +36,9 @@ void	load_footer_images(t_game *game)
 
 void	load_object_images(t_game *game)
 {
-	game->img.floor = xpm_file_to_image(game->mlx, XPM_FLOOR, GRID_SIZE);
+	game->img.back = xpm_file_to_image(game->mlx, XPM_BACK, GRID_SIZE);
 	game->img.wall = xpm_file_to_image(game->mlx, XPM_WALL, GRID_SIZE);
-	game->img.dot = xpm_file_to_image(game->mlx, XPM_DOT, GRID_SIZE);
+	game->img.collect = xpm_file_to_image(game->mlx, XPM_COLLECT, GRID_SIZE);
 	game->img.exit = xpm_file_to_image(game->mlx, XPM_EXIT, GRID_SIZE);
 }
 

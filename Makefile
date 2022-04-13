@@ -129,7 +129,7 @@ play: all
 	do ./${NAME} $$emap ; done
 	@echo "${GREEN}----finish----${DEFAULT}"
 
--include ${DEPS}
+bonus:
 
 git:
 	git add .
@@ -137,7 +137,9 @@ git:
 	git push
 
 norm:
-	norminette ${SRC_DIR} ${LIBFTDIR}
+	norminette ${SRC_DIR} ${LIBFTDIR} ./incs
 	echo $?
+
+-include ${DEPS}
 
 .PHONY: all clean fclean re error_test play_test git
