@@ -32,8 +32,9 @@
 
 /***** Animation *****/
 # define FPS_MAX 30
-# define N_FRAMES 8
-# define MOVE_DUR 0.4
+# define NUM_FRAMES 8
+# define LTD_FRAMES 2
+# define MOVE_DUR 0.3
 
 /***** Image file(.xpm) locations. *****/
 

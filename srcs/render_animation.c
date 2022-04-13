@@ -18,70 +18,59 @@ void	*get_animation_image(t_game *game, t_clist *character)
 	void	*img;
 	short	frame;
 
-	frame = character->frame / 3;
+	frame = game->frame / LTD_FRAMES;
 	if (character->type == TYPE_PLAYER)
 		img = game->img.player[character->dir][frame];
 	else if (character->type == TYPE_ENEMY)
 		img = game->img.enemy[character->dir][frame];
 	else
 		img = game->img.back;
-	character->frame += 1;
-	if (character->frame / 3 == N_FRAMES)
-		character->frame = 0;
 	return (img);
 }
 
-void	draw_lerp_position(t_game *game, t_clist *character, float time)
+t_vector2	calculate_lerp_position(t_clist *character, float time)
 {
 	t_vector2	start;
 	t_vector2	end;
-	void		*img;
-	t_vector2	tmp;
 
-	img = get_animation_image(game, character);
 	start = ft_vector_mul(character->pos, GRID_SIZE);
 	end = ft_vector_mul(ft_vector_add(character->pos, \
 		character->vector), GRID_SIZE);
-	if (character->anim_pos.x || character->anim_pos.y)
-		mlx_put_image_to_window(game->mlx, game->win, game->img.back, \
-			character->anim_pos.x, character->anim_pos.y);
-	tmp = ft_vector_lerp(start, end, time / MOVE_DUR);
-	mlx_put_image_to_window(game->mlx, game->win, img, tmp.x, tmp.y);
+	return (ft_vector_lerp(start, end, time / MOVE_DUR));
 }
 
-void	render_moving_animation(t_game *game, t_clist *character)
+void	render_moving_animation(t_game *game, t_clist *character, void *img)
 {
 	t_timespec	current;
 	double		passed;
+	t_vector2	draw_pos;
 
-	if (character->anim_time.tv_sec == 0)
-		clock_gettime(CLOCK_REALTIME, &character->anim_time);
+	if (character->anim_start.tv_sec == 0)
+		clock_gettime(CLOCK_REALTIME, &character->anim_start);
 	clock_gettime(CLOCK_REALTIME, &current);
-	passed = ft_diff_timespec(&character->anim_time, &current);
+	passed = ft_diff_timespec(&character->anim_start, &current);
 	if (passed > MOVE_DUR)
 	{
 		put_image_to_window(game, game->img.back, character->pos);
 		character->pos = ft_vector_add(character->pos, character->vector);
 		character->vector = (t_vector2){};
-		character->anim_time = (t_timespec){};
+		character->anim_start = (t_timespec){};
 		return ;
 	}
-	draw_lerp_position(game, character, passed);
-}
-
-void	render_standing_animation(t_game *game, t_clist *character)
-{
-	void	*img;
-
-	img = get_animation_image(game, character);
-	put_image_to_window(game, img, character->pos);
-	return ;
+	if (character->anim_pos.x || character->anim_pos.y)
+		mlx_put_image_to_window(game->mlx, game->win, game->img.back, \
+			character->anim_pos.x, character->anim_pos.y);
+	draw_pos = calculate_lerp_position(character, passed);
+	mlx_put_image_to_window(game->mlx, game->win, img, draw_pos.x, draw_pos.y);
 }
 
 void	render_animation(t_game *game, t_clist *character)
 {
+	void	*img;
+
+	img = get_animation_image(game, character);
 	if (character->vector.x || character->vector.y)
-		render_moving_animation(game, character);
+		render_moving_animation(game, character, img);
 	else
-		render_standing_animation(game, character);
+		put_image_to_window(game, img, character->pos);
 }

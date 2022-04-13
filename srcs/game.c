@@ -42,6 +42,9 @@ int	update_game(t_game *game)
 	check_game_state(game, game->character);
 	char_lstiter(game, &render_animation);
 	limit_frame_rate(&start_time);
+	game->frame++;
+	if (game->frame == NUM_FRAMES * LTD_FRAMES)
+		game->frame = 0;
 	return (0);
 }
 

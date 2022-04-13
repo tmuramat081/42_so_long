@@ -35,7 +35,7 @@ void	input_map(t_game *game, char *map_file)
 		put_error_and_exit(ERR_FILE_READ);
 	else if (!*game->map)
 		put_error_and_exit(ERR_MAP_EMPTY);
-	validate_map_playability(game);
+	char_lstiter(game, &validate_map_playability);
 }
 
 int	main(int argc, char **argv)

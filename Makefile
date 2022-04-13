@@ -8,7 +8,7 @@ SRCS =	main.c \
 		render_image.c \
 		render_animation.c \
 		game.c \
-		game_key.c \
+		game_player.c \
 		game_collision.c \
 		game_enemy.c \
 		game_end.c \
@@ -98,7 +98,7 @@ ${NAME}: ${OBJS} ${LIBFT} ${MLX}
 ${OBJ_DIR}%.o: ${SRC_DIR}%.c
 	@mkdir -p ${OBJ_DIR}
 	@${PROGRESS}
-	@${CC} ${CFLAGS} -I/usr/include ${INCS} -O3 -c $< -o $@
+	@${CC} ${CFLAGS} ${INCS} -O3 -c $< -o $@
 
 clean:
 	${MAKE} clean -C ${LIBFTDIR}

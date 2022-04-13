@@ -23,9 +23,8 @@
 # include <stdio.h>
 
 typedef struct s_chk {
-	size_t	cnt_collect;
-	size_t	cnt_exit;
-	size_t	cnt_player;
+	bool	exists_collect;
+	bool	exists_exit;
 	bool	is_obj_error;
 	int		width_lim;
 	int		height_lim;
@@ -49,10 +48,9 @@ typedef struct s_clist {
 	t_type		type;
 	t_vector2	pos;
 	t_vector2	vector;
-	t_timespec	anim_time;
+	t_timespec	anim_start;
 	t_vector2	anim_pos;
 	t_dir		dir;
-	short		frame;
 	void		*next;
 }	t_clist;
 
@@ -61,8 +59,8 @@ typedef struct s_img {
 	void	*wall;
 	void	*collect;
 	void	*exit;
-	void	*player[DIR_END][N_FRAMES];
-	void	*enemy[DIR_END][N_FRAMES];
+	void	*player[DIR_END][NUM_FRAMES];
+	void	*enemy[DIR_END][NUM_FRAMES];
 	void	*digit[10];
 	void	*menu;
 	void	*logo;
@@ -94,8 +92,8 @@ void	parse_grid_object(char *map_line, size_t y, t_game *game);
 bool	is_valid_file_name(char *file_name);
 
 /*** map_check.c ***/
-void	validate_map_playability(t_game *game);
-bool	compare_explored_map(t_game *game, t_chk map_checker);
+void	validate_map_playability(t_game *game, t_clist *character);
+bool	is_playabele_map(t_chk map_checker);
 void	explore_map(char **map, t_vector2 pos, t_chk *map_checker);
 void	check_grid_object(char grid, t_chk *map_checker);
 
@@ -119,8 +117,7 @@ void	render_steps(size_t num, t_game *game);
 
 /*** render_animation.c ***/
 void	render_animation(t_game *game, t_clist *character);
-void	render_standing_animation(t_game *game, t_clist *character);
-void	render_moving_animation(t_game *game, t_clist *character);
+void	render_moving_animation(t_game *game, t_clist *character, void *img);
 void	draw_lerp_position(t_game *game, t_clist *character, float time);
 void	*get_animation_image(t_game *game, t_clist *character);
 
