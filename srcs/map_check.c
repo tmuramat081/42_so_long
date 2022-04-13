@@ -62,8 +62,6 @@ void	validate_map_playability(t_game *game, t_clist *character)
 	t_chk	map_checker;
 	char	**cpy_map;
 
-	if (character->type != TYPE_PLAYER)
-		return ;	
 	map_checker = (t_chk){};
 	map_checker.width_lim = game->map_width;
 	map_checker.height_lim = game->map_height;

@@ -9,8 +9,9 @@ SRCS =	main.c \
 		render_animation.c \
 		game.c \
 		game_player.c \
-		game_collision.c \
 		game_enemy.c \
+		game_object.c \
+		game_collision.c \
 		game_end.c \
 		utils_wrapper.c \
 		utils_list.c \
@@ -138,7 +139,6 @@ git:
 
 norm:
 	norminette ${SRC_DIR} ${LIBFTDIR} ./incs
-	echo $?
 
 -include ${DEPS}
 

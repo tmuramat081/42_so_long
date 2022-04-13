@@ -43,13 +43,13 @@ void	character_lstadd_back(t_clist **lst, t_clist *new_character)
 	prev->next = new_character;
 }
 
-void	character_lstnew(t_clist **lst, t_vector2 pos, t_type type)
+void	character_lstnew(t_clist **lst, t_vector2 pos, t_typ type)
 {
 	t_clist	*new_character;
 
 	new_character = malloc(sizeof(t_clist));
 	if (!new_character)
-		return ;
+		put_error_and_exit(ERR_FILE_READ);
 	*new_character = (t_clist){};
 	new_character->pos = pos;
 	new_character->type = type;

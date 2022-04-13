@@ -32,7 +32,7 @@ void	*xpm_file_to_image(void *mlx, char *img_file, int size)
 	return (img);
 }
 
-void	char_lstiter(t_game *game, void (*func)(t_game *, t_clist *))
+void	char_lstiter(t_game *game, void (*func)(t_game *, t_clist *), t_typ type)
 {
 	t_clist	*character;
 
@@ -41,7 +41,7 @@ void	char_lstiter(t_game *game, void (*func)(t_game *, t_clist *))
 		return ;
 	while (character)
 	{
-		if (character->type == TYPE_PLAYER || character->type == TYPE_ENEMY)
+		if (character->type & type)
 			func(game, character);
 		character = character->next;
 	}

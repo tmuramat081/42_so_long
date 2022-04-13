@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "so_long.h"
+#include <time.h>
 
 void	init_game(t_game *game)
 {
@@ -24,18 +25,19 @@ void	init_game(t_game *game)
 	set_game_hooks(game);
 	render_frame(game);
 	put_steps(game);
+	srand(time(NULL));
 }
 
 void	input_map(t_game *game, char *map_file)
 {
 	if (is_valid_file_name(map_file) == false)
 		put_error_and_exit(ERR_FILE_NAME);
-	game->map = load_map_file(map_file, game);
+	load_map_file(map_file, game);
 	if (!game->map)
 		put_error_and_exit(ERR_FILE_READ);
 	else if (!*game->map)
 		put_error_and_exit(ERR_MAP_EMPTY);
-	char_lstiter(game, &validate_map_playability);
+	char_lstiter(game, &validate_map_playability, TYPE_PLAYER);
 }
 
 int	main(int argc, char **argv)

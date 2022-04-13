@@ -36,7 +36,16 @@ t_vector2	calculate_lerp_position(t_clist *character, float time)
 	start = ft_vector_mul(character->pos, GRID_SIZE);
 	end = ft_vector_mul(ft_vector_add(character->pos, \
 		character->vector), GRID_SIZE);
-	return (ft_vector_lerp(start, end, time / MOVE_DUR));
+	return (ft_vector_lerp(start, end, time / MOVE_DURATION));
+}
+
+void	update_current_position(t_game *game, t_clist *character)
+{
+	put_image_to_window(game, game->img.back, character->pos);
+	character->pos = ft_vector_add(character->pos, character->vector);
+	character->vector = (t_vector2){};
+	character->anim_start = (t_timespec){};
+	return ;
 }
 
 void	render_moving_animation(t_game *game, t_clist *character, void *img)
@@ -49,14 +58,8 @@ void	render_moving_animation(t_game *game, t_clist *character, void *img)
 		clock_gettime(CLOCK_REALTIME, &character->anim_start);
 	clock_gettime(CLOCK_REALTIME, &current);
 	passed = ft_diff_timespec(&character->anim_start, &current);
-	if (passed > MOVE_DUR)
-	{
-		put_image_to_window(game, game->img.back, character->pos);
-		character->pos = ft_vector_add(character->pos, character->vector);
-		character->vector = (t_vector2){};
-		character->anim_start = (t_timespec){};
-		return ;
-	}
+	if (passed > MOVE_DURATION)
+		update_current_position(game, character);
 	if (character->anim_pos.x || character->anim_pos.y)
 		mlx_put_image_to_window(game->mlx, game->win, game->img.back, \
 			character->anim_pos.x, character->anim_pos.y);

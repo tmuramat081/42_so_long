@@ -11,34 +11,55 @@
 /* ************************************************************************** */
 
 #include "so_long.h"
+#include <time.h>
 
-void	random_horizontal_move(t_clist *enemy)
+void	eat_glass(t_clist *character)
 {
-	short	direction;
+	character->vector = (t_vector2){0, 0};
+}
 
-	direction = rand() % 20;
-	if (0 <= direction && direction < 3)
+void	go_straight(t_clist *character)
+{
+	if (character->dir == DIR_LEFT)
 	{
-		enemy->dir = DIR_LEFT;
-		enemy->vector = (t_vector2){-1, 0};
-	}
-	else if (4 <= direction && direction < 7)
-	{
-		enemy->dir = DIR_RIGHT;
-		enemy->vector = (t_vector2){1, 0};
+		character->dir = DIR_LEFT;
+		character->vector = (t_vector2){-1, 0};
 	}
 	else
 	{
-		enemy->vector = (t_vector2){0, 0};
+		character->dir = DIR_RIGHT;
+		character->vector = (t_vector2){1, 0};
 	}
 }
 
-void	set_enemy_move(t_game *game, t_clist *character)
+void	turn_around(t_clist *character)
 {
-	(void)game;
-	if (character->type == TYPE_ENEMY)
+	if (character->dir == DIR_LEFT)
 	{
-		if (character->vector.x == 0 && character->vector.y == 0)
-			random_horizontal_move(character);
+		character->dir = DIR_RIGHT;
+		character->vector = (t_vector2){1, 0};
 	}
+	else
+	{
+		character->dir = DIR_LEFT;
+		character->vector = (t_vector2){-1, 0};
+	}
+}
+
+void	set_enemy_dir(t_game *game, t_clist *character)
+{
+	t_vector2	next;
+
+	if (character->vector.x || character->vector.y)
+		return ;
+	else if (rand() % 10 == 0)
+		eat_glass(character);
+	else
+		go_straight(character);
+	next = ft_vector_add(character->pos, character->vector);
+	if (game->map[next.y][next.x] == '1' 
+		|| game->map[next.y][next.x] == 'C'
+		|| game->map[next.y][next.x] == 'E')
+	turn_around(character);
+
 }

@@ -58,7 +58,7 @@ void	parse_line_size(char *map_line, t_game *game)
 }
 
 /* Read a map file line by line, using get_next_line(subject of school 42). */
-char	**load_map_file(char *file, t_game *game)
+void	load_map_file(char *file, t_game *game)
 {
 	int		fd;
 	char	**map;
@@ -66,19 +66,19 @@ char	**load_map_file(char *file, t_game *game)
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-		return (NULL);
+		return ;
 	map = malloc(sizeof(char *) * MAP_HEIGHT_MAX + 1);
 	if (!map)
-		return (NULL);
+		return ;
 	i = 0;
 	while (i <= MAP_HEIGHT_MAX + 1)
 	{
 		map[i] = get_next_line(fd);
 		if (!map[i])
-			return (map);
+			break ;
 		parse_line_size(map[i], game);
 		parse_grid_object(map[i], i, game);
 		i++;
 	}
-	return (NULL);
+	game->map = map;
 }

@@ -13,7 +13,7 @@
 #include "so_long.h"
 
 #define STEP_MAX 999
-#define TITLE_WIDTH 6
+#define TITLE_WIDTH 7
 
 void	render_steps(size_t num, t_game *game)
 {

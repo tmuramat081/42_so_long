@@ -41,8 +41,11 @@ void	check_game_state(t_game *game, t_clist *character)
 		}
 		character = character->next;
 	}
-	if (is_any_moving == false)
+	if (game->is_key_pressed == true && is_any_moving == false)
+	{
+		put_steps(game);
 		game->is_key_pressed = false;
+	}
 	if (is_any_playing == false)
 		close_window (game, WIN_GAME);
 }
