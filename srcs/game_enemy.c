@@ -52,14 +52,13 @@ void	set_enemy_dir(t_game *game, t_clist *character)
 
 	if (character->vector.x || character->vector.y)
 		return ;
-	else if (rand() % 10 == 0)
+	else if (rand() % 10 > ENEMY_LEVEL)
 		eat_glass(character);
 	else
 		go_straight(character);
 	next = ft_vector_add(character->pos, character->vector);
-	if (game->map[next.y][next.x] == '1' 
+	if (game->map[next.y][next.x] == '1'
 		|| game->map[next.y][next.x] == 'C'
 		|| game->map[next.y][next.x] == 'E')
-	turn_around(character);
-
+		turn_around(character);
 }

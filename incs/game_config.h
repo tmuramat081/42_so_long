@@ -36,8 +36,10 @@
 # define LTD_FRAMES 2
 # define MOVE_DURATION 0.3
 
-/***** Image file(.xpm) locations. *****/
+/**** Enemy ****/
+# define ENEMY_LEVEL 1
 
+/***** Image file(.xpm) locations. *****/
 /////* Object image file */////
 # define XPM_BACK "./img/object/back.xpm"
 # define XPM_WALL "./img/object/wall.xpm"
