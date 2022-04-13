@@ -13,6 +13,19 @@
 #include "so_long.h"
 #include "ft_snprintf.h"
 
+const char	*g_player_directory[4] = {
+	XPM_PLAYER_DOWN,
+	XPM_PLAYER_UP,
+	XPM_PLAYER_LEFT,
+	XPM_PLAYER_RIGHT,
+};
+const char	*g_enemy_directory[4] = {
+	XPM_ENEMY_DOWN,
+	XPM_ENEMY_UP,
+	XPM_ENEMY_LEFT,
+	XPM_ENEMY_RIGHT,
+};
+
 void	load_character_frames(t_game *game, void **img, const char *directory)
 {
 	char	file_path[PATH_MAX];
@@ -29,25 +42,13 @@ void	load_character_frames(t_game *game, void **img, const char *directory)
 
 void	load_animation(t_game *game)
 {
-	const char	*player_directory[4] = {
-		XPM_PLAYER_DOWN,
-		XPM_PLAYER_UP,
-		XPM_PLAYER_LEFT,
-		XPM_PLAYER_RIGHT,
-	};
-	const char	*enemy_directory[4] = {
-		XPM_ENEMY_DOWN,
-		XPM_ENEMY_UP,
-		XPM_ENEMY_LEFT,
-		XPM_ENEMY_RIGHT,
-	};
-	int			i;
+	int	i;
 
 	i = 0;
 	while (i < DIR_END)
 	{
-		load_character_frames(game, game->img.player[i], player_directory[i]);
-		load_character_frames(game, game->img.enemy[i], enemy_directory[i]);
+		load_character_frames(game, game->img.player[i], g_player_directory[i]);
+		load_character_frames(game, game->img.enemy[i], g_enemy_directory[i]);
 		i++;
 	}
 }
