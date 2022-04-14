@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 /* Check what's ahead of the player, then rewrite own coordinates. */
 void	set_player_dir(t_clist *character, t_dir dir)
@@ -34,8 +34,10 @@ void	set_player_dir(t_clist *character, t_dir dir)
 }
 
 /* Set to call functions when keyboard is pressed. */
-int	input_key_entry(int keycode, t_game *game)
+int	check_key_entry(int keycode, t_game *game)
 {
+	if (game->is_key_locked == true)
+		return (0);
 	if (keycode == KEY_Q || keycode == KEY_ESC)
 	{
 		put_end_message(EXIT_GAME);
@@ -49,5 +51,6 @@ int	input_key_entry(int keycode, t_game *game)
 		set_player_dir(game->character, DIR_UP);
 	else if (keycode == KEY_S || keycode == KEY_DOWN)
 		set_player_dir(game->character, DIR_DOWN);
+	game->is_key_locked = true;
 	return (0);
 }

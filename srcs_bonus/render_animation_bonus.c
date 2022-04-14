@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 #include <time.h>
 
 void	*get_animation_image(t_game *game, t_clist *character)

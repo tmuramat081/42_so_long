@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 t_clist	*target_exists(t_vector2 pos, t_vector2 next_pos, t_clist *target)
 {
@@ -34,6 +34,11 @@ void	detect_character_collision(t_game *game, t_clist	*character)
 	target = target_exists(character->pos, next_pos, game->character);
 	if (!target)
 		return ;
+	else if (target->type != character->type)
+	{
+		put_end_message(LOSE_GAME);
+		exit_game_normally(game);
+	}
 	detect_character_collision(game, target);
 	if (target && (target->vector.x == 0 && target->vector.y == 0))
 		character->vector = (t_vector2){};

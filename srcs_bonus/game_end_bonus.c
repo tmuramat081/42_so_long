@@ -10,17 +10,35 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
-
-void	free_character_images(t_game *game)
+void	free_animation_images(t_game *game, t_img img)
 {
-	size_t i;
+	size_t	i;
+	size_t	j;
 
 	i = 0;
 	while (i < DIR_END)
 	{
-		destroy_image(game->mlx, game->img.player[i]);
+		j = 0;
+		while (j < NUM_FRAMES)
+		{
+			destroy_image(game->mlx, img.player[i][j]);
+			destroy_image(game->mlx, img.enemy[i][j]);
+			j++;
+		}
+		i++;
+	}
+}
+
+void	free_counter_images(t_game *game, t_img img)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < 10)
+	{
+		destroy_image(game->mlx, img.digit[i]);
 		i++;
 	}
 }
@@ -34,7 +52,11 @@ void	free_images(t_game *game)
 	destroy_image(game->mlx, img.wall);
 	destroy_image(game->mlx, img.collect);
 	destroy_image(game->mlx, img.exit);
-	free_character_images(game);
+	destroy_image(game->mlx, img.menu);
+	destroy_image(game->mlx, img.logo);
+	destroy_image(game->mlx, img.title);
+	free_counter_images(game, img);
+	free_animation_images(game, img);
 }
 
 void	free_game_buffer(t_game *game)
@@ -57,12 +79,4 @@ int	exit_game_normally(t_game *game)
 	free_game_buffer(game);
 	exit(EXIT_SUCCESS);
 	return (0);
-}
-
-void	handle_process_error(t_game *game, char *message)
-{
-	put_error_message(message);
-	if (game)
-		free_game_buffer(game);
-	exit(EXIT_FAILURE);
 }

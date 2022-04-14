@@ -10,28 +10,28 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 #include "ft_snprintf.h"
 
-const char	*g_player_directory[4] = {
-	XPM_PLAYER_DOWN,
-	XPM_PLAYER_UP,
-	XPM_PLAYER_LEFT,
-	XPM_PLAYER_RIGHT,
-};
-
-void	load_character_images(t_game *game)
+void	load_counter_images(t_game *game)
 {
 	char	file_path[PATH_MAX];
 	int		i;
 
 	i = 0;
-	while (i < DIR_END)
+	while (i < 10)
 	{
-		ft_snprintf(file_path, sizeof(file_path), "%s0.xpm", g_player_directory[i]);
-		game->img.player[i] = xpm_file_to_image(game, file_path, GRID_SIZE);
+		ft_snprintf(file_path, sizeof(file_path), "%s%d.xpm", XPM_DIGIT, i);
+		game->img.digit[i] = xpm_file_to_image(game, file_path, GRID_SIZE);
 		i++;
 	}
+}
+
+void	load_footer_images(t_game *game)
+{
+	game->img.menu = xpm_file_to_image(game, XPM_MENU, 0);
+	game->img.logo = xpm_file_to_image(game, XPM_LOGO, 0);
+	game->img.title = xpm_file_to_image(game, XPM_TITLE, 0);
 }
 
 void	load_object_images(t_game *game)
@@ -45,5 +45,7 @@ void	load_object_images(t_game *game)
 void	load_images(t_game *game)
 {
 	load_object_images(game);
-	load_character_images(game);
+	load_footer_images(game);
+	load_counter_images(game);
+	load_animation(game);
 }

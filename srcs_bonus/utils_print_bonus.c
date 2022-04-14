@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 #include "ft_printf.h"
 
 #define STEP_MAX 999
@@ -40,5 +40,6 @@ void	put_steps(t_game *game)
 	ft_printf(GREEN);
 	ft_printf("STEP:%d", game->cnt_step);
 	ft_printf(DEFAULT);
+	render_steps(game->cnt_step, game);
 	game->cnt_step += 1;
 }

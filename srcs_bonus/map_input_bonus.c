@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 #include "get_next_line.h"
 
 /* "./ber" is prohibited as invalid file name. */
@@ -39,35 +39,22 @@ void	parse_grid_object(char *map_line, size_t y, t_game *game)
 			game->cnt_collect += 1;
 		else if (map_line[x] == 'P')
 			character_lstnew(game, (t_vector2){x, y}, TYPE_PLAYER);
+		else if (map_line[x] == 'O')
+			character_lstnew(game, (t_vector2){x, y}, TYPE_ENEMY);
 		x++;
 	}
 }
 
 /* Check if the map is rectangular or square. */
-void	measure_map_size(char **map, size_t i, t_game *game)
+void	parse_line_size(char *map_line, t_game *game)
 {
-	if (i == 0)
-		game->map_width = ft_strcspn(map[0], "\n\r");
-	if (game->map_width > MAP_WIDTH_MAX)
+	if (!game->map_width)
+		game->map_width = ft_strcspn(map_line, "\n\r");
+	else if (game->map_width > MAP_WIDTH_MAX)
 		handle_process_error(game, ERR_MAP_LARGE);
-	else if (game->map_width != ft_strcspn(map[i], "\n\r"))
+	else if (game->map_width != ft_strcspn(map_line, "\n\r"))
 		handle_process_error(game, ERR_MAP_FMT);
 	game->map_height += 1;
-	if (game->map_height > MAP_HEIGHT_MAX)
-		handle_process_error(game, ERR_MAP_LARGE);
-}
-
-void	parse_map(t_game *game)
-{
-	size_t	i;
-
-	i = 0;
-	while (game->map[i])
-	{
-		measure_map_size(game->map, i, game);
-		parse_grid_object(game->map[i], i, game);
-		i++;
-	}
 }
 
 /* Read a map file line by line, using get_next_line(subject of school 42). */
@@ -76,18 +63,20 @@ void	load_map_file(char *file, t_game *game)
 	int		fd;
 	size_t	i;
 
-	game->map = malloc(sizeof(char *) * MAP_HEIGHT_MAX + 1);
-	if (!game->map)
-		return ;
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		return ;
+	game->map = malloc(sizeof(char *) * MAP_HEIGHT_MAX + 1);
+	if (!game->map)
+		return ;
 	i = 0;
-	while (i < MAP_HEIGHT_MAX + 1)
+	while (i <= MAP_HEIGHT_MAX + 1)
 	{
 		game->map[i] = get_next_line(fd);
 		if (!game->map[i])
 			break ;
+		parse_line_size(game->map[i], game);
+		parse_grid_object(game->map[i], i, game);
 		i++;
 	}
 	close(fd);

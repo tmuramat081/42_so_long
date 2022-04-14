@@ -10,12 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 #define CHECKED '@'
 
 void	check_grid_object(char grid, t_chk *map_checker)
 {
-	if (grid == '0' || grid == 'P')
+	if (grid == '0' || grid == 'P' || grid == 'O')
 		return ;
 	else if (grid == 'C')
 		map_checker->exists_collect = true;
@@ -59,7 +59,7 @@ void	check_is_playable_map(t_game *game, t_chk map_checker)
 	return ;
 }
 
-void	verify_map_playability(t_game *game, t_clist *character)
+void	validate_map_playability(t_game *game, t_clist *character)
 {
 	t_chk	map_checker;
 	char	**cpy_map;

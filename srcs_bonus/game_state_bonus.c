@@ -10,30 +10,31 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
-void	update_position(t_game *game, t_clist *character)
+void	should_lock_key(t_game *game, t_clist *character)
 {
 	if (character->vector.x || character->vector.y)
-	{
-		put_image_to_window(game, game->img.back, character->pos);
-		character->pos = ft_vector_add(character->pos, character->vector);
-		character->vector = (t_vector2){0, 0};
-		game->is_any_moved = true;
-	}
+		game->is_key_locked = true;
 }
 
 void	check_game_state(t_game *game)
 {
-	size_t player_cnt;
+	size_t		ret;
+	static bool	is_step_counted;
 
-	player_cnt = char_lstiter(game, update_position, TYPE_PLAYER);
-	if (game->is_any_moved == true)
+	game->is_key_locked = false;
+	ret = char_lstiter(game, should_lock_key, TYPE_PLAYER);
+	if (is_step_counted == false && game->is_key_locked == true)
+	{
 		put_steps(game);
-	if (player_cnt == 0)
+		is_step_counted = true;
+	}
+	else if (game->is_key_locked == false)
+		is_step_counted = false;
+	if (ret == 0)
 	{
 		put_end_message(WIN_GAME);
 		exit_game_normally(game);
 	}
-	game->is_any_moved = false;	
 }

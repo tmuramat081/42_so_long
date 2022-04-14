@@ -1,15 +1,33 @@
 # Compile variables
 NAME = so_long
-SRCS =	main.c \
+
+ifdef BONUS
+SRCS = main_bonus.c \
+		map_input_bonus.c \
+		map_check_bonus.c \
+		load_image_bonus.c \
+		load_animation_bonus.c \
+		render_image_bonus.c \
+		render_animation_bonus.c \
+		game_bonus.c \
+		game_player_bonus.c \
+		game_enemy_bonus.c \
+		game_object_bonus.c \
+		game_collision_bonus.c \
+		game_state_bonus.c \
+		game_end_bonus.c \
+		utils_wrapper_bonus.c \
+		utils_list_bonus.c \
+		utils_print_bonus.c
+SRC_DIR = srcs_bonus/
+else
+SRCS = main.c \
 		map_input.c \
 		map_check.c \
 		load_image.c \
-		load_animation.c \
 		render_image.c \
-		render_animation.c \
 		game.c \
 		game_player.c \
-		game_enemy.c \
 		game_object.c \
 		game_collision.c \
 		game_state.c \
@@ -18,8 +36,11 @@ SRCS =	main.c \
 		utils_list.c \
 		utils_print.c
 SRC_DIR = srcs/
+endif
+
 OBJS = ${addprefix ${OBJ_DIR}, ${SRCS:.c=.o}}
 OBJ_DIR = objs/
+
 DEPS = ${addprefix ${OBJ_DIR}, ${SRCS:.c=.d}}
 
 MLXDIR = libs/mlx_linux/
@@ -87,6 +108,10 @@ PROGRESS = ${eval SRC_CNT = ${shell expr ${SRC_CNT} + 1}} \
 	$(SRC_CNT) $(SRC_TOT) $(SRC_PCT)
 
 # Commands
+${NAME}: ${OBJS} ${LIBFT} ${MLX}
+	@${CC} ${CFLAGS} ${OBJS} ${LIBFT} ${MLX} ${MFLAGS} ${INCS} -o $@
+	@echo "${BLUE}--- ${NAME} is up to date! ---${DEFAULT}"
+
 all: ${NAME}
 
 ${LIBFT}:
@@ -95,13 +120,13 @@ ${LIBFT}:
 ${MLX}:
 	@${MAKE} -C ${MLXDIR}
 
-${NAME}: ${OBJS} ${LIBFT} ${MLX}
-	@${CC} ${CFLAGS} ${OBJS} ${LIBFT} ${MLX} ${MFLAGS} ${INCS} -o $@
-	@echo "${BLUE}--- ${NAME} is up to date! ---${DEFAULT}"
 
 ${OBJ_DIR}%.o: ${SRC_DIR}%.c
 	@${PROGRESS}
 	@${CC} ${CFLAGS} ${INCS} -O3 -c $< -o $@
+
+bonus:
+	${MAKE} BONUS=1
 
 clean:
 	${MAKE} clean -C ${LIBFTDIR}
