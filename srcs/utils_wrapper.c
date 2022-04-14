@@ -20,29 +20,20 @@ void	put_image_to_window(t_game *game, void *img, t_vector2 pos)
 	mlx_put_image_to_window(game->mlx, game->win, img, draw_pos.x, draw_pos.y);
 }
 
-void	*xpm_file_to_image(void *mlx, char *img_file, int size)
+void	destroy_image(void *mlx, void *img)
+{
+	if (img)
+		mlx_destroy_image(mlx, img);
+}
+
+void	*xpm_file_to_image(t_game *game, char *img_file, int size)
 {
 	int		img_width;
 	int		img_height;
 	void	*img;
 
-	img = mlx_xpm_file_to_image(mlx, img_file, &img_width, &img_height);
+	img = mlx_xpm_file_to_image(game->mlx, img_file, &img_width, &img_height);
 	if (img == NULL || (size && (img_height != size || img_width != size)))
-		put_error_and_exit(ERR_FILE_FMT);
+		handle_process_error(game, ERR_FILE_FMT);
 	return (img);
-}
-
-void	char_lstiter(t_game *game, void (*f)(t_game *, t_clist *), t_typ type)
-{
-	t_clist	*character;
-
-	character = game->character;
-	if (!character)
-		return ;
-	while (character)
-	{
-		if (character->type & type)
-			f(game, character);
-		character = character->next;
-	}
 }

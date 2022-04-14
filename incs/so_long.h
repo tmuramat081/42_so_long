@@ -25,7 +25,8 @@
 typedef struct s_chk {
 	bool	exists_collect;
 	bool	exists_exit;
-	bool	is_obj_error;
+	bool	is_obj_unknown;
+	bool	is_map_opened;
 	int		width_lim;
 	int		height_lim;
 }	t_chk;
@@ -79,7 +80,7 @@ typedef struct s_game {
 	size_t	cnt_collect;
 	size_t	cnt_step;
 	short	frame;
-	bool	is_key_pressed;
+	bool	is_key_locked;
 }	t_game;
 
 /*** main.c ***/
@@ -94,7 +95,7 @@ bool	is_valid_file_name(char *file_name);
 
 /*** map_check.c ***/
 void	validate_map_playability(t_game *game, t_clist *character);
-bool	is_playabele_map(t_chk map_checker);
+void	check_is_playabele_map(t_game *game, t_chk map_checker);
 void	explore_map(char **map, t_vector2 pos, t_chk *map_checker);
 void	check_grid_object(char grid, t_chk *map_checker);
 
@@ -139,30 +140,34 @@ bool	exit_exists(t_game *game, t_vector2 next);
 bool	wall_exists(t_game *game, t_vector2 next);
 
 /*** game_collision  ***/
-void	detect_character_collision(t_game *game, t_clist	*character);
+void	detect_character_collision(t_game *game, t_clist *character);
 t_clist	*target_exists(t_vector2 pos, t_vector2 next_pos, t_clist *target);
 
 /*** game_enemy.c ***/
 void	set_enemy_dir(t_game *game, t_clist *character);
-void	turn_horizontal_direction(t_clist *enemy);
+void	turn_around(t_clist *character);
+void	go_straight(t_clist *character);
+void	eat_glass(t_clist *character);
 
 /*** game_end.c ***/
-void	check_game_state(t_game *game, t_clist *character);
-int		close_window(t_game *game, char *message);
+void	check_game_state(t_game *game);
+int		exit_game_normally(t_game *game);
 
 /*** utils_print.c ***/
-void	put_error_and_exit(char *err_msg);
+void	handle_process_error(t_game *game, char *err_msg);
 void	put_steps(t_game *game);
 void	put_end_message(char *message);
+void	put_error_message(char *message);
 
 /*** utils_list.c ***/
-void	character_lstnew(t_clist **lst, t_vector2 pos, t_typ type);
+void	character_lstnew(t_game *game, t_vector2 pos, t_typ type);
 void	character_lstadd_back(t_clist **lst, t_clist *new_character);
 void	character_lstclear(t_clist **character);
+size_t	char_lstiter(t_game *game, void (*f)(t_game *, t_clist *), t_typ type);
 
 /*** utils_wrapper.c ***/
-void	char_lstiter(t_game *game, void (*func)(t_game *, t_clist *), t_typ type);
-void	*xpm_file_to_image(void *mlx, char *img_file, int size);
+void	*xpm_file_to_image(t_game *game, char *img_file, int size);
 void	put_image_to_window(t_game *game, void *img, t_vector2 pos);
+void	destroy_image(void *mlx, void *img);
 
 #endif

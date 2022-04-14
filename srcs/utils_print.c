@@ -18,10 +18,18 @@
 #define RED "\033[31m"
 #define DEFAULT "\033[m"
 
-void	put_end_message(char *message)
+void	put_end_message(char *end_msg)
 {
 	ft_printf(GREEN);
-	ft_printf(message);
+	ft_printf(end_msg);
+	ft_printf(DEFAULT);
+}
+
+void	put_error_message(char *err_msg)
+{
+	
+	ft_printf(RED);
+	ft_printf("Error\n%s\n", err_msg);
 	ft_printf(DEFAULT);
 }
 
@@ -35,12 +43,4 @@ void	put_steps(t_game *game)
 	ft_printf(DEFAULT);
 	render_steps(game->cnt_step, game);
 	game->cnt_step += 1;
-}
-
-void	put_error_and_exit(char *err_msg)
-{
-	ft_printf(RED);
-	ft_printf("Error\n%s\n", err_msg);
-	ft_printf(DEFAULT);
-	exit(EXIT_FAILURE);
 }

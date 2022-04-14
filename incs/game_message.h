@@ -30,6 +30,7 @@
 # define ERR_NOT_PLAYABLE "This map is unplayable."
 # define ERR_MAP_LARGE "Map is too large."
 # define ERR_FILE_READ "Fail to read file."
+# define ERR_MEMORY "Memory Error."
 
 /***** End message *****/
 # define WIN_GAME "---Congratulations! you are win.---\n"

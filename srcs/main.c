@@ -30,14 +30,18 @@ void	init_game(t_game *game)
 
 void	input_map(t_game *game, char *map_file)
 {
+	size_t cnt_player;
+
 	if (is_valid_file_name(map_file) == false)
-		put_error_and_exit(ERR_FILE_NAME);
+		handle_process_error(game, ERR_FILE_NAME);
 	load_map_file(map_file, game);
 	if (!game->map)
-		put_error_and_exit(ERR_FILE_READ);
+		handle_process_error(game, ERR_FILE_READ);
 	else if (!*game->map)
-		put_error_and_exit(ERR_MAP_EMPTY);
-	char_lstiter(game, &validate_map_playability, TYPE_PLAYER);
+		handle_process_error(game, ERR_MAP_EMPTY);
+	cnt_player = char_lstiter(game, &validate_map_playability, TYPE_PLAYER);
+	if (cnt_player == 0)
+		handle_process_error(game, ERR_PLAYERS);
 }
 
 int	main(int argc, char **argv)
@@ -45,7 +49,7 @@ int	main(int argc, char **argv)
 	t_game	game;
 
 	if (argc != 2)
-		put_error_and_exit(ERR_ARGS);
+		handle_process_error(NULL, ERR_ARGS);
 	game = (t_game){};
 	game.mlx = mlx_init();
 	input_map(&game, argv[1]);

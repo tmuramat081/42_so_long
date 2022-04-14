@@ -43,16 +43,35 @@ void	character_lstadd_back(t_clist **lst, t_clist *new_character)
 	prev->next = new_character;
 }
 
-void	character_lstnew(t_clist **lst, t_vector2 pos, t_typ type)
+void	character_lstnew(t_game *game, t_vector2 pos, t_typ type)
 {
 	t_clist	*new_character;
 
 	new_character = malloc(sizeof(t_clist));
 	if (!new_character)
-		put_error_and_exit(ERR_FILE_READ);
+		handle_process_error(game, ERR_MEMORY);
 	*new_character = (t_clist){};
 	new_character->pos = pos;
 	new_character->type = type;
 	new_character->next = NULL;
-	character_lstadd_back(lst, new_character);
+	character_lstadd_back(&game->character, new_character);
+}
+
+size_t	char_lstiter(t_game *game, void (*f)(t_game *, t_clist *), t_typ type)
+{
+	size_t cnt;
+	t_clist	*character;
+
+	character = game->character;
+	cnt = 0;
+	while (character)
+	{
+		if (f && (character->type & type))
+		{
+			f(game, character);
+			cnt += 1;
+		}
+		character = character->next;
+	}
+	return (cnt);
 }

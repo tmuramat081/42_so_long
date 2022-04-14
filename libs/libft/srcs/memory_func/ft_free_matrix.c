@@ -17,6 +17,8 @@ void	ft_free_matrix(char ***src)
 	size_t	i;
 
 	i = 0;
+	if (!src || !*src)
+		return ;
 	while ((*src)[i])
 	{
 		free((*src)[i]);

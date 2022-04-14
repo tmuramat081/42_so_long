@@ -22,7 +22,7 @@ void	check_grid_object(char grid, t_chk *map_checker)
 	else if (grid == 'E')
 		map_checker->exists_exit = true;
 	else
-		map_checker->is_obj_error = true;
+		map_checker->is_obj_unknown = true;
 }
 
 void	explore_map(char **map, t_vector2 pos, t_chk *map_checker)
@@ -34,7 +34,7 @@ void	explore_map(char **map, t_vector2 pos, t_chk *map_checker)
 	y = pos.y;
 	if (x == -1 || x == map_checker->width_lim
 		|| y == -1 || y == map_checker->height_lim)
-		map_checker->is_obj_error = true;
+		map_checker->is_map_opened = true;
 	else if (map[y][x] != CHECKED && map[y][x] != '1')
 	{
 		check_grid_object(map[y][x], map_checker);
@@ -46,15 +46,17 @@ void	explore_map(char **map, t_vector2 pos, t_chk *map_checker)
 	}
 }
 
-bool	is_playable_map(t_chk map_checker)
+void	check_is_playable_map(t_game *game, t_chk map_checker)
 {
-	if (map_checker.is_obj_error == true)
-		return (false);
+	if (map_checker.is_obj_unknown == true)
+		handle_process_error(game, ERR_MAP_FMT);
 	else if (map_checker.exists_collect == false)
-		return (false);
+		handle_process_error(game, ERR_MAP_FMT);
 	else if (map_checker.exists_exit == false)
-		return (false);
-	return (true);
+		handle_process_error(game, ERR_NOT_PLAYABLE);
+	else if (map_checker.is_map_opened == true)
+		handle_process_error(game, ERR_NO_WALL);
+	return ;
 }
 
 void	validate_map_playability(t_game *game, t_clist *character)
@@ -67,9 +69,8 @@ void	validate_map_playability(t_game *game, t_clist *character)
 	map_checker.height_lim = game->map_height;
 	cpy_map = ft_matrixdup((const char **)game->map);
 	if (!cpy_map)
-		put_error_and_exit(ERR_FILE_READ);
+		handle_process_error(game, ERR_MEMORY);
 	explore_map(cpy_map, character->pos, &map_checker);
 	ft_free_matrix(&cpy_map);
-	if (is_playable_map(map_checker) == false)
-		put_error_and_exit(ERR_NOT_PLAYABLE);
+	check_is_playable_map(game, map_checker);
 }

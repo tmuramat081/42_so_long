@@ -26,7 +26,7 @@
 # define KEY_ESC 65307
 
 /***** Window resolution. *****/
-# define MAP_WIDTH_MAX 128
+# define MAP_WIDTH_MAX 64
 # define MAP_HEIGHT_MAX 64
 # define GRID_SIZE 32
 

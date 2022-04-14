@@ -35,7 +35,10 @@ void	detect_character_collision(t_game *game, t_clist	*character)
 	if (!target)
 		return ;
 	else if (target->type != character->type)
-		close_window(game, LOSE_GAME);
+	{
+		put_end_message(LOSE_GAME);
+		exit_game_normally(game);
+	}
 	detect_character_collision(game, target);
 	if (target && (target->vector.x == 0 && target->vector.y == 0))
 		character->vector = (t_vector2){};

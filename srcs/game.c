@@ -39,7 +39,7 @@ int	update_game(t_game *game)
 	char_lstiter(game, &set_enemy_dir, TYPE_ENEMY);
 	char_lstiter(game, &manage_object_event, TYPE_PLAYER);
 	char_lstiter(game, &detect_character_collision, TYPE_ALL);
-	check_game_state(game, game->character);
+	check_game_state(game);
 	char_lstiter(game, &render_animation, TYPE_ALL);
 	limit_frame_rate(&start_time);
 	game->frame++;
@@ -52,7 +52,7 @@ int	update_game(t_game *game)
 void	set_game_hooks(t_game *game)
 {
 	mlx_hook(game->win, 02, 1L << 0, check_key_entry, game);
-	mlx_hook(game->win, 17, 0, close_window, game);
+	mlx_hook(game->win, 17, 0, exit_game_normally, game);
 	mlx_loop_hook(game->mlx, update_game, game);
 	mlx_expose_hook (game->win, render_frame, game);
 	mlx_do_key_autorepeatoff (game->mlx);

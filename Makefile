@@ -122,7 +122,7 @@ error_test: all
 	@for emap in ${ERROR_MAPS} ; \
 	do echo "${GREEN}----$$emap-----${DEFAULT}" ; \
 	cat $$emap ; echo "\n" ; \
-	${MEM_CHECK} ./${NAME} $$emap ; done ; \
+	${MEM_CHECK} ./${NAME} $$emap ; done
 	@echo "${GREEN}----finish----${DEFAULT}"
 
 play: all

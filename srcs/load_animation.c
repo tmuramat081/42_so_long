@@ -35,7 +35,7 @@ void	load_character_frames(t_game *game, void **img, const char *directory)
 	while (i < NUM_FRAMES)
 	{
 		ft_snprintf(file_path, sizeof(file_path), "%s%d.xpm", directory, i);
-		img[i] = xpm_file_to_image(game->mlx, file_path, GRID_SIZE);
+		img[i] = xpm_file_to_image(game, file_path, GRID_SIZE);
 		i++;
 	}
 }

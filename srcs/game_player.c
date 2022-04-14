@@ -36,10 +36,13 @@ void	set_player_dir(t_clist *character, t_dir dir)
 /* Set to call functions when keyboard is pressed. */
 int	check_key_entry(int keycode, t_game *game)
 {
-	if (game->is_key_pressed == true)
+	if (game->is_key_locked == true)
 		return (0);
 	if (keycode == KEY_Q || keycode == KEY_ESC)
-		close_window(game, EXIT_GAME);
+	{
+		put_end_message(EXIT_GAME);
+		exit_game_normally(game);
+	}
 	if (keycode == KEY_A || keycode == KEY_LEFT)
 		set_player_dir(game->character, DIR_LEFT);
 	else if (keycode == KEY_D || keycode == KEY_RIGHT)
@@ -48,6 +51,6 @@ int	check_key_entry(int keycode, t_game *game)
 		set_player_dir(game->character, DIR_UP);
 	else if (keycode == KEY_S || keycode == KEY_DOWN)
 		set_player_dir(game->character, DIR_DOWN);
-	game->is_key_pressed = true;
+	game->is_key_locked = true;
 	return (0);
 }
