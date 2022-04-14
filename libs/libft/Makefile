@@ -37,7 +37,7 @@ ALL_OBJS = ${addprefix ${OBJ_DIR},${CHR_SRCS:.c=.o} ${STR_SRCS:.c=.o} ${MEM_SRCS
 
 OBJ_DIR = objs/
 INCS = -I./incs
-CFLAG = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 AR = ar rc
 
 # Print variables
@@ -48,14 +48,14 @@ GREEN = \033[0;92m
 RED = \033[0;91m
 
 # Progress variables
-SRC_COUNT_TOT := ${shell expr ${words ${ALL_SRCS}} - ${shell ls -l ${OBJ_DIR} | grep .o$ | wc -l} + 1}
-ifndef SRC_COUNT_TOT
-	SRC_COUNT_TOT := ${words ${ALL_SRCS}}
+SRC_TOT := ${shell expr ${words ${ALL_SRCS}} - ${shell ls -l ${OBJ_DIR} | grep .o$ | wc -l} + 1}
+ifndef SRC_TOT
+	SRC_TOT := ${words ${ALL_SRCS}}
 endif
-SRC_COUNT := 0
-SRC_PCT = $(shell expr 100 \* $(SRC_COUNT) / $(SRC_COUNT_TOT))
-PROGRESS = $(eval SRC_COUNT = $(shell expr ${SRC_COUNT} + 1)) \
-	${PRINTF} "${GREEN}\r%100s\r[ %d/%d (%d%%) ] Compiling $< ...${DEFAULT}" "" $(SRC_COUNT) $(SRC_COUNT_TOT) $(SRC_PCT)
+SRC_CNT := 0
+SRC_PCT = $(shell expr 100 \* $(SRC_CNT) / $(SRC_TOT))
+PROGRESS = $(eval SRC_CNT = $(shell expr ${SRC_CNT} + 1)) \
+	${PRINTF} "${GREEN}\r%100s\r[ %d/%d (%d%%) ] Compiling $< ${CC} ${CFLAGS} ...${DEFAULT}" "" $(SRC_CNT) $(SRC_TOT) $(SRC_PCT)
 
 # Command
 ${NAME}: ${ALL_OBJS}
@@ -64,7 +64,7 @@ ${NAME}: ${ALL_OBJS}
 
 ${OBJ_DIR}%.o: %.c
 	@${PROGRESS}
-	@${CC} ${CFLAG} ${INCS} -c $< -o $@
+	@${CC} ${CFLAGS} ${INCS} -c $< -o $@
 
 all: ${NAME}
 

@@ -12,6 +12,7 @@ SRCS =	main.c \
 		game_enemy.c \
 		game_object.c \
 		game_collision.c \
+		game_state.c \
 		game_end.c \
 		utils_wrapper.c \
 		utils_list.c \
@@ -28,8 +29,8 @@ LIBFTDIR = libs/libft/
 LIBFT = ${LIBFTDIR}/libft.a
 
 INCS = -I./incs -I./${LIBFTDIR}/incs/ -I./${MLXDIR}
-CC = gcc -g -MMD -MP
-CFLAGS = -Wall -Wextra -Werror
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror -g -MMD -MP
 MFLAGS = -L/usr/lib -lXext -lX11 -lm -lz
 
 # Map files
@@ -72,16 +73,18 @@ DEFAULT = \033[0;39m
 BLUE = \033[0;94m
 GREEN = \033[0;92m
 RED = \033[0;91m
+CR = \033[1G
 
 # Progress variables
-SRC_COUNT_TOT := ${shell expr ${words ${SRCS}} - ${shell ls -l ${OBJ_DIR} | grep .o$ | wc -l} + 1}
-ifndef ${SRC_COUNT_TOT}
-	SRC_COUNT_TOT := ${words ${SRCS}}
+SRC_TOT := ${shell expr ${words ${SRCS}} - ${shell ls -l ${OBJ_DIR} | grep .o$ | wc -l} + 1}
+ifndef ${SRC_TOT}
+	SRC_TOT := ${words ${SRCS}}
 endif
-SRC_COUNT := 0
-SRC_PCT = ${shell expr 100 \* ${SRC_COUNT} / ${SRC_COUNT_TOT}}
-PROGRESS = ${eval SRC_COUNT = ${shell expr ${SRC_COUNT} + 1}} \
-	${PRINTF} "${GREEN}\r%100s\r[ %d/%d (%d%%) ] Compiling $< ...${DEFAULT}" "" $(SRC_COUNT) $(SRC_COUNT_TOT) $(SRC_PCT)
+SRC_CNT := 0
+SRC_PCT = ${shell expr 100 \* ${SRC_CNT} / ${SRC_TOT}}
+PROGRESS = ${eval SRC_CNT = ${shell expr ${SRC_CNT} + 1}} \
+	${PRINTF} "${GREEN}${CR}%100s${CR}$[ %d/%d (%d%%) ] Compiling $< ${CC} ${CFLAGS}...${DEFAULT}" "" \
+	$(SRC_CNT) $(SRC_TOT) $(SRC_PCT)
 
 # Commands
 all: ${NAME}
@@ -97,7 +100,6 @@ ${NAME}: ${OBJS} ${LIBFT} ${MLX}
 	@echo "${BLUE}--- ${NAME} is up to date! ---${DEFAULT}"
 
 ${OBJ_DIR}%.o: ${SRC_DIR}%.c
-	@mkdir -p ${OBJ_DIR}
 	@${PROGRESS}
 	@${CC} ${CFLAGS} ${INCS} -O3 -c $< -o $@
 

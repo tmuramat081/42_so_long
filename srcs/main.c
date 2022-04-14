@@ -13,6 +13,14 @@
 #include "so_long.h"
 #include <time.h>
 
+void	handle_process_error(t_game *game, char *message)
+{
+	put_error_message(message);
+	if (game)
+		free_game_buffer(game);
+	exit(EXIT_FAILURE);
+}
+
 void	init_game(t_game *game)
 {
 	size_t	win_width;
@@ -30,8 +38,6 @@ void	init_game(t_game *game)
 
 void	input_map(t_game *game, char *map_file)
 {
-	size_t cnt_player;
-
 	if (is_valid_file_name(map_file) == false)
 		handle_process_error(game, ERR_FILE_NAME);
 	load_map_file(map_file, game);
@@ -39,8 +45,7 @@ void	input_map(t_game *game, char *map_file)
 		handle_process_error(game, ERR_FILE_READ);
 	else if (!*game->map)
 		handle_process_error(game, ERR_MAP_EMPTY);
-	cnt_player = char_lstiter(game, &validate_map_playability, TYPE_PLAYER);
-	if (cnt_player == 0)
+	if (char_lstiter(game, &validate_map_playability, TYPE_PLAYER) == 0)
 		handle_process_error(game, ERR_PLAYERS);
 }
 

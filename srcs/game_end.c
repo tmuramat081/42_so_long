@@ -33,7 +33,7 @@ void	free_animation_images(t_game *game, t_img img)
 
 void	free_counter_images(t_game *game, t_img img)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	while (i < 10)
@@ -45,7 +45,7 @@ void	free_counter_images(t_game *game, t_img img)
 
 void	free_images(t_game *game)
 {
-	t_img img;
+	t_img	img;
 
 	img = game->img;
 	destroy_image(game->mlx, img.back);
@@ -58,7 +58,6 @@ void	free_images(t_game *game)
 	free_counter_images(game, img);
 	free_animation_images(game, img);
 }
-
 
 void	free_game_buffer(t_game *game)
 {
@@ -74,46 +73,10 @@ void	free_game_buffer(t_game *game)
 	free(game->mlx);
 }
 
-void	handle_process_error(t_game *game, char *message)
-{
-	put_error_message(message);
-	if (game)
-		free_game_buffer(game);
-	exit(EXIT_FAILURE);
-}
-
 int	exit_game_normally(t_game *game)
 {
 	put_steps(game);
 	free_game_buffer(game);
 	exit(EXIT_SUCCESS);
 	return (0);
-}
-
-
-void	should_lock_key(t_game *game, t_clist *character)
-{
-	if (character->vector.x || character->vector.y)
-		game->is_key_locked = true;
-}
-
-void	check_game_state(t_game *game)
-{
-	size_t		ret;
-	static bool	is_step_counted;
-
-	game->is_key_locked = false;
-	ret = char_lstiter(game, should_lock_key, TYPE_PLAYER);
-	if (is_step_counted == false && game->is_key_locked == true)
-	{
-		put_steps(game);
-		is_step_counted = true;
-	}
-	if (game->is_key_locked == false)
-		is_step_counted = false;
-	if (ret == 0)
-	{
-		put_end_message(WIN_GAME);
-		exit_game_normally(game);
-	}
 }

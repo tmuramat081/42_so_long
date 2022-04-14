@@ -27,7 +27,7 @@ void	put_end_message(char *end_msg)
 
 void	put_error_message(char *err_msg)
 {
-	
+
 	ft_printf(RED);
 	ft_printf("Error\n%s\n", err_msg);
 	ft_printf(DEFAULT);

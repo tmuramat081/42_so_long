@@ -59,7 +59,7 @@ void	character_lstnew(t_game *game, t_vector2 pos, t_typ type)
 
 size_t	char_lstiter(t_game *game, void (*f)(t_game *, t_clist *), t_typ type)
 {
-	size_t cnt;
+	size_t	cnt;
 	t_clist	*character;
 
 	character = game->character;

@@ -150,8 +150,15 @@ void	go_straight(t_clist *character);
 void	eat_glass(t_clist *character);
 
 /*** game_end.c ***/
-void	check_game_state(t_game *game);
 int		exit_game_normally(t_game *game);
+void	free_game_buffer(t_game *game);
+void	free_images(t_game *game);
+void	free_counter_images(t_game *game, t_img img);
+void	free_animation_images(t_game *game, t_img img);
+
+/*** game_state.c ***/
+void	check_game_state(t_game *game);
+void	should_lock_key(t_game *game, t_clist *character);
 
 /*** utils_print.c ***/
 void	handle_process_error(t_game *game, char *err_msg);
