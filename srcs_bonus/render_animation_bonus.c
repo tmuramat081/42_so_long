@@ -28,7 +28,7 @@ void	*get_animation_image(t_game *game, t_clist *character)
 	return (img);
 }
 
-/* Calculate intermediate point between A and B, using linear interpolation(LERP), */
+/* Calculate intermediate point between A and B, using linear interpolation. */
 t_vector2	calculate_lerp_position(t_clist *character, float time)
 {
 	t_vector2	start;

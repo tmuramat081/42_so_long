@@ -45,14 +45,13 @@ void	parse_grid_object(char *map_line, size_t y, t_game *game)
 	}
 }
 
-
 /* Check if the map is rectangular or square. */
 void	measure_map_size(char **map, size_t i, t_game *game)
 {
-	if (i == 0)
-		game->map_width = ft_strcspn(map[0], "\n\r");
 	if (game->map_height > MAP_HEIGHT_MAX)
 		handle_error(game, ERR_MAP_SIZE);
+	if (i == 0)
+		game->map_width = ft_strcspn(map[0], "\n\r");
 	if (game->map_width > MAP_WIDTH_MAX)
 		handle_error(game, ERR_MAP_SIZE);
 	else if (game->map_width != ft_strcspn(map[i], "\n\r"))
@@ -82,11 +81,11 @@ void	load_map_file(char *file, t_game *game)
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		return ;
-	game->map = malloc(sizeof(char *) * MAP_HEIGHT_MAX + 1);
+	game->map = ft_calloc(MAP_HEIGHT_MAX + 1 + 1, sizeof(char *));
 	if (!game->map)
 		return ;
 	i = 0;
-	while (i < MAP_HEIGHT_MAX)
+	while (i < MAP_HEIGHT_MAX + 1)
 	{
 		game->map[i] = get_next_line(fd);
 		if (!game->map[i])

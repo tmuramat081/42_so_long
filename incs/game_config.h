@@ -27,7 +27,7 @@
 
 /***** Window resolution. *****/
 # define MAP_WIDTH_MAX 128
-# define MAP_HEIGHT_MAX 64
+# define MAP_HEIGHT_MAX 32
 # define GRID_SIZE 32
 
 /***** Animation *****/

@@ -83,99 +83,103 @@ typedef struct s_game {
 	bool	is_key_locked;
 }	t_game;
 
-/*** main.c ***/
-void	input_map(t_game *game, char *map_file);
-void	init_game(t_game *game);
+/*** main_bonua.c ***/
+void		input_map(t_game *game, char *map_file);
+void		init_game(t_game *game);
 
-/*** map_input.c ***/
-void	load_map_file(char *file, t_game *game);
-void	parse_map(t_game *game);
-void	measure_map_size(char **map, size_t i, t_game *game);
-void	parse_grid_object(char *map_line, size_t y, t_game *game);
-bool	is_valid_file_name(char *file_name);
+/*** map_input_bonus.c ***/
+void		load_map_file(char *file, t_game *game);
+void		parse_map(t_game *game);
+void		measure_map_size(char **map, size_t i, t_game *game);
+void		parse_grid_object(char *map_line, size_t y, t_game *game);
+bool		is_valid_file_name(char *file_name);
 
-/*** map_check.c ***/
-void	validate_map_playability(t_game *game, t_clist *character);
-void	check_if_playabele_map(t_game *game, t_chk map_checker);
-void	explore_map(char **map, t_vector2 pos, t_chk *map_checker);
-void	check_grid_object(char grid, t_chk *map_checker);
+/*** map_check_bonus.c ***/
+void		validate_map_playability(t_game *game, t_clist *character);
+void		check_if_playabele_map(t_game *game, t_chk map_checker);
+void		explore_map(char **map, t_vector2 pos, t_chk *map_checker);
+void		check_grid_object(char grid, t_chk *map_checker);
 
-/*** load_image.c ***/
-void	load_images(t_game *game);
-void	load_object_images(t_game *game);
-void	load_character_sprites(t_game *game, void **img, const char *directory);
-void	load_footer_images(t_game *game);
-void	load_counter_images(t_game *game);
+/*** load_image_bonus.c ***/
+void		load_images(t_game *game);
+void		load_object_images(t_game *game);
+void		load_character_sprites(t_game *game, void **img,
+				const char *directory);
+void		load_footer_images(t_game *game);
+void		load_counter_images(t_game *game);
 
-/*** load_animation.c ***/
-void	load_animation(t_game *game);
-void	load_character_frames(t_game *game, void **img, const char *directory);
+/*** load_animation_bonus.c ***/
+void		load_animation(t_game *game);
+void		load_character_frames(t_game *game, void **img,
+				const char *directory);
 
-/*** render_image.c ***/
-int		render_frame(t_game *game);
-void	*get_object_image(int y, int x, t_game *game);
-void	render_map(t_game *game);
-void	render_footer(t_game *game);
-void	render_steps(size_t num, t_game *game);
+/*** render_image_bonus.c ***/
+int			render_frame(t_game *game);
+void		*get_object_image(int y, int x, t_game *game);
+void		render_map(t_game *game);
+void		render_footer(t_game *game);
+void		render_steps(size_t num, t_game *game);
 
-/*** render_animation.c ***/
-void	render_animation(t_game *game, t_clist *character);
-void	render_moving_animation(t_game *game, t_clist *character, void *img);
+/*** render_animation_bonus.c ***/
+void		render_animation(t_game *game, t_clist *character);
+void		render_moving_animation(t_game *game, t_clist *character,
+				void *img);
 t_vector2	calculate_lerp_position(t_clist *character, float time);
-void	update_cutternt_position(t_game *game, t_clist *character);
-void	*get_animation_image(t_game *game, t_clist *character);
+void		update_cutternt_position(t_game *game, t_clist *character);
+void		*get_animation_image(t_game *game, t_clist *character);
 
-/*** game.c ***/
-void	set_game_hooks(t_game *game);
-int		update_game(t_game *game);
-void	limit_frame_rate(t_timespec *start_time);
+/*** game_bonus.c ***/
+void		set_game_hooks(t_game *game);
+int			update_game(t_game *game);
+void		limit_frame_rate(t_timespec *start_time);
 
-/*** game_player.c ***/
-int		check_key_entry(int keycode, t_game *game);
-void	set_player_dir(t_clist *character, t_dir dir);
+/*** game_player_bonus.c ***/
+int			check_key_entry(int keycode, t_game *game);
+void		set_player_dir(t_clist *character, t_dir dir);
 
-/*** game_object.c ***/
-void	manage_object_event(t_game *game, t_clist *character);
-bool	collective_exists(t_game *game, t_vector2 next);
-bool	exit_exists(t_game *game, t_vector2 next);
-bool	wall_exists(t_game *game, t_vector2 next);
+/*** game_object_bonus.c ***/
+void		manage_object_event(t_game *game, t_clist *character);
+bool		collective_exists(t_game *game, t_vector2 next);
+bool		exit_exists(t_game *game, t_vector2 next);
+bool		wall_exists(t_game *game, t_vector2 next);
 
-/*** game_collision  ***/
-void	detect_character_collision(t_game *game, t_clist *character);
-t_clist	*target_exists(t_vector2 pos, t_vector2 next_pos, t_clist *target);
+/*** game_collision_bonus.c ***/
+void		detect_character_collision(t_game *game, t_clist *character);
+t_clist		*target_exists(t_vector2 pos, t_vector2 next_pos, t_clist *target);
 
-/*** game_enemy.c ***/
-void	set_enemy_dir(t_game *game, t_clist *character);
-void	turn_around(t_clist *character);
-void	go_straight(t_clist *character);
-void	eat_glass(t_clist *character);
+/*** game_enemy_bonus.c ***/
+void		set_enemy_dir(t_game *game, t_clist *character);
+void		turn_around(t_clist *character);
+void		go_straight(t_clist *character);
+void		eat_glass(t_clist *character);
 
-/*** game_end.c ***/
-int		exit_game_normally(t_game *game);
-void	free_game_buffer(t_game *game);
-void	free_images(t_game *game);
-void	free_counter_images(t_game *game, t_img img);
-void	free_animation_images(t_game *game, t_img img);
+/*** game_end_bonus.c ***/
+int			exit_game_normally(t_game *game);
+void		free_game_buffer(t_game *game);
+void		free_images(t_game *game);
+void		free_counter_images(t_game *game, t_img img);
+void		free_animation_images(t_game *game, t_img img);
 
-/*** game_state.c ***/
-void	check_game_state(t_game *game);
-void	should_lock_key(t_game *game, t_clist *character);
+/*** game_state_bonus.c ***/
+void		check_game_state(t_game *game);
+void		should_lock_key(t_game *game, t_clist *character);
 
-/*** utils_print.c ***/
-void	handle_error(t_game *game, char *err_msg);
-void	put_steps(t_game *game);
-void	put_end_message(char *message);
-void	put_error_message(char *message);
+/*** utils_print_bonus.c ***/
+void		handle_error(t_game *game, char *err_msg);
+void		put_steps(t_game *game);
+void		put_end_message(char *message);
+void		put_error_message(char *message);
 
-/*** utils_list.c ***/
-void	character_lstnew(t_game *game, t_vector2 pos, t_typ type);
-void	character_lstadd_back(t_clist **lst, t_clist *new_character);
-void	character_lstclear(t_clist **character);
-size_t	char_lstiter(t_game *game, void (*f)(t_game *, t_clist *), t_typ type);
+/*** utils_list_bonus.c ***/
+void		character_lstnew(t_game *game, t_vector2 pos, t_typ type);
+void		character_lstadd_back(t_clist **lst, t_clist *new_character);
+void		character_lstclear(t_clist **character);
+size_t		char_lstiter(t_game *game, void (*f)(t_game *, t_clist *),
+				t_typ type);
 
-/*** utils_wrapper.c ***/
-void	*xpm_file_to_image(t_game *game, char *img_file, int size);
-void	put_image_to_window(t_game *game, void *img, t_vector2 pos);
-void	destroy_image(void *mlx, void *img);
+/*** utils_wrapper_bonus.c ***/
+void		*xpm_file_to_image(t_game *game, char *img_file, int size);
+void		put_image_to_window(t_game *game, void *img, t_vector2 pos);
+void		destroy_image(void *mlx, void *img);
 
 #endif

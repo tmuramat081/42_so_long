@@ -21,7 +21,6 @@ SRCS = main_bonus.c \
 		utils_print_bonus.c
 SRC_DIR = srcs_bonus/
 OBJ_DIR = objs_bonus/
-DEPS = ${addprefix ${OBJ_DIR}, ${SRCS:.c=.d}}
 else
 SRCS = main.c \
 		map_input.c \
@@ -39,9 +38,11 @@ SRCS = main.c \
 		utils_print.c
 SRC_DIR = srcs/
 OBJ_DIR = objs/
-DEPS = ${addprefix ${OBJ_DIR}, ${SRCS:.c=.d}}
 endif
+
 OBJS = ${addprefix ${OBJ_DIR}, ${SRCS:.c=.o}}
+DEPS = ${addprefix ${OBJ_DIR}, ${SRCS:.c=.d}}
+
 MLXDIR = libs/mlx_linux/
 MLX = ${MLXDIR}/libmlx.a
 LIBFTDIR = libs/libft/
@@ -62,7 +63,7 @@ ERROR_MAP_SRCS = E00_empty.ber \
 				E02_not_closed2.ber \
 				E03_no_collectible.ber \
 				E05_no_spawn.ber \
-				E06_multi_spawn.ber \
+				E06_from_second_line.ber \
 				E07_not_rectangle.ber \
 				E08_void_line.ber \
 				E09_too_large.ber \
@@ -107,9 +108,9 @@ PROGRESS = ${eval SRC_CNT = ${shell expr ${SRC_CNT} + 1}} \
 # Commands
 ${NAME}: ${OBJS} ${LIBFT} ${MLX}
 	@${CC} ${CFLAGS} ${OBJS} ${LIBFT} ${MLX} ${MFLAGS} ${INCS} -o $@
-	@echo "${BLUE}--- ${NAME} is up to date! ---${DEFAULT}"
 
 all: ${NAME}
+	@echo "${BLUE}--- ${NAME} is up to date! ---${DEFAULT}"
 
 ${LIBFT}:
 	@${MAKE} -C ${LIBFTDIR}
@@ -122,17 +123,22 @@ ${OBJ_DIR}%.o: ${SRC_DIR}%.c
 	@${CC} ${CFLAGS} ${INCS} -O3 -c $< -o $@
 
 bonus:
-	@${MAKE} WITH_BONUS=1
+	@${MAKE} WITH_BONUS=1 --no-print-directory
+	@echo "${BLUE}--- ${NAME} bonus is up to date! ---${DEFAULT}"
 
 clean:
-	${MAKE} clean -C ${LIBFTDIR}
-	${MAKE} clean -C ${MLXDIR}
 	${RM} ${OBJS} ${DEPS}
-
+ifndef WITH_BONUS
+	@${MAKE} clean -C ${LIBFTDIR} --no-print-directory
+	@${MAKE} clean -C ${MLXDIR} --no-print-directory
+	@${MAKE} WITH_BONUS=1 clean --no-print-directory
+	@echo "${RED}--- All object files have been deleted. ---${DEFAULT}"
+endif
+ 
 fclean: clean
 	${RM} ${NAME}
 	${MAKE} fclean -C ${LIBFTDIR}
-	${MAKE} WITH_BONUS=1 fclean -C ${LIBFTDIR}
+	@echo "${RED}--- All executable and object files have been deleted. ---${DEFAULT}"
 
 re: fclean
 	${MAKE} -s all
@@ -149,8 +155,7 @@ error_test: all
 	${MEM_CHECK} ./${NAME} $$emap ; done
 	@echo "${GREEN}----finish----${DEFAULT}"
 
-play:
-	${MAKE} bonus
+play: bonus
 	@for emap in ${PLAY_MAPS} ; \
 	do ./${NAME} $$emap ; done
 	@echo "${GREEN}----finish----${DEFAULT}"
@@ -161,8 +166,16 @@ git:
 	git push
 
 norm:
-	norminette ${SRC_DIR} ${SRC_BONUS_DIR} ${LIBFTDIR} ./incs
+	norminette ${SRC_DIR}
+ifndef WITH_BONUS
+	norminette ${LIBFTDIR} ./incs
+	@${MAKE} WITH_BONUS=1 norm --no-print-directory
+endif
 
 -include ${DEPS}
 
-.PHONY: all clean fclean re error_test play_test git
+nm: $(NAME)
+	nm -u $(NAME) | grep -v mlx_ | grep -v ft_ | grep -v ' __' | grep -v ' X' | grep -v \
+	-e open -e close -e read -e write -e malloc -e free -e perror -e strerror -e exit
+
+.PHONY: all bonus clean fclean re error_test play_test play git norm

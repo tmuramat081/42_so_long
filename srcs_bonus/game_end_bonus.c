@@ -61,7 +61,8 @@ void	free_images(t_game *game)
 
 void	free_game_buffer(t_game *game)
 {
-	ft_free_matrix(&game->map);
+	if (game->map)
+		ft_free_matrix(&game->map);
 	character_lstclear(&game->character);
 	free_images(game);
 	if (game->win)
