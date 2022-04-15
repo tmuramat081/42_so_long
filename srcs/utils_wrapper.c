@@ -34,6 +34,6 @@ void	*xpm_file_to_image(t_game *game, char *img_file, int size)
 
 	img = mlx_xpm_file_to_image(game->mlx, img_file, &img_width, &img_height);
 	if (img == NULL || (size && (img_height != size || img_width != size)))
-		handle_process_error(game, ERR_FILE_FMT);
+		handle_error(game, ERR_FILE_FMT);
 	return (img);
 }

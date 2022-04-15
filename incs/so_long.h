@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONGH
+#ifndef SO_LONG_H
 # define SO_LONG_H
 
 # include "game_config.h"
@@ -20,6 +20,7 @@
 # include <unistd.h>
 # include <sys/types.h>
 # include <fcntl.h>
+# include <stdlib.h>
 
 typedef struct s_chk {
 	bool	exists_collect;
@@ -70,7 +71,6 @@ typedef struct s_game {
 	t_img	img;
 	size_t	cnt_collect;
 	size_t	cnt_step;
-	short	frame;
 	bool	is_any_moved;
 }	t_game;
 
@@ -87,7 +87,7 @@ bool	is_valid_file_name(char *file_name);
 
 /*** map_check.c ***/
 void	verify_map_playability(t_game *game, t_clist *character);
-void	check_is_playabele_map(t_game *game, t_chk map_checker);
+void	check_if_playabele_map(t_game *game, t_chk map_checker);
 void	explore_map(char **map, t_vector2 pos, t_chk *map_checker);
 void	check_grid_object(char grid, t_chk *map_checker);
 
@@ -119,6 +119,10 @@ bool	wall_exists(t_game *game, t_vector2 next);
 void	detect_character_collision(t_game *game, t_clist *character);
 t_clist	*target_exists(t_vector2 pos, t_vector2 next_pos, t_clist *target);
 
+/*** game_state.c ***/
+void	check_game_state(t_game *game);
+void	update_position(t_game *game, t_clist *character);
+
 /*** game_end.c ***/
 int		exit_game_normally(t_game *game);
 void	free_game_buffer(t_game *game);
@@ -126,12 +130,8 @@ void	free_images(t_game *game);
 void	free_counter_images(t_game *game, t_img img);
 void	free_animation_images(t_game *game, t_img img);
 
-/*** game_state.c ***/
-void	check_game_state(t_game *game);
-void	update_position(t_game *game, t_clist *character);
-
 /*** utils_print.c ***/
-void	handle_process_error(t_game *game, char *err_msg);
+void	handle_error(t_game *game, char *err_msg);
 void	put_steps(t_game *game);
 void	put_end_message(char *message);
 void	put_error_message(char *message);

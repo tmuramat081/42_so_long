@@ -49,7 +49,7 @@ void	character_lstnew(t_game *game, t_vector2 pos, t_typ type)
 
 	new_character = malloc(sizeof(t_clist));
 	if (!new_character)
-		handle_process_error(game, ERR_MEMORY);
+		handle_error(game, ERR_MEMORY);
 	*new_character = (t_clist){};
 	new_character->pos = pos;
 	new_character->type = type;
@@ -57,6 +57,7 @@ void	character_lstnew(t_game *game, t_vector2 pos, t_typ type)
 	character_lstadd_back(&game->character, new_character);
 }
 
+/* Apply a function to each character (specified by 3rd argument). */
 size_t	char_lstiter(t_game *game, void (*f)(t_game *, t_clist *), t_typ type)
 {
 	size_t	cnt;

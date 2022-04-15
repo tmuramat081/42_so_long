@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
-#include <time.h>
 
 const double	g_frame_time = 1.0 / FPS_MAX;
 

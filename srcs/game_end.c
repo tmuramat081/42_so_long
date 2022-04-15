@@ -12,10 +12,9 @@
 
 #include "so_long.h"
 
-
 void	free_character_images(t_game *game)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	while (i < DIR_END)
@@ -39,7 +38,8 @@ void	free_images(t_game *game)
 
 void	free_game_buffer(t_game *game)
 {
-	ft_free_matrix(&game->map);
+	if (game->map)
+		ft_free_matrix(&game->map);
 	character_lstclear(&game->character);
 	free_images(game);
 	if (game->win)
@@ -53,16 +53,7 @@ void	free_game_buffer(t_game *game)
 
 int	exit_game_normally(t_game *game)
 {
-	put_steps(game);
 	free_game_buffer(game);
 	exit(EXIT_SUCCESS);
 	return (0);
-}
-
-void	handle_process_error(t_game *game, char *message)
-{
-	put_error_message(message);
-	if (game)
-		free_game_buffer(game);
-	exit(EXIT_FAILURE);
 }

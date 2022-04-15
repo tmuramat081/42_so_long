@@ -28,6 +28,7 @@ void	*get_animation_image(t_game *game, t_clist *character)
 	return (img);
 }
 
+/* Calculate intermediate point between A and B, using linear interpolation(LERP), */
 t_vector2	calculate_lerp_position(t_clist *character, float time)
 {
 	t_vector2	start;
@@ -39,15 +40,17 @@ t_vector2	calculate_lerp_position(t_clist *character, float time)
 	return (ft_vector_lerp(start, end, time / MOVE_DURATION));
 }
 
+/* If moving duration is passed, rewirite character's position. */
 void	update_current_position(t_game *game, t_clist *character)
 {
 	put_image_to_window(game, game->img.back, character->pos);
 	character->pos = ft_vector_add(character->pos, character->vector);
-	character->vector = (t_vector2){};
+	character->vector = (t_vector2){0, 0};
 	character->anim_start = (t_timespec){};
 	return ;
 }
 
+/* Draw animation at the specified time. */
 void	render_moving_animation(t_game *game, t_clist *character, void *img)
 {
 	t_timespec	current;

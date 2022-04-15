@@ -25,7 +25,7 @@ void	update_position(t_game *game, t_clist *character)
 
 void	check_game_state(t_game *game)
 {
-	size_t player_cnt;
+	size_t	player_cnt;
 
 	player_cnt = char_lstiter(game, update_position, TYPE_PLAYER);
 	if (game->is_any_moved == true)
@@ -35,5 +35,5 @@ void	check_game_state(t_game *game)
 		put_end_message(WIN_GAME);
 		exit_game_normally(game);
 	}
-	game->is_any_moved = false;	
+	game->is_any_moved = false;
 }

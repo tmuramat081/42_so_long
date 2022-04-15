@@ -56,6 +56,6 @@ void	manage_object_event(t_game *game, t_clist *character)
 			character->type = TYPE_NONE;
 			put_image_to_window(game, game->img.back, character->pos);
 		}
-		character->vector = (t_vector2){};
+		character->vector = (t_vector2){0, 0};
 	}
 }

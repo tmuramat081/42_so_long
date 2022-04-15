@@ -22,14 +22,14 @@ const char	*g_player_directory[4] = {
 
 void	load_character_images(t_game *game)
 {
-	char	file_path[PATH_MAX];
+	char	path[PATH_MAX];
 	int		i;
 
 	i = 0;
 	while (i < DIR_END)
 	{
-		ft_snprintf(file_path, sizeof(file_path), "%s0.xpm", g_player_directory[i]);
-		game->img.player[i] = xpm_file_to_image(game, file_path, GRID_SIZE);
+		ft_snprintf(path, sizeof(path), "%s%d.xpm", g_player_directory[i], 0);
+		game->img.player[i] = xpm_file_to_image(game, path, GRID_SIZE);
 		i++;
 	}
 }

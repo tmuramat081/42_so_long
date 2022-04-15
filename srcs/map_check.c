@@ -46,16 +46,16 @@ void	explore_map(char **map, t_vector2 pos, t_chk *map_checker)
 	}
 }
 
-void	check_is_playable_map(t_game *game, t_chk map_checker)
+void	check_if_playable_map(t_game *game, t_chk map_checker)
 {
 	if (map_checker.is_obj_unknown == true)
-		handle_process_error(game, ERR_MAP_FMT);
+		handle_error(game, ERR_MAP_OBJ);
 	else if (map_checker.exists_collect == false)
-		handle_process_error(game, ERR_MAP_FMT);
+		handle_error(game, ERR_MAP_COLL);
 	else if (map_checker.exists_exit == false)
-		handle_process_error(game, ERR_NOT_PLAYABLE);
+		handle_error(game, ERR_MAP_EXIT);
 	else if (map_checker.is_map_opened == true)
-		handle_process_error(game, ERR_NO_WALL);
+		handle_error(game, ERR_MAP_WALL);
 	return ;
 }
 
@@ -69,8 +69,8 @@ void	verify_map_playability(t_game *game, t_clist *character)
 	map_checker.height_lim = game->map_height;
 	cpy_map = ft_matrixdup((const char **)game->map);
 	if (!cpy_map)
-		handle_process_error(game, ERR_MEMORY);
+		handle_error(game, ERR_MEMORY);
 	explore_map(cpy_map, character->pos, &map_checker);
 	ft_free_matrix(&cpy_map);
-	check_is_playable_map(game, map_checker);
+	check_if_playable_map(game, map_checker);
 }

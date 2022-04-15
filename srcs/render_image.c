@@ -20,7 +20,6 @@ void	render_character(t_game *game, t_clist *character)
 	put_image_to_window(game, img, character->pos);
 }
 
-
 void	*get_object_image(int y, int x, t_game *game)
 {
 	void	*img;

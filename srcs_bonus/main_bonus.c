@@ -11,9 +11,8 @@
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
-#include <time.h>
 
-void	handle_process_error(t_game *game, char *message)
+void	handle_error(t_game *game, char *message)
 {
 	put_error_message(message);
 	if (game)
@@ -36,17 +35,21 @@ void	init_game(t_game *game)
 	srand(time(NULL));
 }
 
-void	input_map(t_game *game, char *map_file)
+void	input_map(t_game *game, char *file_name)
 {
-	if (is_valid_file_name(map_file) == false)
-		handle_process_error(game, ERR_FILE_NAME);
-	load_map_file(map_file, game);
+	size_t	player_cnt;
+
+	if (is_valid_file_name(file_name) == false)
+		handle_error(game, ERR_FILE_NAME);
+	load_map_file(file_name, game);
 	if (!game->map)
-		handle_process_error(game, ERR_FILE_READ);
+		handle_error(game, ERR_FILE_READ);
 	else if (!*game->map)
-		handle_process_error(game, ERR_MAP_EMPTY);
-	if (char_lstiter(game, &validate_map_playability, TYPE_PLAYER) == 0)
-		handle_process_error(game, ERR_PLAYERS);
+		handle_error(game, ERR_MAP_EMPTY);
+	parse_map(game);
+	player_cnt = char_lstiter(game, &validate_map_playability, TYPE_PLAYER);
+	if (player_cnt == 0)
+		handle_error(game, ERR_NO_PLAYER);
 }
 
 int	main(int argc, char **argv)
@@ -54,7 +57,7 @@ int	main(int argc, char **argv)
 	t_game	game;
 
 	if (argc != 2)
-		handle_process_error(NULL, ERR_ARGS);
+		handle_error(NULL, ERR_ARGS);
 	game = (t_game){};
 	game.mlx = mlx_init();
 	input_map(&game, argv[1]);

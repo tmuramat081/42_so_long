@@ -1,7 +1,7 @@
 # Compile variables
 NAME = so_long
 
-ifdef BONUS
+ifdef WITH_BONUS
 SRCS = main_bonus.c \
 		map_input_bonus.c \
 		map_check_bonus.c \
@@ -20,6 +20,8 @@ SRCS = main_bonus.c \
 		utils_list_bonus.c \
 		utils_print_bonus.c
 SRC_DIR = srcs_bonus/
+OBJ_DIR = objs_bonus/
+DEPS = ${addprefix ${OBJ_DIR}, ${SRCS:.c=.d}}
 else
 SRCS = main.c \
 		map_input.c \
@@ -36,19 +38,14 @@ SRCS = main.c \
 		utils_list.c \
 		utils_print.c
 SRC_DIR = srcs/
-endif
-
-OBJS = ${addprefix ${OBJ_DIR}, ${SRCS:.c=.o}}
 OBJ_DIR = objs/
-
 DEPS = ${addprefix ${OBJ_DIR}, ${SRCS:.c=.d}}
-
+endif
+OBJS = ${addprefix ${OBJ_DIR}, ${SRCS:.c=.o}}
 MLXDIR = libs/mlx_linux/
 MLX = ${MLXDIR}/libmlx.a
-
 LIBFTDIR = libs/libft/
 LIBFT = ${LIBFTDIR}/libft.a
-
 INCS = -I./incs -I./${LIBFTDIR}/incs/ -I./${MLXDIR}
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g -MMD -MP
@@ -58,7 +55,8 @@ MFLAGS = -L/usr/lib -lXext -lX11 -lm -lz
 TEST_MAP_SRCS = T00_basic1.ber \
 				T01_basic2.ber \
 				T02_smallest.ber \
-				T03_largest.ber
+				T03_largest.ber \
+				T04_multi_player.ber
 ERROR_MAP_SRCS = E00_empty.ber \
 				E01_not_closed.ber \
 				E02_not_closed2.ber \
@@ -78,7 +76,6 @@ BONUS_MAP_SRCS = B00_enemy.ber \
 PLAY_MAP_SRCS = M00_maze.ber \
 				M01_puzzle.ber \
 				M02_action.ber
-
 MAP_DIR = maps/
 TEST_MAPS = ${addprefix ${MAP_DIR},${TEST_MAP_SRCS:.c=.o}}
 ERROR_MAPS = ${addprefix ${MAP_DIR},${ERROR_MAP_SRCS:.c=.o}}
@@ -120,13 +117,12 @@ ${LIBFT}:
 ${MLX}:
 	@${MAKE} -C ${MLXDIR}
 
-
 ${OBJ_DIR}%.o: ${SRC_DIR}%.c
 	@${PROGRESS}
 	@${CC} ${CFLAGS} ${INCS} -O3 -c $< -o $@
 
 bonus:
-	${MAKE} BONUS=1
+	@${MAKE} WITH_BONUS=1
 
 clean:
 	${MAKE} clean -C ${LIBFTDIR}
@@ -136,6 +132,7 @@ clean:
 fclean: clean
 	${RM} ${NAME}
 	${MAKE} fclean -C ${LIBFTDIR}
+	${MAKE} WITH_BONUS=1 fclean -C ${LIBFTDIR}
 
 re: fclean
 	${MAKE} -s all
@@ -152,12 +149,11 @@ error_test: all
 	${MEM_CHECK} ./${NAME} $$emap ; done
 	@echo "${GREEN}----finish----${DEFAULT}"
 
-play: all
+play:
+	${MAKE} bonus
 	@for emap in ${PLAY_MAPS} ; \
 	do ./${NAME} $$emap ; done
 	@echo "${GREEN}----finish----${DEFAULT}"
-
-bonus:
 
 git:
 	git add .
@@ -165,7 +161,7 @@ git:
 	git push
 
 norm:
-	norminette ${SRC_DIR} ${LIBFTDIR} ./incs
+	norminette ${SRC_DIR} ${SRC_BONUS_DIR} ${LIBFTDIR} ./incs
 
 -include ${DEPS}
 

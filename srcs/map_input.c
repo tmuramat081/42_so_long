@@ -13,7 +13,7 @@
 #include "so_long.h"
 #include "get_next_line.h"
 
-/* "./ber" is prohibited as invalid file name. */
+/* "./ber" is regarded as invalid file name. */
 bool	is_valid_file_name(char *file_name)
 {
 	size_t	len;
@@ -48,13 +48,13 @@ void	measure_map_size(char **map, size_t i, t_game *game)
 {
 	if (i == 0)
 		game->map_width = ft_strcspn(map[0], "\n\r");
-	if (game->map_width > MAP_WIDTH_MAX)
-		handle_process_error(game, ERR_MAP_LARGE);
-	else if (game->map_width != ft_strcspn(map[i], "\n\r"))
-		handle_process_error(game, ERR_MAP_FMT);
-	game->map_height += 1;
 	if (game->map_height > MAP_HEIGHT_MAX)
-		handle_process_error(game, ERR_MAP_LARGE);
+		handle_error(game, ERR_MAP_SIZE);
+	if (game->map_width > MAP_WIDTH_MAX)
+		handle_error(game, ERR_MAP_SIZE);
+	else if (game->map_width != ft_strcspn(map[i], "\n\r"))
+		handle_error(game, ERR_MAP_FMT);
+	game->map_height += 1;
 }
 
 void	parse_map(t_game *game)
@@ -76,14 +76,14 @@ void	load_map_file(char *file, t_game *game)
 	int		fd;
 	size_t	i;
 
-	game->map = malloc(sizeof(char *) * MAP_HEIGHT_MAX + 1);
+	game->map = calloc(MAP_HEIGHT_MAX + 1, sizeof(char *));
 	if (!game->map)
 		return ;
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		return ;
 	i = 0;
-	while (i < MAP_HEIGHT_MAX + 1)
+	while (i < MAP_HEIGHT_MAX)
 	{
 		game->map[i] = get_next_line(fd);
 		if (!game->map[i])

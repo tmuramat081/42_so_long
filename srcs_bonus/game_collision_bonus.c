@@ -41,5 +41,5 @@ void	detect_character_collision(t_game *game, t_clist	*character)
 	}
 	detect_character_collision(game, target);
 	if (target && (target->vector.x == 0 && target->vector.y == 0))
-		character->vector = (t_vector2){};
+		character->vector = (t_vector2){0, 0};
 }

@@ -15,16 +15,16 @@
 void	ft_free_matrix(char ***src)
 {
 	size_t	i;
+	char	**matrix;
 
+	matrix = *src;
 	i = 0;
-	if (!src || !*src)
-		return ;
-	while ((*src)[i])
+	while (matrix[i])
 	{
-		free((*src)[i]);
-		(*src)[i] = NULL;
+		free(matrix[i]);
+		matrix[i] = NULL;
 		i++;
 	}
-	free(*src);
-	*src = NULL;
+	free(matrix);
+	matrix = NULL;
 }

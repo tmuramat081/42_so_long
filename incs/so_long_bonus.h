@@ -20,6 +20,7 @@
 # include <unistd.h>
 # include <sys/types.h>
 # include <fcntl.h>
+# include <time.h>
 
 typedef struct s_chk {
 	bool	exists_collect;
@@ -88,13 +89,14 @@ void	init_game(t_game *game);
 
 /*** map_input.c ***/
 void	load_map_file(char *file, t_game *game);
-void	parse_line_size(char *map_line, t_game *game);
+void	parse_map(t_game *game);
+void	measure_map_size(char **map, size_t i, t_game *game);
 void	parse_grid_object(char *map_line, size_t y, t_game *game);
 bool	is_valid_file_name(char *file_name);
 
 /*** map_check.c ***/
 void	validate_map_playability(t_game *game, t_clist *character);
-void	check_is_playabele_map(t_game *game, t_chk map_checker);
+void	check_if_playabele_map(t_game *game, t_chk map_checker);
 void	explore_map(char **map, t_vector2 pos, t_chk *map_checker);
 void	check_grid_object(char grid, t_chk *map_checker);
 
@@ -160,7 +162,7 @@ void	check_game_state(t_game *game);
 void	should_lock_key(t_game *game, t_clist *character);
 
 /*** utils_print.c ***/
-void	handle_process_error(t_game *game, char *err_msg);
+void	handle_error(t_game *game, char *err_msg);
 void	put_steps(t_game *game);
 void	put_end_message(char *message);
 void	put_error_message(char *message);
