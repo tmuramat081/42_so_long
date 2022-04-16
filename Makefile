@@ -122,8 +122,6 @@ ${NAME}: ${OBJS} ${LIBFT} ${MLX}
 	@${CC} ${CFLAGS} ${INCS} ${OBJS} ${LIBFT} ${MLX} ${MFLAGS} -o $@
 	@echo "${DEL}${BLUE}--- ${NAME} is up to date! ---${DEFAULT}${CR}"
 
-all: ${NAME} ${OBJ_DIR}
-
 ${LIBFT}:
 	@${MAKE} -C ${LIBFTDIR}
 
@@ -133,6 +131,8 @@ ${MLX}:
 ${OBJ_DIR}%.o: ${SRC_DIR}%.c
 	@${PROGRESS}
 	@${CC} ${CFLAGS} ${INCS} -O3 -c $< ${KEY_MACRO} -o $@
+
+all: ${NAME}
 
 bonus:
 	@${MAKE} WITH_BONUS=1 --no-print-directory
