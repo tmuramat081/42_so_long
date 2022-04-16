@@ -159,7 +159,7 @@ void		eat_glass(t_clist *character);
 /*** game_enemy_s_bonus.c ***/
 void		set_enemy_s_dir(t_game *game, t_clist *character);
 t_dir		turn_eyes(t_game *game, t_clist *character);
-t_clist		*search_col_target(int col, t_clist *target);
+int			search_closest_player(int col, t_clist *target);
 
 /*** game_end_bonus.c ***/
 int			exit_game_normally(t_game *game);

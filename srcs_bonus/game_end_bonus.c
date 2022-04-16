@@ -77,7 +77,6 @@ void	free_game_buffer(t_game *game)
 
 int	exit_game_normally(t_game *game)
 {
-	put_steps(game);
 	free_game_buffer(game);
 	exit(EXIT_SUCCESS);
 	return (0);
