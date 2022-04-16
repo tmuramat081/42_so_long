@@ -53,7 +53,6 @@ PROGRESS = $(eval SRC_CNT = $(shell expr ${SRC_CNT} + 1)) \
 	${PRINTF} "${DEL}${GREEN}[ %d/%d (%d%%) ] ${CC} ${CFLAGS} $< ...${DEFAULT}${CR}" $(SRC_CNT) $(SRC_TOT) $(SRC_PCT)
 
 all	: $(NAME)
-	@echo "${BLUE}--- ${NAME} is up to date! ---${DEFAULT}"
 
 $(OBJ_DIR)/%.o: %.c
 	${PROGRESS}
@@ -63,6 +62,7 @@ $(NAME): $(OBJ)
 	@ar -r $(NAME) $(OBJ)
 	@ranlib ${NAME}
 	@cp $(NAME) $(NAME_UNAME)
+	@echo "${BLUE}--- ${NAME} is up to date! ---${DEFAULT}"
 
 check: all
 	@test/run_tests.sh

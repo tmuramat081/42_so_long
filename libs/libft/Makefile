@@ -62,13 +62,13 @@ PROGRESS = $(eval SRC_CNT = $(shell expr ${SRC_CNT} + 1)) \
 # Command
 ${NAME}: ${ALL_OBJS}
 	@${AR} ${NAME} ${ALL_OBJS}
+	@echo "${BLUE}--- ${NAME} is up to date! ---${DEFAULT}"
 
 ${OBJ_DIR}%.o: %.c
 	@${PROGRESS}
 	@${CC} ${CFLAGS} ${INCS} -c $< -o $@
 
 all: ${NAME}
-	@echo "${BLUE}--- ${NAME} is up to date! ---${DEFAULT}"
 
 clean:
 	${RM} ${ALL_OBJS}

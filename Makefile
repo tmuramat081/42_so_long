@@ -103,6 +103,7 @@ BLUE := \033[0;94m
 GREEN := \033[0;92m
 RED := \033[0;91m
 DEL := \033[2K
+MOVE := \033[1F
 CR := \033[1G
 
 # Progress variables
@@ -119,9 +120,9 @@ PROGRESS = ${eval SRC_CNT = ${shell expr ${SRC_CNT} + 1}} \
 # Main commands
 ${NAME}: ${OBJS} ${LIBFT} ${MLX}
 	@${CC} ${CFLAGS} ${INCS} ${OBJS} ${LIBFT} ${MLX} ${MFLAGS} -o $@
+	@echo "${BLUE}--- ${NAME} is up to date! ---${DEFAULT}"
 
 all: ${NAME} ${OBJ_DIR}
-	@echo "${BLUE}--- ${NAME} is up to date! ---${DEFAULT}"
 
 ${LIBFT}:
 	@${MAKE} -C ${LIBFTDIR}
