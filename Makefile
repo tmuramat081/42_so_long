@@ -102,7 +102,7 @@ DEFAULT := \033[0;39m
 BLUE := \033[0;94m
 GREEN := \033[0;92m
 RED := \033[0;91m
-DEL := \033[0K\033[1K
+DEL := \033[2K
 CR := \033[1G
 
 # Progress variables
