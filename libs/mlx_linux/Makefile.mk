@@ -62,7 +62,7 @@ $(NAME): $(OBJ)
 	@ar -r $(NAME) $(OBJ)
 	@ranlib ${NAME}
 	@cp $(NAME) $(NAME_UNAME)
-	@echo "${BLUE}--- ${NAME} is up to date! ---${DEFAULT}"
+	@echo "${DEL}${BLUE}--- ${NAME} is up to date! ---${DEFAULT}${CR}"
 
 check: all
 	@test/run_tests.sh

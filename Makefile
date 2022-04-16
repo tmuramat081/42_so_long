@@ -120,7 +120,7 @@ PROGRESS = ${eval SRC_CNT = ${shell expr ${SRC_CNT} + 1}} \
 # Main commands
 ${NAME}: ${OBJS} ${LIBFT} ${MLX}
 	@${CC} ${CFLAGS} ${INCS} ${OBJS} ${LIBFT} ${MLX} ${MFLAGS} -o $@
-	@echo "${BLUE}--- ${NAME} is up to date! ---${DEFAULT}"
+	@echo "${DEL}${BLUE}--- ${NAME} is up to date! ---${DEFAULT}${CR}"
 
 all: ${NAME} ${OBJ_DIR}
 
@@ -136,7 +136,7 @@ ${OBJ_DIR}%.o: ${SRC_DIR}%.c
 
 bonus:
 	@${MAKE} WITH_BONUS=1 --no-print-directory
-	@echo "${BLUE}--- ${NAME} bonus is up to date! ---${DEFAULT}"
+	@echo "${DEL}${BLUE}--- ${NAME} bonus is up to date! ---${DEFAULT}${CR}"
 
 clean:
 	${RM} ${OBJS} ${DEPS}
