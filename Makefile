@@ -118,9 +118,9 @@ PROGRESS = ${eval SRC_CNT = ${shell expr ${SRC_CNT} + 1}} \
 	$(SRC_CNT) $(SRC_TOT) $(SRC_PCT)
 
 # Main commands
-${NAME}: ${OBJS} ${LIBFT} ${MLX}
+${NAME}: ${LIBFT} ${MLX} ${OBJS}
+	@echo "\n${BLUE}--- ${NAME} is up to date! ---${DEFAULT}"
 	@${CC} ${CFLAGS} ${INCS} ${OBJS} ${LIBFT} ${MLX} ${MFLAGS} -o $@
-	@echo "${DEL}${BLUE}--- ${NAME} is up to date! ---${DEFAULT}${CR}"
 
 ${LIBFT}:
 	@${MAKE} -C ${LIBFTDIR}

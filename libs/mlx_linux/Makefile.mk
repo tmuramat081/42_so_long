@@ -56,13 +56,13 @@ all	: $(NAME)
 
 $(OBJ_DIR)/%.o: %.c
 	${PROGRESS}
-	$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
 
 $(NAME): $(OBJ)
+	@echo "\n${BLUE}--- ${NAME} is up to date! ---${DEFAULT}"
 	@ar -r $(NAME) $(OBJ)
 	@ranlib ${NAME}
 	@cp $(NAME) $(NAME_UNAME)
-	@echo "${DEL}${BLUE}--- ${NAME} is up to date! ---${DEFAULT}${CR}"
 
 check: all
 	@test/run_tests.sh
