@@ -75,9 +75,13 @@
 # define XPM_PLAYER_RIGHT "./img/player/right/"
 
 /////* Enemy image file directory (0-9.xpm) */////
-# define XPM_ENEMY_UP "./img/enemy/up/"
-# define XPM_ENEMY_DOWN "./img/enemy/down/"
-# define XPM_ENEMY_LEFT "./img/enemy/left/"
-# define XPM_ENEMY_RIGHT "./img/enemy/right/"
+# define XPM_ENEMY_L_UP "./img/enemy_l/up/"
+# define XPM_ENEMY_L_DOWN "./img/enemy_l/down/"
+# define XPM_ENEMY_L_LEFT "./img/enemy_l/left/"
+# define XPM_ENEMY_L_RIGHT "./img/enemy_l/right/"
 
+# define XPM_ENEMY_S_UP "./img/enemy_s/up/"
+# define XPM_ENEMY_S_DOWN "./img/enemy_s/down/"
+# define XPM_ENEMY_S_LEFT "./img/enemy_s/left/"
+# define XPM_ENEMY_S_RIGHT "./img/enemy_s/right/"
 #endif

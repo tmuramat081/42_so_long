@@ -42,7 +42,9 @@ typedef enum e_dir {
 typedef enum e_type {
 	TYPE_NONE = 0,
 	TYPE_PLAYER = 1 << 0,
-	TYPE_ENEMY = 1 << 1,
+	TYPE_ENEMY_L = 1 << 1,
+	TYPE_ENEMY_S = 1 << 2,
+	TYPE_ENEMY = TYPE_ENEMY_L | TYPE_ENEMY_S,
 	TYPE_ALL = ~0
 }	t_typ;
 
@@ -62,7 +64,8 @@ typedef struct s_img {
 	void	*collect;
 	void	*exit;
 	void	*player[DIR_END][NUM_FRAMES];
-	void	*enemy[DIR_END][NUM_FRAMES];
+	void	*enemy_l[DIR_END][NUM_FRAMES];
+	void	*enemy_s[DIR_END][NUM_FRAMES];
 	void	*digit[10];
 	void	*menu;
 	void	*logo;
@@ -147,11 +150,16 @@ bool		wall_exists(t_game *game, t_vector2 next);
 void		detect_character_collision(t_game *game, t_clist *character);
 t_clist		*target_exists(t_vector2 pos, t_vector2 next_pos, t_clist *target);
 
-/*** game_enemy_bonus.c ***/
-void		set_enemy_dir(t_game *game, t_clist *character);
+/*** game_enemy_l_bonus.c ***/
+void		set_enemy_l_dir(t_game *game, t_clist *character);
 void		turn_around(t_clist *character);
 void		go_straight(t_clist *character);
 void		eat_glass(t_clist *character);
+
+/*** game_enemy_s_bonus.c ***/
+void		set_enemy_s_dir(t_game *game, t_clist *character);
+t_dir		turn_eyes(t_game *game, t_clist *character);
+t_clist		*search_col_target(int col, t_clist *target);
 
 /*** game_end_bonus.c ***/
 int			exit_game_normally(t_game *game);

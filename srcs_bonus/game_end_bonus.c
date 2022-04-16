@@ -24,7 +24,8 @@ void	free_animation_images(t_game *game, t_img img)
 		while (j < NUM_FRAMES)
 		{
 			destroy_image(game->mlx, img.player[i][j]);
-			destroy_image(game->mlx, img.enemy[i][j]);
+			destroy_image(game->mlx, img.enemy_l[i][j]);
+			destroy_image(game->mlx, img.enemy_s[i][j]);
 			j++;
 		}
 		i++;

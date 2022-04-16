@@ -39,8 +39,10 @@ void	parse_grid_object(char *map_line, size_t y, t_game *game)
 			game->cnt_collect += 1;
 		else if (map_line[x] == 'P')
 			character_lstnew(game, (t_vector2){x, y}, TYPE_PLAYER);
-		else if (map_line[x] == 'O')
-			character_lstnew(game, (t_vector2){x, y}, TYPE_ENEMY);
+		else if (map_line[x] == 'L')
+			character_lstnew(game, (t_vector2){x, y}, TYPE_ENEMY_L);
+		else if (map_line[x] == 'S')
+			character_lstnew(game, (t_vector2){x, y}, TYPE_ENEMY_S);
 		x++;
 	}
 }

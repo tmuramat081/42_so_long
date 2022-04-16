@@ -13,7 +13,8 @@ ifdef WITH_BONUS
 			render_animation_bonus.c \
 			game_bonus.c \
 			game_player_bonus.c \
-			game_enemy_bonus.c \
+			game_enemy_l_bonus.c \
+			game_enemy_s_bonus.c \
 			game_object_bonus.c \
 			game_collision_bonus.c \
 			game_state_bonus.c \

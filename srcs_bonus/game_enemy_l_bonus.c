@@ -46,7 +46,7 @@ void	turn_around(t_clist *character)
 	}
 }
 
-void	set_enemy_dir(t_game *game, t_clist *character)
+void	set_enemy_l_dir(t_game *game, t_clist *character)
 {
 	t_vector2	next;
 

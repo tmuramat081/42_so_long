@@ -32,7 +32,7 @@ SRC	= mlx_init.c mlx_new_window.c mlx_pixel_put.c mlx_loop.c \
 	mlx_rgb.c mlx_destroy_image.c mlx_mouse.c mlx_screen_size.c \
 	mlx_destroy_display.c
 
-OBJ_DIR = obj
+OBJ_DIR = obj/
 OBJ	= $(addprefix $(OBJ_DIR)/,$(SRC:%.c=%.o))
 CFLAGS	= -O3 -I$(INC)
 
@@ -47,7 +47,7 @@ RED = \033[0;91m
 SRC_TOT := ${shell expr ${words ${SRC}} - ${shell ls -l ${OBJ_DIR}/ | grep .o$ | wc -l} + 1}
 SRC_CNT := 0
 SRC_PCT = $(shell expr 100 \* $(SRC_CNT) / $(SRC_TOT))
-PROGRESS = $(eval SRC_COUNT = $(shell expr ${SRC_CNT} + 1)) \
+PROGRESS = $(eval SRC_CNT = $(shell expr ${SRC_CNT} + 1)) \
 	${PRINTF} "${GREEN}\r%100s\r[ %d/%d (%d%%) ] ${CC} ${CFLAGS} $< ...${DEFAULT}" "" $(SRC_CNT) $(SRC_TOT) $(SRC_PCT)
 
 all	: $(NAME)

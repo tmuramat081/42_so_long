@@ -13,17 +13,24 @@
 #include "so_long_bonus.h"
 #include "ft_snprintf.h"
 
-const char	*g_player_directory[4] = {
+const char	*g_player_dir[4] = {
 	XPM_PLAYER_DOWN,
 	XPM_PLAYER_UP,
 	XPM_PLAYER_LEFT,
 	XPM_PLAYER_RIGHT,
 };
-const char	*g_enemy_directory[4] = {
-	XPM_ENEMY_DOWN,
-	XPM_ENEMY_UP,
-	XPM_ENEMY_LEFT,
-	XPM_ENEMY_RIGHT,
+const char	*g_enemy_l_dir[4] = {
+	XPM_ENEMY_L_DOWN,
+	XPM_ENEMY_L_UP,
+	XPM_ENEMY_L_LEFT,
+	XPM_ENEMY_L_RIGHT,
+};
+
+const char	*g_enemy_s_dir[4] = {
+	XPM_ENEMY_S_DOWN,
+	XPM_ENEMY_S_UP,
+	XPM_ENEMY_S_LEFT,
+	XPM_ENEMY_S_RIGHT,
 };
 
 void	load_character_frames(t_game *game, void **img, const char *directory)
@@ -47,8 +54,9 @@ void	load_animation(t_game *game)
 	i = 0;
 	while (i < DIR_END)
 	{
-		load_character_frames(game, game->img.player[i], g_player_directory[i]);
-		load_character_frames(game, game->img.enemy[i], g_enemy_directory[i]);
+		load_character_frames(game, game->img.player[i], g_player_dir[i]);
+		load_character_frames(game, game->img.enemy_l[i], g_enemy_l_dir[i]);
+		load_character_frames(game, game->img.enemy_s[i], g_enemy_s_dir[i]);
 		i++;
 	}
 }

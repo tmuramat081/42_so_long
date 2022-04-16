@@ -15,7 +15,7 @@
 
 void	check_grid_object(char grid, t_chk *map_checker)
 {
-	if (grid == '0' || grid == 'P' || grid == 'O')
+	if (grid == '0' || grid == 'P' || grid == 'L' || grid == 'S')
 		return ;
 	else if (grid == 'C')
 		map_checker->exists_collect = true;

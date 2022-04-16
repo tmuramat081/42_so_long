@@ -21,8 +21,10 @@ void	*get_animation_image(t_game *game, t_clist *character)
 	frame = game->frame / LTD_FRAMES;
 	if (character->type == TYPE_PLAYER)
 		img = game->img.player[character->dir][frame];
-	else if (character->type == TYPE_ENEMY)
-		img = game->img.enemy[character->dir][frame];
+	else if (character->type == TYPE_ENEMY_L)
+		img = game->img.enemy_l[character->dir][frame];
+	else if (character->type == TYPE_ENEMY_S)
+		img = game->img.enemy_s[character->dir][frame];
 	else
 		img = game->img.back;
 	return (img);

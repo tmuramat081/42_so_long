@@ -35,7 +35,8 @@ int	update_game(t_game *game)
 	t_timespec	start_time;
 
 	clock_gettime(CLOCK_REALTIME, &start_time);
-	char_lstiter(game, &set_enemy_dir, TYPE_ENEMY);
+	char_lstiter(game, &set_enemy_l_dir, TYPE_ENEMY_L);
+	char_lstiter(game, &set_enemy_s_dir, TYPE_ENEMY_S);
 	char_lstiter(game, &manage_object_event, TYPE_PLAYER);
 	char_lstiter(game, &detect_character_collision, TYPE_ALL);
 	check_game_state(game);

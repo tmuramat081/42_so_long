@@ -16,7 +16,7 @@ t_clist	*target_exists(t_vector2 pos, t_vector2 next_pos, t_clist *target)
 {
 	while (target)
 	{
-		if (target->type == TYPE_PLAYER
+		if (target->type != TYPE_ENEMY_L
 			&& ft_vector_cmp(pos, target->pos) == false
 			&& ft_vector_cmp(next_pos, target->pos) == true)
 			return (target);
@@ -34,7 +34,8 @@ void	detect_character_collision(t_game *game, t_clist	*character)
 	target = target_exists(character->pos, next_pos, game->character);
 	if (!target)
 		return ;
-	else if (target->type != character->type)
+	else if ((character->type & TYPE_PLAYER && target->type & TYPE_ENEMY)
+		|| (character->type & TYPE_ENEMY && target->type & TYPE_PLAYER))
 	{
 		put_end_message(LOSE_GAME);
 		exit_game_normally(game);
