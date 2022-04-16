@@ -49,7 +49,7 @@ DEPS := ${addprefix ${OBJ_DIR}, ${SRCS:.c=.d}}
 ifeq (${shell uname}, Linux)
 	MLXDIR := libs/mlx_linux/
 	MLX := ${MLXDIR}/libmlx.a
-	MFLAGS := -lXext -lX11 -lm -lz
+	MFLAGS := -lXext -lX11 -lm
 	KEY_MACRO := -D KEYCODE_LINUX
 else
 	MLXDIR := libs/mlx_mms/
@@ -120,6 +120,7 @@ ${NAME}: ${OBJS} ${LIBFT} ${MLX}
 	@${CC} ${CFLAGS} ${INCS} ${OBJS} ${LIBFT} ${MLX} ${MFLAGS} -o $@
 
 all: ${NAME}
+	@mkdir ${OBJ_DIR}
 	@echo "${BLUE}--- ${NAME} is up to date! ---${DEFAULT}"
 
 ${LIBFT}:
@@ -133,6 +134,7 @@ ${OBJ_DIR}%.o: ${SRC_DIR}%.c
 	@${CC} ${CFLAGS} ${INCS} -O3 -c $< ${KEY_MACRO} -o $@
 
 bonus:
+	@mkdir ${OBJ_DIR}
 	@${MAKE} WITH_BONUS=1 --no-print-directory
 	@echo "${BLUE}--- ${NAME} bonus is up to date! ---${DEFAULT}"
 
