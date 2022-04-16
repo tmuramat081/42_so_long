@@ -119,8 +119,8 @@ PROGRESS = ${eval SRC_CNT = ${shell expr ${SRC_CNT} + 1}} \
 ${NAME}: ${OBJS} ${LIBFT} ${MLX}
 	@${CC} ${CFLAGS} ${INCS} ${OBJS} ${LIBFT} ${MLX} ${MFLAGS} -o $@
 
-all: ${NAME}
-	@mkdir ${OBJ_DIR}
+all: ${NAME} ${OBJ_DIR}
+
 	@echo "${BLUE}--- ${NAME} is up to date! ---${DEFAULT}"
 
 ${LIBFT}:
@@ -134,7 +134,6 @@ ${OBJ_DIR}%.o: ${SRC_DIR}%.c
 	@${CC} ${CFLAGS} ${INCS} -O3 -c $< ${KEY_MACRO} -o $@
 
 bonus:
-	@mkdir ${OBJ_DIR}
 	@${MAKE} WITH_BONUS=1 --no-print-directory
 	@echo "${BLUE}--- ${NAME} bonus is up to date! ---${DEFAULT}"
 
