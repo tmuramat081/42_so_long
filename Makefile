@@ -112,7 +112,7 @@ endif
 SRC_CNT := 0
 SRC_PCT = ${shell expr 100 \* ${SRC_CNT} / ${SRC_TOT}}
 PROGRESS = ${eval SRC_CNT = ${shell expr ${SRC_CNT} + 1}} \
-	${PRINTF} "${GREEN}${CR}%100s${CR}[ %d/%d (%d%%) ] ${CC} ${CFLAGS} $< ...${DEFAULT}" "" \
+	${PRINTF} "${GREEN}\033[1K$[ %d/%d (%d%%) ] ${CC} ${CFLAGS} $< ...${DEFAULT}${CR}" \
 	$(SRC_CNT) $(SRC_TOT) $(SRC_PCT)
 
 # Main commands
@@ -120,7 +120,6 @@ ${NAME}: ${OBJS} ${LIBFT} ${MLX}
 	@${CC} ${CFLAGS} ${INCS} ${OBJS} ${LIBFT} ${MLX} ${MFLAGS} -o $@
 
 all: ${NAME} ${OBJ_DIR}
-
 	@echo "${BLUE}--- ${NAME} is up to date! ---${DEFAULT}"
 
 ${LIBFT}:
