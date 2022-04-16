@@ -42,7 +42,7 @@ DEFAULT = \033[0;39m
 BLUE = \033[0;94m
 GREEN = \033[0;92m
 RED = \033[0;91m
-DEL := \033[0K\033[1K
+DEL := \033[2K
 CR := \033[1G
 
 # Progress variables
@@ -53,16 +53,16 @@ PROGRESS = $(eval SRC_CNT = $(shell expr ${SRC_CNT} + 1)) \
 	${PRINTF} "${DEL}${GREEN}[ %d/%d (%d%%) ] ${CC} ${CFLAGS} $< ...${DEFAULT}${CR}" $(SRC_CNT) $(SRC_TOT) $(SRC_PCT)
 
 all	: $(NAME)
+	@echo "${BLUE}--- ${NAME} is up to date! ---${DEFAULT}"
 
 $(OBJ_DIR)/%.o: %.c
-	${PROGRESS} 
+	${PROGRESS}
 	$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
 
 $(NAME): $(OBJ)
 	@ar -r $(NAME) $(OBJ)
 	@ranlib ${NAME}
 	@cp $(NAME) $(NAME_UNAME)
-	@echo "\n${BLUE}--- ${NAME} is up to date! ---${DEFAULT}"
 
 check: all
 	@test/run_tests.sh

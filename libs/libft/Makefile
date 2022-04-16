@@ -46,7 +46,7 @@ DEFAULT = \033[0;39m
 BLUE = \033[0;94m
 GREEN = \033[0;92m
 RED = \033[0;91m
-DEL := \033[0K\033[1K
+DEL := \033[2K
 CR := \033[1G
 
 # Progress variables
@@ -62,13 +62,13 @@ PROGRESS = $(eval SRC_CNT = $(shell expr ${SRC_CNT} + 1)) \
 # Command
 ${NAME}: ${ALL_OBJS}
 	@${AR} ${NAME} ${ALL_OBJS}
-	@echo "\n${BLUE}--- ${NAME} is up to date! ---${DEFAULT}"
 
 ${OBJ_DIR}%.o: %.c
 	@${PROGRESS}
 	@${CC} ${CFLAGS} ${INCS} -c $< -o $@
 
 all: ${NAME}
+	@echo "${BLUE}--- ${NAME} is up to date! ---${DEFAULT}"
 
 clean:
 	${RM} ${ALL_OBJS}
