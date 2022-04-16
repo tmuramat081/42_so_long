@@ -121,7 +121,7 @@ ${NAME}: ${OBJS} ${LIBFT} ${MLX}
 	@${CC} ${CFLAGS} ${INCS} ${OBJS} ${LIBFT} ${MLX} ${MFLAGS} -o $@
 
 all: ${NAME} ${OBJ_DIR}
-	@echo "\n${BLUE}--- ${NAME} is up to date! ---${DEFAULT}"
+	@echo "${BLUE}--- ${NAME} is up to date! ---${DEFAULT}"
 
 ${LIBFT}:
 	@${MAKE} -C ${LIBFTDIR}
@@ -135,7 +135,7 @@ ${OBJ_DIR}%.o: ${SRC_DIR}%.c
 
 bonus:
 	@${MAKE} WITH_BONUS=1 --no-print-directory
-	@echo "\n${BLUE}--- ${NAME} bonus is up to date! ---${DEFAULT}"
+	@echo "${BLUE}--- ${NAME} bonus is up to date! ---${DEFAULT}"
 
 clean:
 	${RM} ${OBJS} ${DEPS}
