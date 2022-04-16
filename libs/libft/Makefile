@@ -46,6 +46,8 @@ DEFAULT = \033[0;39m
 BLUE = \033[0;94m
 GREEN = \033[0;92m
 RED = \033[0;91m
+DEL := \033[0K\033[1K
+CR := \033[1G
 
 # Progress variables
 SRC_TOT := ${shell expr ${words ${ALL_SRCS}} - ${shell ls -l ${OBJ_DIR} | grep .o$ | wc -l} + 1}
@@ -55,7 +57,7 @@ endif
 SRC_CNT := 0
 SRC_PCT = $(shell expr 100 \* $(SRC_CNT) / $(SRC_TOT))
 PROGRESS = $(eval SRC_CNT = $(shell expr ${SRC_CNT} + 1)) \
-	${PRINTF} "${GREEN}\r%100s\r[ %d/%d (%d%%) ] ${CC} ${CFLAGS} $< ...${DEFAULT}" "" $(SRC_CNT) $(SRC_TOT) $(SRC_PCT)
+	${PRINTF} "${DEL}${GREEN}[ %d/%d (%d%%) ] ${CC} ${CFLAGS} $< ...${DEFAULT}${CR}" $(SRC_CNT) $(SRC_TOT) $(SRC_PCT)
 
 # Command
 ${NAME}: ${ALL_OBJS}
