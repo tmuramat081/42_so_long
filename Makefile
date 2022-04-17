@@ -48,13 +48,13 @@ DEPS := ${addprefix ${OBJ_DIR}, ${SRCS:.c=.d}}
 
 ifeq (${shell uname}, Linux)
 	MLXDIR := libs/mlx_linux/
-	MLX := ${MLXDIR}libmlx.a
-	MFLAGS := -L./${MLXDIR} -lXext -lX11
+	MLX := libmlx.a
+	MFLAGS := -L. -L./${MLXDIR} -lXext -lX11
 	KEY_MACRO := -D FOR_LINUX
 else
 	MLXDIR := libs/mlx_mms/
-	MLX := ${MLXDIR}libmlx.dylib
-	MFLAGS := -L./${MLXDIR} -framework OpenGL -framework AppKit
+	MLX := libmlx.dylib
+	MFLAGS := -L. -L./${MLXDIR} -framework OpenGL -framework AppKit -lz
 	KEY_MACRO := -D FOR_MAC
 endif
 
@@ -120,14 +120,14 @@ PROGRESS = ${eval SRC_CNT = ${shell expr ${SRC_CNT} + 1}} \
 # Main commands
 ${NAME}: ${LIBFT} ${MLX} ${OBJS}
 	@echo "\n${BLUE}--- ${NAME} is up to date! ---${DEFAULT}"
-	@${CC} ${CFLAGS} ${INCS} ${OBJS} ${LIBFT} ${MFLAGS} ${MLX} -o $@
+	@${CC} ${CFLAGS} ${INCS} ${OBJS} ${LIBFT} ${MLX} ${MFLAGS} -o $@
 
 ${LIBFT}:
 	@${MAKE} -C ${LIBFTDIR}
 
 ${MLX}:
 	@${MAKE} -C ${MLXDIR}
-
+	cp ${MLXDIR}${MLX} .
 ${OBJ_DIR}%.o: ${SRC_DIR}%.c
 	@${PROGRESS}
 	@${CC} ${CFLAGS} ${INCS} -O3 -c $< ${KEY_MACRO} -o $@
@@ -148,7 +148,7 @@ ifndef WITH_BONUS
 endif
  
 fclean: clean
-	${RM} ${NAME}
+	${RM} ${NAME} ${MLX}
 	${MAKE} fclean -C ${LIBFTDIR}
 	@echo "${RED}--- Executable file has been deleted. ---${DEFAULT}"
 
