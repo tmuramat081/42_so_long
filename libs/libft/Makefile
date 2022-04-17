@@ -4,15 +4,64 @@ CC = gcc
 
 VPATH = ${CHR_DIR}:${STR_DIR}:${MEM_DIR}:${MTH_DIR}:${CNV_DIR}:${PUT_DIR}:${LST_DIR}:${GNL_DIR}:${PRF_DIR}:${SPRF_DIR}
 
-CHR_SRCS = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_isspace.c
-STR_SRCS = ft_strlen.c ft_split.c ft_strchr.c ft_strcspn.c ft_strdup.c ft_striteri.c ft_strjoin.c ft_strlcat.c ft_strlcpy.c \
-	ft_strmapi.c ft_strncmp.c ft_strnstr.c ft_strrchr.c ft_strtol_d.c ft_substr.c ft_strtoupper.c
-MEM_SRCS = ft_bzero.c ft_calloc.c ft_free_matrix.c ft_matrixdup.c ft_matrixlen.c ft_memchr.c ft_memcmp.c ft_memcpy.c ft_memmove.c ft_memset.c
-MTH_SRCS = ft_abs.c ft_vector_add.c ft_vector_cmp.c ft_vector_lerp.c ft_vector_mul.c ft_vector_sub.c \
-	ft_diff_timespec.c
-CNV_SRCS = ft_atoi.c ft_itoa.c ft_tolower.c ft_toupper.c
-PUT_SRCS = ft_putchar_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c
-LST_SRCS = ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c ft_lstiter.c ft_lstlast.c ft_lstmap.c ft_lstnew.c ft_lstsize.c
+CHR_SRCS = ft_isalpha.c \
+		ft_isdigit.c \
+		ft_isalnum.c \
+		ft_isascii.c \
+		ft_isprint.c \
+		ft_isspace.c
+STR_SRCS = ft_strlen.c \
+		ft_split.c \
+		ft_strchr.c \
+		ft_strcspn.c \
+		ft_strdup.c \
+		ft_striteri.c \
+		ft_strjoin.c \
+		ft_strlcat.c \
+		ft_strlcpy.c \
+		ft_strmapi.c \
+		ft_strncmp.c \
+		ft_strnstr.c \
+		ft_strrchr.c \
+		ft_strtol_d.c \
+		ft_substr.c \
+		ft_strtoupper.c \
+		ft_strtrim.c
+MEM_SRCS = ft_bzero.c \
+		ft_calloc.c \
+		ft_free_matrix.c \
+		ft_matrixdup.c \
+		ft_matrixlen.c \
+		ft_memchr.c \
+		ft_memcmp.c \
+		ft_memcpy.c \
+		ft_memmove.c \
+		ft_memset.c
+MTH_SRCS = ft_abs.c \
+		ft_vector_add.c \
+		ft_vector_cmp.c \
+		ft_vector_lerp.c \
+		ft_vector_mul.c \
+		ft_vector_sub.c \
+		ft_diff_timespec.c \
+		ft_count_digits.c
+CNV_SRCS = ft_atoi.c \
+		ft_itoa.c \
+		ft_tolower.c \
+		ft_toupper.c
+PUT_SRCS = ft_putchar_fd.c \
+		ft_putendl_fd.c \
+		ft_putnbr_fd.c \
+		ft_putstr_fd.c
+LST_SRCS = ft_lstadd_back.c \
+		ft_lstadd_front.c \
+		ft_lstclear.c \
+		ft_lstiter.c \
+		ft_lstlast.c \
+		ft_lstmap.c \
+		ft_lstnew.c \
+		ft_lstsize.c \
+		ft_lstdelone.c
 GNL_SRCS = get_next_line.c
 PRF_SRCS = ft_printf.c doprintf.c composer.c parser.c converter.c utils.c printer.c
 SPRF_SRCS = ft_snprintf.c sconverter.c sutils.c
@@ -50,7 +99,7 @@ DEL := \033[2K
 CR := \033[1G
 
 # Progress variables
-SRC_TOT := ${shell expr ${words ${ALL_SRCS}} - ${shell ls -l ${OBJ_DIR} | grep .o$ | wc -l} + 1}
+SRC_TOT := ${shell expr ${words ${ALL_SRCS}} - $(shell ls -l $(OBJ_DIR) | grep .o$ | wc -l)}
 ifndef SRC_TOT
 	SRC_TOT := ${words ${ALL_SRCS}}
 endif
