@@ -14,6 +14,13 @@
 
 const double	g_frame_time = 1.0 / FPS_MAX;
 
+int	exit_game_normally(t_game *game)
+{
+	free_game_buffer(game);
+	exit(EXIT_SUCCESS);
+	return (0);
+}
+
 /* Limit max FPS(Frame Per Second), using usleep function. */
 void	limit_frame_rate(t_timespec *start_time)
 {

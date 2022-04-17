@@ -14,9 +14,9 @@
 # define GAME_CONFIG_H
 
 /***** Key binding for Mac. *****/
-# ifdef KEYCODE_MAC
+# ifdef FOR_MAC
 #  define KEY_A 0
-#  define KEY_D 1
+#  define KEY_D 2
 #  define KEY_W 13
 #  define KEY_S 1
 #  define KEY_Q 12

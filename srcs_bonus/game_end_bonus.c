@@ -60,6 +60,22 @@ void	free_images(t_game *game)
 	free_animation_images(game, img);
 }
 
+#ifdef FOR_MAC
+void	free_game_buffer(t_game *game)
+{
+	if (game->map)
+		ft_free_matrix(&game->map);
+	character_lstclear(&game->character);
+	free_images(game);
+	if (game->win)
+	{
+		mlx_clear_window(game->mlx, game->win);
+		mlx_destroy_window(game->mlx, game->win);
+	}
+	free(game->mlx);
+}
+#else
+
 void	free_game_buffer(t_game *game)
 {
 	if (game->map)
@@ -74,10 +90,4 @@ void	free_game_buffer(t_game *game)
 	mlx_destroy_display(game->mlx);
 	free(game->mlx);
 }
-
-int	exit_game_normally(t_game *game)
-{
-	free_game_buffer(game);
-	exit(EXIT_SUCCESS);
-	return (0);
-}
+#endif

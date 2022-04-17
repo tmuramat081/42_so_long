@@ -104,6 +104,7 @@ void	render_character(t_game *game, t_clist *character);
 /*** game.c ***/
 void	set_game_hooks(t_game *game);
 int		update_game(t_game *game);
+int		exit_game_normally(t_game *game);
 
 /*** game_player.c ***/
 int		input_key_entry(int keycode, t_game *game);
@@ -124,7 +125,6 @@ void	check_game_state(t_game *game);
 void	update_position(t_game *game, t_clist *character);
 
 /*** game_end.c ***/
-int		exit_game_normally(t_game *game);
 void	free_game_buffer(t_game *game);
 void	free_images(t_game *game);
 void	free_counter_images(t_game *game, t_img img);

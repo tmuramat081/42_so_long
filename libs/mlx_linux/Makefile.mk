@@ -33,7 +33,7 @@ SRC	= mlx_init.c mlx_new_window.c mlx_pixel_put.c mlx_loop.c \
 	mlx_destroy_display.c
 
 OBJ_DIR = obj/
-OBJ	= $(addprefix $(OBJ_DIR)/,$(SRC:%.c=%.o))
+OBJ	= $(addprefix $(OBJ_DIR),$(SRC:%.c=%.o))
 CFLAGS	= -O3 -I$(INC)
 
 # Print variables
@@ -54,7 +54,7 @@ PROGRESS = $(eval SRC_CNT = $(shell expr ${SRC_CNT} + 1)) \
 
 all	: $(NAME)
 
-$(OBJ_DIR)/%.o: %.c
+$(OBJ_DIR)%.o: %.c
 	${PROGRESS}
 	@$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
 

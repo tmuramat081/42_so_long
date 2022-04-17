@@ -135,6 +135,7 @@ void		*get_animation_image(t_game *game, t_clist *character);
 void		set_game_hooks(t_game *game);
 int			update_game(t_game *game);
 void		limit_frame_rate(t_timespec *start_time);
+int			exit_game_normally(t_game *game);
 
 /*** game_player_bonus.c ***/
 int			check_key_entry(int keycode, t_game *game);
@@ -162,7 +163,6 @@ t_dir		turn_eyes(t_game *game, t_clist *character);
 int			search_closest_player(int col, t_clist *target);
 
 /*** game_end_bonus.c ***/
-int			exit_game_normally(t_game *game);
 void		free_game_buffer(t_game *game);
 void		free_images(t_game *game);
 void		free_counter_images(t_game *game, t_img img);

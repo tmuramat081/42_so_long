@@ -12,6 +12,13 @@
 
 #include "so_long.h"
 
+int	exit_game_normally(t_game *game)
+{
+	free_game_buffer(game);
+	exit(EXIT_SUCCESS);
+	return (0);
+}
+
 int	update_game(t_game *game)
 {
 	char_lstiter(game, &manage_object_event, TYPE_PLAYER);

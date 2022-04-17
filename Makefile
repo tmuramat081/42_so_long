@@ -48,14 +48,14 @@ DEPS := ${addprefix ${OBJ_DIR}, ${SRCS:.c=.d}}
 
 ifeq (${shell uname}, Linux)
 	MLXDIR := libs/mlx_linux/
-	MLX := ${MLXDIR}/libmlx.a
-	MFLAGS := -lXext -lX11 -lm
-	KEY_MACRO := -D KEYCODE_LINUX
+	MLX := ${MLXDIR}libmlx.a
+	MFLAGS := -L./${MLXDIR} -lXext -lX11
+	KEY_MACRO := -D FOR_LINUX
 else
 	MLXDIR := libs/mlx_mms/
-	MLX := ${MLXDIR}/libmlx.dylib
-	MFLAGS := -L -framework OpenGL -framework Appkit
-	KEY_MACRO := -D KEYCODE_MAC
+	MLX := ${MLXDIR}libmlx.dylib
+	MFLAGS := -L./${MLXDIR} -framework OpenGL -framework AppKit
+	KEY_MACRO := -D FOR_MAC
 endif
 
 LIBFTDIR := libs/libft/
@@ -120,7 +120,7 @@ PROGRESS = ${eval SRC_CNT = ${shell expr ${SRC_CNT} + 1}} \
 # Main commands
 ${NAME}: ${LIBFT} ${MLX} ${OBJS}
 	@echo "\n${BLUE}--- ${NAME} is up to date! ---${DEFAULT}"
-	@${CC} ${CFLAGS} ${INCS} ${OBJS} ${LIBFT} ${MLX} ${MFLAGS} -o $@
+	@${CC} ${CFLAGS} ${INCS} ${OBJS} ${LIBFT} ${MFLAGS} ${MLX} -o $@
 
 ${LIBFT}:
 	@${MAKE} -C ${LIBFTDIR}
