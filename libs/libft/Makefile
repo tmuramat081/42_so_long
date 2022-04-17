@@ -99,7 +99,7 @@ DEL := \033[2K
 CR := \033[1G
 
 # Progress variables
-SRC_TOT := ${shell expr ${words ${ALL_SRCS}} - $(shell ls -l $(OBJ_DIR) | grep .o$ | wc -l)}
+SRC_TOT := ${shell expr ${words ${ALL_SRCS}} - $(shell ls -l $(OBJ_DIR) | grep .o$ | wc -l) + 1}
 ifndef SRC_TOT
 	SRC_TOT := ${words ${ALL_SRCS}}
 endif
