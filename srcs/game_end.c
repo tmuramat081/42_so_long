@@ -37,6 +37,7 @@ void	free_images(t_game *game)
 }
 
 #ifdef FOR_MAC
+
 void	free_game_buffer(t_game *game)
 {
 	if (game->map)
