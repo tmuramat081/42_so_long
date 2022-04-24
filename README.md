@@ -33,3 +33,11 @@ chosing the shortest possible route.
 - Multiple characters
 - Limiter of max FPS
 - Linier interpolation (LERP)
+
+## Thanks
+- This game uses the following image materials.  
+"Sprout Lands" by Cup Nooble  
+https://cupnooble.itch.io/sprout-lands-asset-pac  
+
+- *And thanks for all the student of 42 Tokyo!*  
+https://42tokyo.jp/
