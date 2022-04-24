@@ -11,7 +11,7 @@ You operate characters to collect fruits. After collecting all fruits, head for 
 
 ## How to play ?
 This game works on Linux.  
-Although it works on Mac OS, The rendering may be unstable (Now we are optimizing it, so please wait...).  
+Although it works on Mac OS, the rendering may be unstable (Now we are optimizing it, so please wait...).  
   
 <img src="thumbnails/image1.jpg" width="400px">  
 
