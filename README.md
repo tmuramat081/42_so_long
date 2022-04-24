@@ -1,4 +1,4 @@
-# So Long (for project of 42 Tokyo)
+# So Long (2D simple game for project of 42 Tokyo)
 -- And thanks for all the animal! --
 
 ## What is this ?
