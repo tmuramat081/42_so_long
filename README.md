@@ -5,7 +5,7 @@
 
 ## What is this ?
 This is a simple 2D game, written in C.  
-You operate characters to collect fruits. After collecting all fruits, head for the stump!  
+You operate characters to collect fruits. After collecting all, head for the stump!  
   
 <img src="thumbnails/image2.jpg" width="400px">  
 
