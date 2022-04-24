@@ -1,5 +1,5 @@
 # So Long (project of 42 Tokyo)
--- And thanks for all the animal! --  
+*--And thanks for all the animal!*
   
 <img src="thumbnails/image0.jpg" width="400px">  
 
