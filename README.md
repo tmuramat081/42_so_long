@@ -38,7 +38,7 @@ chosing the shortest possible route.
 ## Reference
 ### Data structure  
 https://gitmind.com/app/flowchart/a4010228373
-### Flow of game loop  
+### Flow diagram  
 https://gitmind.com/app/flowchart/9ce10244397
 
 ## Thanks
