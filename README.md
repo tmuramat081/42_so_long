@@ -1,13 +1,13 @@
 # So Long (project of 42 Tokyo)
-!(thmbnails/image0.jpg)
+!(thumbnails/image0.jpg)
 -- And thanks for all the animal! --
 
 ## What is this ?
-!(thmbnails/image1.jpg)
+!(thumbnails/image1.jpg)
 This is a simple 2D game, written in C. You operate characters to collect fruits. After collecting all fruits, head for the stump!
 
 ## How to play ?
-!(thmbnails/image2.jpg)
+!(thumbnails/image2.jpg)
 This game works on Linux.
 Although it works on Mac OS, The rendering may be unstable (Now we are optimizing it, so please wait...). 
 
