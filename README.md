@@ -39,7 +39,7 @@ chosing the shortest possible route.
 "Sprout Lands" by Cup Nooble  
 https://cupnooble.itch.io/sprout-lands-asset-pack  
 
-- *And thanks for all the student of 42 Tokyo!*  
+- *And thanks for all the student, staff, sponser of 42 Tokyo!*  
 https://42tokyo.jp/
 
 ## Authors
