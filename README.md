@@ -4,8 +4,7 @@
 <img src="thumbnails/image0.jpg" width="400px">  
 
 ## What is this ?
-This is a simple 2D game, written in C.  
-You operate characters to collect fruits.  
+This is a simple 2D game, written in C. You operate characters to collect fruits.  
 After collecting all, head for the stump and escape from the Earth!
   
 <img src="thumbnails/image2.jpg" width="400px">  
@@ -18,10 +17,11 @@ Although it works on Mac OS, the rendering may be unstable (Now we are optimizin
 
 ### Installation
 Please clone this repository as follows.  
-`git clone https://github.com/tmuramat081/42_so_long.git`  
-`cd 42_so_long`  
-`make play`  
-
+```
+git clone https://github.com/tmuramat081/42_so_long.git`  
+cd 42_so_long`  
+make play`  
+```
 ### Game rules
 - The player’s goal is to collect every items present on the map, then escape
 chosing the shortest possible route.
