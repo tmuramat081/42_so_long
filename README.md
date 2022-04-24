@@ -9,7 +9,7 @@ This game works on Linux.
 Although it works on Mac OS, The rendering may be unstable (Now we are optimizing it, so please wait...). 
 
 ### Installation
-Please clone this repository as follows.
+Please clone this repository as follows.  
 `git clone https://github.com/tmuramat081/42_so_long.git
 cd so_long
 make play `
