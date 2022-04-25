@@ -31,7 +31,7 @@ chosing the shortest possible route.
 
 ## Thecnical issues
 - Sprite animations
-- Multiple main characters
+- Multiple players
 - Limiter of max FPS
 - Linier interpolation (LERP)
 
