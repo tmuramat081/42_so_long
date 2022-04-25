@@ -1,4 +1,4 @@
-# So Long (project of 42 Tokyo)
+# So Long (project for 42 Tokyo)
 *--And thanks for all the animal!*
   
 <img src="thumbnails/image0.jpg" width="400px">  
@@ -30,8 +30,8 @@ chosing the shortest possible route.
 - The player should not be able to move into walls.
 
 ## Thecnical issues
-- Sprite animation
-- Multiple characters
+- Sprite animations
+- Multiple main characters
 - Limiter of max FPS
 - Linier interpolation (LERP)
 
