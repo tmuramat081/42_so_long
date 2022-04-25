@@ -50,4 +50,4 @@ https://cupnooble.itch.io/sprout-lands-asset-pack
 https://42tokyo.jp/
 
 ## Authors
-Taisei Muramatsu (tmuramat)
+Taisei Muramatsu (tmuramat, 42 Tokyo)
